@@ -1,0 +1,41 @@
+ext {
+
+    apiUrl = [
+
+            releaseUrl: '"http://www.baidu.com"',
+            debugUrl  : '"http://www.douban.com"',
+    ]
+
+
+    android = [
+            applicationId    : "com.lz.framecase",
+            compileSdkVersion: 27,
+            minSdkVersion    : 16,
+            targetSdkVersion : 22,
+
+
+            versionCode      : 42,
+            /**
+             * versionName      : "   3.         0.           5.                5"
+             * -------------------重构修改+1--新功能上线+1---版本迭代+1------内部测试版本+1(对外上线删除这一位)
+             */
+            versionName      : "1.0.0"
+    ]
+
+
+    libsVersion = [
+            supportLibraryVersion = "27.1.1",
+    ]
+
+
+
+    dependencies = [
+            //support
+            design     : "com.android.support:design:$rootProject.supportLibraryVersion",
+            support_v4 : "com.android.support:support-v4:$rootProject.supportLibraryVersion",
+            cardview_v7: "com.android.support:cardview-v7:$rootProject.supportLibraryVersion",
+
+    ]
+
+
+}

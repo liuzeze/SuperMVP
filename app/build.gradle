@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
+    }
+
+  /*  signingConfigs {
+        //开发者签名
+        production {
+            storeFile file("")
+            storePassword ""
+            keyAlias ""
+            keyPassword ""
+        }
+    }
+*/
+    buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+            debuggable true
+//            signingConfig signingConfigs.production
+            buildConfigField("String", "API_URL", rootProject.ext.apiUrl.debugUrl)
+
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.production
+            buildConfigField("String", "API_URL", rootProject.ext.apiUrl.releaseUrl)
+            // 进行压缩优化
+            //  zipAlignEnabled true
+            // 进行资源优化，移除无用的resource文件  跟快速编译不兼容
+            // shrinkResources true
+            //修改apk包名
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    outputFileName = "app-${variant.name}-${defaultConfig.versionName}-${defaultConfig.versionCode}.apk"
+                }
+            }
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation project(':utilslib')
+
+
+
+}
