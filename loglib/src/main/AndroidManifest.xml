@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lz.loglib">
+
+
+    <application>
+
+        <activity
+            android:name=".ui.NetworkLogListActivity"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity android:name=".ui.NetworkLogDetailActivity" />
+    </application>
+</manifest>

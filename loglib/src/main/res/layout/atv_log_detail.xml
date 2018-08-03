@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="日志详情"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:textColor="@color/red" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_url">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Request Headers" />
+
+            <TextView
+                android:id="@+id/request_headers_textView"
+                style="@style/DetailContent"
+                android:background="@drawable/bg_request_headers"
+                android:textColor="#8033b7" />
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Request" />
+
+            <TextView
+                android:id="@+id/request_textView"
+                style="@style/DetailContent"
+                android:background="@drawable/green_rect"
+                android:textColor="#8033b7" />
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Response Headers" />
+
+            <TextView
+                android:id="@+id/response_headers_textView"
+                style="@style/DetailContent"
+                android:background="@drawable/bg_response_headers"
+                android:textColor="#257ada" />
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Response" />
+
+            <TextView
+                android:id="@+id/body_textView"
+                style="@style/DetailContent"
+                android:background="@drawable/bg_response"
+                android:textColor="#4dac41" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/feed_detail_back_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/gray_circle"
+        android:gravity="center"
+        android:text="返回"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+</RelativeLayout>

@@ -1,1 +1,1 @@
-include ':app', ':fram', ':utilslib'
+include ':app', ':fram', ':utilslib', ':loglib', ':logreleaselib'
