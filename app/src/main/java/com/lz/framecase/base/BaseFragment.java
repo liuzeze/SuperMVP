@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.lz.fram.app.App;
 import com.lz.fram.base.BasePresenter;
@@ -15,6 +16,7 @@ import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.component.DaggerFragmentComponent;
 import com.lz.framecase.component.FragmentComponent;
+import com.vondear.rxtool.view.RxToast;
 
 import javax.inject.Inject;
 
@@ -33,7 +35,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     protected T mPresenter;
     protected Context mContext;
     private Unbinder mUnbinder;
-    private View rootView;
     private PresenterDispatch mPresenterDispatch;
 
     @Override
@@ -45,21 +46,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        boolean initialized = rootView != null;
-        if (!initialized) {
-            rootView = inflater.inflate(getLayout(), container, false);
-            mUnbinder = ButterKnife.bind(this, rootView);
-            initInject();
-        }
+        View rootView = inflater.inflate(getLayout(), container, false);
+        mUnbinder = ButterKnife.bind(this, rootView);
+        initInject();
         onViewCreated();
-        if (!initialized) {
-            initData();
-        }
+        initData();
 
-//        ViewParent vp = rootView.getParent();
-//        if(vp != null){
-//            ((ViewGroup)vp).removeAllViews();
-//        }
 
         return rootView;
     }
@@ -93,6 +85,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
             mUnbinder.unbind();
         }
 
+    }
+
+    @Override
+    public void showErrorMsg(String msg) {
+        RxToast.error(msg);
     }
 
     protected abstract int getLayout();

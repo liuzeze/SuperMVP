@@ -25,6 +25,7 @@ import com.lz.fram.model.ConfigModule;
 import com.lz.fram.model.GlobalConfigBuild;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.interceptor.AddCookiesInterceptor;
+import com.lz.loglib.reporter.OkNetworkMonitorInterceptor;
 import com.lz.utilslib.interceptor.LoggerInterceptor;
 import com.lz.utilslib.interceptor.ReceivedCookiesInterceptor;
 
@@ -46,13 +47,13 @@ public class GlobalConfiguration implements ConfigModule {
         if (BuildConfig.DEBUG) {
             //Release 时,让框架不再打印 Http 请求和响应的信息
             builder.addInterceptor(new LoggerInterceptor());
-//            builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
+            builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
         }
 
         builder
-                .addInterceptor(new ReceivedCookiesInterceptor(LpUrl.BASE_URl + LpUrl.LOGIN_URl))
+                //.addInterceptor(new ReceivedCookiesInterceptor(LpUrl.BASE_URl + LpUrl.LOGIN_URl))
 //                .addInterceptor(new HostInterceptor())
-                .addInterceptor(new AddCookiesInterceptor())
+               // .addInterceptor(new AddCookiesInterceptor())
                 .baseurl(LpUrl.BASE_URl)
                 .gsonConfiguration(new AppModule.GsonConfiguration() {
                     @Override

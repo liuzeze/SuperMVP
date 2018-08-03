@@ -92,9 +92,8 @@ public class DataTranslator {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         if (contentType != null && contentType.contains("json")) {
             byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel);
-            if (contentEncoding != null && contentEncoding.contains("gzip")) {
-                byteArrayOutputStream = parseGzipAndSaveBody(inputStream, networkFeedModel);
-            }
+        } else if (contentEncoding != null && contentEncoding.contains("gzip")) {
+            byteArrayOutputStream = parseGzipAndSaveBody(inputStream, networkFeedModel);
         } else {
             return inputStream;
         }

@@ -1,6 +1,7 @@
 package com.lz.framecase.logic;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.lz.fram.app.FrameApplication;
@@ -17,6 +18,7 @@ public class MyApplication extends FrameApplication {
     public void onCreate() {
         super.onCreate();
         RxTool.init(this);
+
     }
 
 

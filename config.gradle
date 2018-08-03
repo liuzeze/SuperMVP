@@ -2,8 +2,8 @@ ext {
 
     apiUrl = [
 
-            releaseUrl: '"http://www.baidu.com"',
-            debugUrl  : '"http://www.douban.com"',
+            releaseUrl: '"https://news-at.zhihu.com/api/4/"',
+            debugUrl  : '"https://news-at.zhihu.com/api/4/"',
     ]
 
 

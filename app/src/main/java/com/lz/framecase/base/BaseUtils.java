@@ -83,6 +83,6 @@ public class BaseUtils<T extends BasePresenter> implements BaseView {
 
     @Override
     public void showErrorMsg(String msg) {
-        RxToast.error(RxTool.getContext(), msg);
+        RxToast.error(msg);
     }
 }

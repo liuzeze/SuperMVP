@@ -11,12 +11,10 @@ public interface Main2Contract {
 
 
     interface View extends BaseView {
-        void showLoginInfor();
     }
 
     interface Presenter extends BasePresenter<View> {
-        //登录
-        void login();
+        void getNewLists();
     }
 
 
