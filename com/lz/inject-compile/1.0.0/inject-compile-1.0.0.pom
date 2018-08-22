@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lz</groupId>
-  <artifactId>inject_compile</artifactId>
+  <artifactId>inject-compile</artifactId>
   <version>1.0.0</version>
   <dependencies>
     <dependency>
@@ -20,7 +20,7 @@
     </dependency>
     <dependency>
       <groupId>zgsy_frame</groupId>
-      <artifactId>inject_annotaions</artifactId>
+      <artifactId>inject_annotations</artifactId>
       <version>unspecified</version>
       <scope>compile</scope>
     </dependency>
