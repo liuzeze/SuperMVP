@@ -17,6 +17,7 @@ import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.component.ActivityComponent;
 import com.lz.framecase.component.DaggerActivityComponent;
+import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.vondear.rxtool.view.RxToast;
 
 import javax.inject.Inject;
@@ -42,7 +43,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         initConfig();
-        initInject();
+        InjectUtils.inject(this);
         onViewCreated();
         initData();
     }
@@ -61,7 +62,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
      *
      * @return
      */
-    protected ActivityComponent getActivityComponent() {
+    public ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
                 .appComponent(((App) getApplicationContext()).getAppComponent())
                 .build();
@@ -94,21 +95,18 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         super.onDestroy();
 
     }
+
     @Override
     public void showErrorMsg(String msg) {
         RxToast.error(msg);
     }
+
     /**
      * 获取资源文件
      *
      * @return
      */
     protected abstract int getLayout();
-
-    /**
-     * 注解当前activity
-     */
-    protected abstract void initInject();
 
     /**
      * 初始化数据
