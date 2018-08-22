@@ -38,6 +38,7 @@ dependencies {
     api 'com.jakewharton:butterknife:8.8.1'
     api project(':inject_annotation')//自己定义的注解的java lib
 
+    api 'com.lz:inject_annotations:1.0.0'
     api 'com.lz:fram_lib:1.0.0'
 //    api project(':fram')
 //    api project(':loglib')
