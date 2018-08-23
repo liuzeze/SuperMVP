@@ -3,7 +3,7 @@ package com.lz.framecase.component;
 
 import com.lz.fram.component.AppComponent;
 import com.lz.fram.scope.CustomizeScope;
-import com.lz.framecase.Main2Activity;
+import com.lz.framecase.activity.Main2Activity;
 
 import dagger.Component;
 

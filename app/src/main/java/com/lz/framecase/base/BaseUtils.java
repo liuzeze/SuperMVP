@@ -11,6 +11,7 @@ import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.component.DaggerUtilsComponent;
 import com.lz.framecase.component.UtilsComponent;
+import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.vondear.rxtool.RxTool;
 import com.vondear.rxtool.view.RxToast;
 
@@ -49,7 +50,7 @@ public class BaseUtils<T extends BasePresenter> implements BaseView {
         return convertView;
     }
 
-    protected UtilsComponent getUtilsComponent() {
+    public UtilsComponent getObjectComponent() {
         return DaggerUtilsComponent.builder()
                 .appComponent(((App) RxTool.getContext().getApplicationContext()).getAppComponent())
                 .build();
@@ -74,6 +75,7 @@ public class BaseUtils<T extends BasePresenter> implements BaseView {
     }
 
     protected void initInject() {
+        InjectUtils.inject(this);
     }
 
     protected View initView() {

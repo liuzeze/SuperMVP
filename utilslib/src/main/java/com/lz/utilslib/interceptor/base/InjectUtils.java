@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 public class InjectUtils {
     private static final ArrayMap<String, Object> injectMap = new ArrayMap<>();
 
-    public static void inject(AppCompatActivity activity) {
+    public static void inject(Object activity) {
         String className = activity.getClass().getName();
         try {
             Object inject = injectMap.get(className);

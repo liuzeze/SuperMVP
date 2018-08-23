@@ -16,7 +16,7 @@
             android:name="com.lz.framecase.logic.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".Main2Activity">
+        <activity android:name=".activity.Main2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

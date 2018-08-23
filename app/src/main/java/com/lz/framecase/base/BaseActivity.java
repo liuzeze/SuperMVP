@@ -62,7 +62,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
      *
      * @return
      */
-    public ActivityComponent getActivityComponent() {
+    public ActivityComponent getObjectComponent() {
         return DaggerActivityComponent.builder()
                 .appComponent(((App) getApplicationContext()).getAppComponent())
                 .build();
