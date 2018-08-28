@@ -10,6 +10,8 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         multiDexEnabled true
+        multiDexKeepProguard file("multiDexKeep.pro") //分包时，将部分包放入主dex
+
     }
 
   /*  signingConfigs {
@@ -54,8 +56,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor "com.google.dagger:dagger-compiler:2.15"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    annotationProcessor project(':inject_compile')
-//    annotationProcessor 'com.lz:inject_compile:1.0.2'
+//    annotationProcessor project(':inject_compile')
+    annotationProcessor 'com.lz:inject_compile:1.0.3'
     implementation project(':utilslib')
 
 

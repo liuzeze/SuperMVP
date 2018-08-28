@@ -22,14 +22,14 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 
 
-/**
- * Created by spc on 17/6/6.
- */
 @AutoService(Processor.class)
 public class ActivityInjectProcesser extends AbstractProcessor {
-    private Filer mFiler; //文件相关的辅助类
-    private Elements mElementUtils; //元素相关的辅助类  许多元素
-    private Messager mMessager; //日志相关的辅助类
+    //文件相关的辅助类
+    private Filer mFiler;
+    //元素相关的辅助类  许多元素
+    private Elements mElementUtils;
+    //日志相关的辅助类
+    private Messager mMessager;
 
     private Map<String, AnnotatedClass> mAnnotatedClassMap;
 
