@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -14,7 +17,7 @@ android {
 
     }
 
-  /*  signingConfigs {
+    /*  signingConfigs {
         //开发者签名
         production {
             storeFile file("")
@@ -54,12 +57,16 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    kapt "com.google.dagger:dagger-compiler:2.15"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 //    annotationProcessor project(':inject_compile')
-    annotationProcessor 'com.lz:inject_compile:1.0.3'
+    kapt 'com.lz:inject_compile:1.0.3'
     implementation project(':utilslib')
 
 
-
 }
+
+apply plugin: 'kotlin-android-extensions'

@@ -4,6 +4,8 @@ package com.lz.framecase.api;
 import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.observer.CommonSubscriber;
 import com.lz.fram.observer.Transformer;
+import com.lz.framecase.bean.MultNewsBean;
+import com.vondear.rxtool.RxTimeTool;
 
 import javax.inject.Inject;
 
@@ -23,11 +25,11 @@ public class RequestApi {
     }
 
 
-    public CommonSubscriber<String> getNewLists(CommonSubscriber<String> subscriber) {
+    public CommonSubscriber<MultNewsBean> getNewLists(String category, CommonSubscriber<MultNewsBean> subscriber) {
         return
                 mRetrofit.create(ApiService.class)
-                        .getNewLists()
-                        .compose(Transformer.<String>switchSchedulers(mLpLoadDialog))
+                        .getNewsArticle(category, RxTimeTool.getCurTimeMills()/1000 + "")
+                        .compose(Transformer.<MultNewsBean>switchSchedulers(mLpLoadDialog))
                         .subscribeWith(subscriber);
 
     }

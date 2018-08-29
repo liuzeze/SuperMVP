@@ -3,19 +3,24 @@ package com.lz.framecase.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lz.fram.app.App;
 import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
+import com.lz.framecase.R;
+import com.lz.framecase.bean.NewsDataBean;
 import com.lz.framecase.component.DaggerFragmentComponent;
 import com.lz.framecase.component.FragmentComponent;
+import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.vondear.rxtool.view.RxToast;
 
 import javax.inject.Inject;
@@ -48,15 +53,19 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
-        initInject();
+        InjectUtils.inject(this);
         onViewCreated();
-        initData();
-
 
         return rootView;
     }
 
-    protected FragmentComponent getFragmentComponent() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+    }
+
+    public FragmentComponent getObjectComponent() {
         return DaggerFragmentComponent.builder()
                 .appComponent(((App) mContext.getApplicationContext()).getAppComponent())
                 .build();
@@ -94,7 +103,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     protected abstract int getLayout();
 
-    protected abstract void initInject();
 
-    protected abstract void initData();
+    protected abstract void init();
 }

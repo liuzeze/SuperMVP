@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_news"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_news"
+        android:title="新闻"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_photo"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_image"
+        android:title="图片"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_video"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_video"
+        android:title="视屏"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_media"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_news_title"
+        android:title="头条号"
+        app:showAsAction="ifRoom" />
+</menu>

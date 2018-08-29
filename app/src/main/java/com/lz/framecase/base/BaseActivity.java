@@ -45,7 +45,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         initConfig();
         InjectUtils.inject(this);
         onViewCreated();
-        initData();
+        onCreate();
     }
 
     /**
@@ -111,6 +111,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
     /**
      * 初始化数据
      */
-    protected abstract void initData();
+    protected abstract void onCreate();
 
 }
