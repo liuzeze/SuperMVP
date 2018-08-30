@@ -10,6 +10,7 @@ import com.lz.fram.scope.CustomizeScope;
 import com.lz.framecase.R;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.fragment.ImagePagerFragment;
+import com.lz.framecase.fragment.NewsDetailFragment;
 import com.lz.framecase.fragment.NewsListFragment;
 import com.lz.framecase.fragment.NewsPagerFragment;
 import com.lz.framecase.fragment.NewsTitlePagerFragment;
@@ -32,6 +33,8 @@ public interface FragmentComponent {
     void inject(NewsListFragment fragment);
 
     void inject(WenDaListFragment fragment);
+
+    void inject(NewsDetailFragment fragment);
 
 
 }

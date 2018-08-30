@@ -1,10 +1,12 @@
 package com.lz.framecase.bean
 
+import java.io.Serializable
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
- class RepostParamsEntity {
+ class RepostParamsEntity : Serializable {
     /**
      * cover_url : null
      * fw_id : 1610117113409603

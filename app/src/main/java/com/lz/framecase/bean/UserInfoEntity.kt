@@ -1,10 +1,12 @@
 package com.lz.framecase.bean
 
+import java.io.Serializable
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-class UserInfoEntity {
+class UserInfoEntity : Serializable {
     /**
      * avatar_url : http://p9.pstatp.com/thumb/9b1f0003e50e12ffc79f
      * follow : true

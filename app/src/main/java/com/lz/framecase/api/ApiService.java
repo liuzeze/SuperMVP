@@ -2,13 +2,16 @@ package com.lz.framecase.api;
 
 
 import com.lz.framecase.bean.MultNewsBean;
+import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * API 管理器服务
@@ -40,4 +43,5 @@ public interface ApiService {
     Flowable<WendaArticleBean> getWendaArticle(
             @Query("max_behot_time") String maxBehotTime);
 
-}
+    @GET
+    Observable<NewsContentBean> getNewsContent(@Url String url);}

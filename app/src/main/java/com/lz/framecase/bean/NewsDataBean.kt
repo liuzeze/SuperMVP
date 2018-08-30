@@ -2,12 +2,13 @@ package com.lz.framecase.bean
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-class NewsDataBean : MultiItemEntity {
+class NewsDataBean : MultiItemEntity, Serializable{
 
 
     /**
@@ -184,7 +185,8 @@ class NewsDataBean : MultiItemEntity {
     var video_detail_info: VideoDetailInfoEntity? = null
     var video_duration: Int = 0
     var tag: String? = null
-     var media_name: String = ""
+    var media_name: String? = ""
+    var display_url: String? = ""
 
 
 }

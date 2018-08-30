@@ -1,10 +1,12 @@
 package com.lz.framecase.bean
 
+import java.io.Serializable
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-30       创建class
  */
-class VideoDetailInfoEntity {
+class VideoDetailInfoEntity : Serializable {
    var group_flags: Int = 0
    var video_type: Int = 0
    var video_preloading_flag: Int = 0

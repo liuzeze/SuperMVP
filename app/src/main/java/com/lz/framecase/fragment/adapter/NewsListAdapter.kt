@@ -56,9 +56,7 @@ class NewsListAdapter(arrayList: ArrayList<NewsDataBean>)
                     helper.setText(R.id.tv_abstract, item?.abstractX)
                     helper.setText(R.id.tv_extra, item?.source + " - " + tv_comment_count + "评论 - " + tv_datetime)
                     helper.addOnClickListener(R.id.tv_dots)
-                    /* RxView.clicks(holder.itemView)
-                             .throttleFirst(1, TimeUnit.SECONDS)
-                             .subscribe({ o -> NewsContentActivity.launch(item) })*/
+
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -96,11 +94,6 @@ class NewsListAdapter(arrayList: ArrayList<NewsDataBean>)
                     helper.setText(R.id.tv_extra, item?.source + " - " + tv_comment_count + " - " + tv_datetime)
                     helper.addOnClickListener(R.id.tv_dots)
 
-
-                    /*  val finalImgUrl = imgUrl
-                      RxView.clicks(holder.itemView)
-                              .throttleFirst(1, TimeUnit.SECONDS)
-                              .subscribe({ o -> NewsContentActivity.launch(item, finalImgUrl) })*/
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

@@ -1,20 +1,25 @@
 package com.lz.framecase.fragment
 
+import android.content.Intent
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import android.support.v7.widget.PopupMenu
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
 import com.lz.framecase.R
+import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
+import com.lz.framecase.logic.MyApplication
 import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.vondear.rxtool.RxTimeTool
@@ -81,7 +86,28 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
             mPresenter.getNewLists(category)
         }, RecyclerView)
 
+        newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
 
+            val item = mNewsBean.get(position)
+            if (item.itemType === NewsDataBean.NEWSTEXT) {
+                var intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent.putExtra(NewDetailActivity.TAG, item)
+                startActivity(intent)
+            }
+            if (item.itemType === NewsDataBean.NEWSIMG) {
+                var imgUrl = "http://p3.pstatp.com/"
+                val image_list = item?.image_list
+                if (image_list != null && image_list!!.size != 0) {
+                    if (!TextUtils.isEmpty(image_list!!.get(0).uri)) {
+                        imgUrl += image_list!!.get(0).uri?.replace("list", "large")
+                    }
+                }
+                var intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent.putExtra(NewDetailActivity.TAG, item)
+                intent.putExtra(NewDetailActivity.IMG, imgUrl)
+                startActivity(intent)
+            }
+        })
     }
 
     private var time: String = ""

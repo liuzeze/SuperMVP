@@ -5,15 +5,20 @@ import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.observer.CommonSubscriber;
 import com.lz.fram.observer.Transformer;
 import com.lz.framecase.bean.MultNewsBean;
+import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
 import com.vondear.rxtool.RxTimeTool;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import retrofit2.Retrofit;
 
 /**
@@ -59,4 +64,11 @@ public class RequestApi {
 
     }
 
+    @Nullable
+    public ObservableSource< NewsContentBean> getNewsContent(@NotNull String s) {
+        return
+                mRetrofit.create(ApiService.class)
+                        .getNewsContent(s);
+
+    }
 }
