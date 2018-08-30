@@ -35,8 +35,18 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
         val stringId = resources.getStringArray(R.array.mobile_news_id)
         val arrayList = ArrayList<Fragment>();
         for (s in stringId) {
-            val instance = NewsListFragment.getInstance(s)
-            arrayList.add(instance)
+
+
+            when (s) {
+                "question_and_answer" -> {
+                    val instance = WenDaListFragment.getInstance(s)
+                    arrayList.add(instance)
+                }
+                else -> {
+                    val instance = NewsListFragment.getInstance(s)
+                    arrayList.add(instance)
+                }
+            }
         }
         val newsPagerAdapter = NewsPagerAdapter(childFragmentManager, arrayList)
         newsPagerAdapter.setTitleList(string)

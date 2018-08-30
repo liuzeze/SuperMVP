@@ -1,11 +1,15 @@
 package com.lz.framecase.fragment.presenter
 
 
+import android.text.TextUtils
+import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.MultNewsBean
-import com.vondear.rxtool.view.RxToast
+import com.lz.framecase.bean.NewsDataBean
+import com.vondear.rxtool.RxTimeTool
+import java.util.ArrayList
 import javax.inject.Inject
 
 /**
@@ -14,17 +18,73 @@ import javax.inject.Inject
 class NewsListPresenter @Inject
 constructor(var mRequestApi: RequestApi)
     : RxPresenter<NewsListContract.View>(), NewsListContract.Presenter {
-
+    var time: String = (RxTimeTool.getCurTimeMills() / 1000).toString()
+    val dataList = ArrayList<NewsDataBean>()
     /**
      * 登录
      */
     override fun getNewLists(category: String?) {
+
+        val gson = Gson()
         val subscriber = object : CommonSubscriber<MultNewsBean>(mView) {
             override fun onNext(bean: MultNewsBean) {
-                mView.getNewsListSuccess(bean)
+                val list = ArrayList<NewsDataBean>()
+
+                val data = bean.data!!
+                for (datum in data) {
+                    try {
+                        val element = gson?.fromJson(datum.content, NewsDataBean::class.java)
+                        time = element?.behot_time.toString()
+
+
+                        if (TextUtils.isEmpty(element?.source)) {
+                            continue
+                        }
+                        // 过滤头条问答新闻
+                        if (element?.source!!.contains("头条问答")
+                                || element?.tag!!.contains("ad")
+                                || element?.source!!.contains("悟空问答")) {
+                            continue
+                        }
+                        // 过滤头条问答新闻
+                        if (element?.read_count === 0 || TextUtils.isEmpty(element.media_name)) {
+                            val title = element?.title
+                            if (title?.lastIndexOf("？") == title!!.length - 1) {
+                                continue
+                            }
+                        }
+
+
+
+                        if (element?.has_video!!) {
+                            element.itemType = NewsDataBean.NEWSVIDEO
+                        } else if (null != element.image_list && element.image_list!!.size > 0) {
+                            element.itemType = NewsDataBean.NEWSIMG
+                        } else {
+                            element.itemType = NewsDataBean.NEWSTEXT
+                        }
+
+                        // 过滤重复新闻(与上次刷新的数据比较)
+                        var isHave = false
+                        for (bean in dataList) {
+                            if (bean.title.equals(element.title)) {
+                                isHave = true
+                                break
+                            }
+                        }
+                        if (!isHave) {
+                            list.add(0, element!!)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+
+                    mView.getNewsListSuccess(list,bean.isHas_more_to_refresh)
+                }
             }
         }
-        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(category, subscriber))
+        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(category, time, subscriber))
 
     }
 }

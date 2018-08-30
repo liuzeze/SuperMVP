@@ -2,22 +2,21 @@ package com.lz.framecase.fragment.presenter
 
 import com.lz.fram.base.BasePresenter
 import com.lz.fram.base.BaseView
-import com.lz.framecase.bean.NewsDataBean
-import java.util.ArrayList
+import com.lz.framecase.bean.WendaArticleDataBean
 
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-interface NewsListContract {
+interface WenDaListContract {
 
 
     interface View : BaseView {
-        fun getNewsListSuccess(bean: ArrayList<NewsDataBean>, has_more_to_refresh: Boolean)
+        fun getWenDaListSuccess(bean: List<WendaArticleDataBean>)
     }
 
     interface Presenter : BasePresenter<View> {
         //��¼
-        fun getNewLists(category: String?)
+        fun getWenDaList()
     }
 
 

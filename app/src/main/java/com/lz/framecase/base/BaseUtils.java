@@ -12,6 +12,7 @@ import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.component.DaggerUtilsComponent;
 import com.lz.framecase.component.UtilsComponent;
 import com.lz.utilslib.interceptor.base.InjectUtils;
+import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.vondear.rxtool.RxTool;
 import com.vondear.rxtool.view.RxToast;
 
@@ -85,6 +86,6 @@ public class BaseUtils<T extends BasePresenter> implements BaseView {
 
     @Override
     public void showErrorMsg(String msg) {
-        RxToast.error(msg);
+        ToastUtils.error(msg);
     }
 }

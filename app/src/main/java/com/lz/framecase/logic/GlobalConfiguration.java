@@ -24,10 +24,8 @@ import com.lz.fram.model.ClientModule;
 import com.lz.fram.model.ConfigModule;
 import com.lz.fram.model.GlobalConfigBuild;
 import com.lz.framecase.BuildConfig;
-import com.lz.framecase.interceptor.AddCookiesInterceptor;
 import com.lz.loglib.reporter.OkNetworkMonitorInterceptor;
-import com.lz.utilslib.interceptor.LoggerInterceptor;
-import com.lz.utilslib.interceptor.ReceivedCookiesInterceptor;
+import com.lz.utilslib.interceptor.intercept.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

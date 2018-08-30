@@ -4,6 +4,7 @@ package com.lz.framecase.presenter
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
+import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.view.RxToast
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<Main2Contract.Vi
     override fun getNewLists() {
         val subscriber = object : CommonSubscriber<String>(mView) {
             override fun onNext(s: String) {
-                RxToast.info(s)
+                ToastUtils.info(s)
 
             }
         }

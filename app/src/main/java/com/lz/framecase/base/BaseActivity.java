@@ -18,6 +18,7 @@ import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.component.ActivityComponent;
 import com.lz.framecase.component.DaggerActivityComponent;
 import com.lz.utilslib.interceptor.base.InjectUtils;
+import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.vondear.rxtool.view.RxToast;
 
 import javax.inject.Inject;
@@ -98,7 +99,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     @Override
     public void showErrorMsg(String msg) {
-        RxToast.error(msg);
+        ToastUtils.error(msg);
     }
 
     /**

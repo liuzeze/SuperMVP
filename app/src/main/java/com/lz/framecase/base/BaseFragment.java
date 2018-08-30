@@ -8,20 +8,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.lz.fram.app.App;
 import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.R;
-import com.lz.framecase.bean.NewsDataBean;
 import com.lz.framecase.component.DaggerFragmentComponent;
 import com.lz.framecase.component.FragmentComponent;
 import com.lz.utilslib.interceptor.base.InjectUtils;
-import com.vondear.rxtool.view.RxToast;
+import com.lz.utilslib.interceptor.utils.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -98,7 +94,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
 
     @Override
     public void showErrorMsg(String msg) {
-        RxToast.error(msg);
+        ToastUtils.error(msg);
     }
 
     protected abstract int getLayout();

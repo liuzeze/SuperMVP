@@ -1,4 +1,4 @@
-package com.lz.utilslib.interceptor;
+package com.lz.utilslib.interceptor.intercept;
 
 import android.annotation.SuppressLint;
 

@@ -132,7 +132,7 @@ class NewsDataBean : MultiItemEntity {
     var has_edit: Int = 0
     var isHas_m3u8_video: Boolean = false
     var has_mp4_video: Int = 0
-    var isHas_video: Boolean = false
+    var has_video: Boolean = false
     var hot: Int = 0
     var ignore_web_transform: Int = 0
     var inner_ui_flag: Int = 0
@@ -181,6 +181,10 @@ class NewsDataBean : MultiItemEntity {
     var image_list: List<ImageListEntity>? = null
     var user_info: UserInfoEntity? = null
     var source: String? = null
+    var video_detail_info: VideoDetailInfoEntity? = null
+    var video_duration: Int = 0
+    var tag: String? = null
+     var media_name: String = ""
 
 
 }

@@ -61,6 +61,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.15"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
 //    annotationProcessor project(':inject_compile')
     kapt 'com.lz:inject_compile:1.0.3'
