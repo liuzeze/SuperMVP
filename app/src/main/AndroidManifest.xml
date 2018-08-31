@@ -3,6 +3,7 @@
     package="com.lz.framecase">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".logic.MyApplication"
@@ -25,8 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Main3Activity" />
-        <activity android:name=".activity.NewDetailActivity"></activity>
+        <activity android:name=".activity.NewDetailActivity" />
+        <activity
+            android:name=".activity.ImagePreviewActivity"
+
+            android:theme="@style/imagethem"></activity>
+        <activity android:name=".activity.NewsCommentActivity"></activity>
     </application>
 
 </manifest>

@@ -9,4 +9,15 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="whiteText">
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="GreyText">
+        <item name="android:textColor">#666666</item>
+    </style>
+    <style name="imagethem"  parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

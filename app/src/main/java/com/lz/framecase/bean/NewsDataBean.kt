@@ -187,6 +187,9 @@ class NewsDataBean : MultiItemEntity, Serializable{
     var tag: String? = null
     var media_name: String? = ""
     var display_url: String? = ""
+     var item_id: Long = 0
+     var group_id: Long = 0
+     var media_info: MediaInfoBean? = null
 
 
 }

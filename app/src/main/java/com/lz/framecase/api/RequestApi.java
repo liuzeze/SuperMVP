@@ -5,6 +5,7 @@ import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.observer.CommonSubscriber;
 import com.lz.fram.observer.Transformer;
 import com.lz.framecase.bean.MultNewsBean;
+import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
@@ -65,10 +66,22 @@ public class RequestApi {
     }
 
     @Nullable
-    public ObservableSource< NewsContentBean> getNewsContent(@NotNull String s) {
+    public ObservableSource<NewsContentBean> getNewsContent(@NotNull String s) {
         return
                 mRetrofit.create(ApiService.class)
                         .getNewsContent(s);
+
+    }
+
+
+    @Nullable
+    public CommonSubscriber<NewsCommentBean> getNewsComment(@NotNull String groupId, int itemId, CommonSubscriber<NewsCommentBean> subscriber) {
+        return
+                mRetrofit.create(ApiService.class)
+                        .getNewsComment(groupId, itemId)
+                        .compose(Transformer.<NewsCommentBean>switchSchedulers(mLpLoadDialog))
+                        .subscribeWith(subscriber);
+
 
     }
 }

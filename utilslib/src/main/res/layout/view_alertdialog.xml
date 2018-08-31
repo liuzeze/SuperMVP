@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_dialog_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:padding="50dp">
+
+    <LinearLayout
+       android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_diglog_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40"
+            android:gravity="center"
+            android:paddingLeft="40dp"
+            android:paddingRight="@dimen/dp_40"
+            android:textColor="#000000"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            tools:text="标题" />
+
+        <TextView
+            android:id="@+id/txt_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingLeft="40dp"
+            android:paddingRight="@dimen/dp_40"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            tools:text="内容" />
+
+        <FrameLayout
+            android:id="@+id/fl_rootview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="visible">
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_btn_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="30dp"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40">
+
+            <Button
+                android:id="@+id/btn_neg"
+                android:layout_width="128dp"
+                android:layout_height="44dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/shape_diglog_cancel"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/btn_pos"
+                android:layout_width="128dp"
+                android:layout_height="44dp"
+                android:background="@drawable/shape_diglog_confirm"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+
+

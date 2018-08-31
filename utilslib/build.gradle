@@ -50,4 +50,8 @@ dependencies {
     debugApi 'com.lz:intercept_debug:1.0.1'
     releaseApi 'com.lz:intercept_release:1.0.0'
     api 'com.github.bumptech.glide:glide:4.8.0'
+
+    api 'com.github.chrisbanes.photoview:library:1.2.4'
+    api 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
 }

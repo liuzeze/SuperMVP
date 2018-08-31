@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_open_comment"
+        android:icon="@drawable/ic_white_comment"
+        android:title="评论"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_open_media_home"
+        android:icon="@drawable/ic_white_user"
+        android:title="主页"
+        app:showAsAction="ifRoom"/>
+
+    <!--<item-->
+    <!--android:id="@+id/action_follow_media"-->
+    <!--android:icon="@drawable/ic_favorite_white_24dp"-->
+    <!--android:title="@string/action_follow_media"-->
+    <!--app:showAsAction="ifRoom"/>-->
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_white_share"
+        android:title="分享"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_open_in_browser"
+        android:title="浏览器打开"
+        app:showAsAction="never"/>
+
+</menu>

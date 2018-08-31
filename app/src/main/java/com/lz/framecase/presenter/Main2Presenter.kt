@@ -25,7 +25,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<Main2Contract.Vi
 
             }
         }
-       // addSubscribe("getZhiHuNews", mRequestApi.getNewLists(subscriber))
+//        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(subscriber))
 
     }
 }

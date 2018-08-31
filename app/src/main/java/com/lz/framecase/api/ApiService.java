@@ -2,6 +2,7 @@ package com.lz.framecase.api;
 
 
 import com.lz.framecase.bean.MultNewsBean;
+import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
@@ -18,7 +19,7 @@ import retrofit2.http.Url;
  */
 public interface ApiService {
 
-//    @Headers({DOMAIN_NAME_HEADER + DOUBAN_DOMAIN_NAME})
+    //    @Headers({DOMAIN_NAME_HEADER + DOUBAN_DOMAIN_NAME})
     @GET("news/latest")
     Flowable<String> getNewLists();
 
@@ -44,4 +45,10 @@ public interface ApiService {
             @Query("max_behot_time") String maxBehotTime);
 
     @GET
-    Observable<NewsContentBean> getNewsContent(@Url String url);}
+    Observable<NewsContentBean> getNewsContent(@Url String url);
+
+    @GET("http://is.snssdk.com/article/v53/tab_comments/")
+    Flowable<NewsCommentBean> getNewsComment(
+            @Query("group_id") String groupId,
+            @Query("offset") int offset);
+}

@@ -1,6 +1,7 @@
 package com.lz.framecase.fragment.presenter
 
 
+import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import android.webkit.JavascriptInterface
@@ -8,6 +9,7 @@ import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.R
+import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.*
 import com.lz.utilslib.interceptor.utils.ToastUtils
@@ -31,7 +33,9 @@ import javax.inject.Inject
 class NewsDetailPresenter @Inject
 constructor(var mRequestApi: RequestApi)
     : RxPresenter<NewsDetailContract.View>(), NewsDetailContract.Presenter {
-    fun doLoadData(dataBean: NewsDataBean) {
+
+
+    override fun loadUrl(dataBean: NewsDataBean) {
         val url = dataBean.display_url
 
         val subscribe: Any = Observable
@@ -64,8 +68,8 @@ constructor(var mRequestApi: RequestApi)
         if (!TextUtils.isEmpty(url)) {
             val list = getAllImageUrlFromHtml(html)
             if (list.size > 0) {
-                ToastUtils.error("webview中的图片数量" + list.size)
-                //ImageBrowserActivity.start(InitApp.AppContext, url, list)
+                ToastUtils.info("webview中的图片数量" + list.size)
+                mView.onJumpPreview(url, list)
             }
         }
     }
