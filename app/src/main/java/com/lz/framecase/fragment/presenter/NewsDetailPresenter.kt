@@ -51,8 +51,8 @@ constructor(var mRequestApi: RequestApi)
                 .switchMap<NewsContentBean> { s -> mRequestApi.getNewsContent(s) }
                 .map { o -> getHTML(o) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer<String?> { r -> mView.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
-                    mView.onSetWebView(null, false)
+                .subscribe(Consumer<String?> { r -> mView?.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
+                    mView?.onSetWebView(null, false)
                 })
     }
 

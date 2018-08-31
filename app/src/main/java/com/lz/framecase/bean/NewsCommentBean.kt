@@ -1,10 +1,12 @@
 package com.lz.framecase.bean
 
+import java.io.Serializable
+
 /**
  * Created by Meiji on 2017/5/18.
  */
 
-class NewsCommentBean {
+class NewsCommentBean :Serializable {
 
     /**
      * detail_no_comment : 0
@@ -45,7 +47,7 @@ class NewsCommentBean {
         var tabs: List<String>? = null
     }
 
-    class DataBean {
+    class DataBean :Serializable {
         /**
          * comment : {"is_followed":0,"text":"我们的未来有希望了，","reply_count":0,"is_following":0,"reply_list":[],"user_verified":false,"is_blocking":0,"user_id":50022511998,"bury_count":0,"author_badge":[],"id":50029624449,"verified_reason":"","platform":"feifei","score":0,"user_name":"WolfRoad124180199","user_profile_image_url":"http://p1.pstatp.com/thumb/729001d88c6944f970b","user_bury":0,"user_digg":0,"is_blocked":0,"user_relation":0,"user_auth_info":"","digg_count":33,"create_time":1470145059}
          * cell_type : 1
@@ -54,7 +56,7 @@ class NewsCommentBean {
         var comment: CommentBean? = null
         var cell_type: Int = 0
 
-        class CommentBean {
+        class CommentBean :Serializable {
             /**
              * is_followed : 0
              * text : 我们的未来有希望了，

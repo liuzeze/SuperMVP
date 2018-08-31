@@ -18,7 +18,6 @@ import javax.inject.Inject
 class NewsListPresenter @Inject
 constructor(var mRequestApi: RequestApi)
     : RxPresenter<NewsListContract.View>(), NewsListContract.Presenter {
-    var time: String = (RxTimeTool.getCurTimeMills() / 1000).toString()
     val dataList = ArrayList<NewsDataBean>()
     /**
      * 登录
@@ -34,7 +33,6 @@ constructor(var mRequestApi: RequestApi)
                 for (datum in data) {
                     try {
                         val element = gson?.fromJson(datum.content, NewsDataBean::class.java)
-                        time = element?.behot_time.toString()
 
 
                         if (TextUtils.isEmpty(element?.source)) {
@@ -84,7 +82,7 @@ constructor(var mRequestApi: RequestApi)
                 }
             }
         }
-        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(category, time, subscriber))
+        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(category,  (RxTimeTool.getCurTimeMills() / 1000).toString(), subscriber))
 
     }
 }

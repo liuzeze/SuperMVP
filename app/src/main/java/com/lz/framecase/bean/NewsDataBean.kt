@@ -8,7 +8,7 @@ import java.io.Serializable
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-class NewsDataBean : MultiItemEntity, Serializable{
+class NewsDataBean : MultiItemEntity, Serializable {
 
 
     /**
@@ -187,9 +187,10 @@ class NewsDataBean : MultiItemEntity, Serializable{
     var tag: String? = null
     var media_name: String? = ""
     var display_url: String? = ""
-     var item_id: Long = 0
-     var group_id: Long = 0
-     var media_info: MediaInfoBean? = null
+    var item_id: Long = 0
+    var group_id: Long = 0
+    var media_info: MediaInfoBean? = null
+    var video_id: String? = null
 
 
 }

@@ -33,7 +33,7 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
     var commentList = ArrayList<NewsCommentBean.DataBean>()
     var newsCommentAdapter: NewsCommentAdapter? = null
     var groupId = ""
-    var itemId = 0
+    var itemId: Long = 0
     override fun getLayout(): Int {
         return R.layout.activity_comment_list
     }
@@ -45,15 +45,18 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
 
     }
 
+
+    var offset: Long = 0
     private fun initLisrtener() {
 
         swiperefreshlayout.setOnRefreshListener {
             commentList.clear()
-            mPresenter.getNewCommentLists(groupId, itemId)
+            offset = 0;
+            mPresenter.getNewCommentLists(groupId, offset)
         }
-       /* newsCommentAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
-            // mPresenter.getNewCommentLists(groupId, itemId)
-        }, comment_list)*/
+        /* newsCommentAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
+             // mPresenter.getNewCommentLists(groupId, itemId)
+         }, comment_list)*/
         newsCommentAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val text = commentList.get(position).comment?.text!!
             LpDialogUtils.alertDialog(mActivity, "内容分享", "复制内容", View.OnClickListener {
@@ -71,8 +74,8 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
 
     private fun initData() {
         groupId = intent.getStringExtra("group_id")
-        itemId = intent.getIntExtra("item_id", 0)
-        mPresenter.getNewCommentLists(groupId, itemId)
+        itemId = intent.getLongExtra("item_id", 0)
+        mPresenter.getNewCommentLists(groupId, 0)
     }
 
     private fun initView() {
@@ -87,10 +90,11 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
         comment_list.addItemDecoration(DividerItemDecoration(mActivity, VERTICAL))
         newsCommentAdapter = NewsCommentAdapter(commentList)
         comment_list.adapter = newsCommentAdapter
-
+        newsCommentAdapter?.openLoadAnimation()
     }
 
     override fun getNewsCommentSuccess(data: ArrayList<NewsCommentBean.DataBean>) {
+        swiperefreshlayout.isRefreshing = false
         if (data.size == 0) {
             newsCommentAdapter?.loadMoreEnd()
             return
@@ -101,4 +105,10 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
 
     }
 
+    override fun showErrorMsg(msg: String?) {
+        super.showErrorMsg(msg)
+        swiperefreshlayout.isRefreshing = false
+
+
+    }
 }

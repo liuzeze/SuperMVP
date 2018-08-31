@@ -19,18 +19,20 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<NewsCommentContr
     /**
      * 登录
      */
-    override fun getNewCommentLists(groupId: String, itemId: Int) {
+    override fun getNewCommentLists(groupId: String, itemId: Long) {
         val subscriber = object : CommonSubscriber<NewsCommentBean>(mView) {
             override fun onNext(s: NewsCommentBean) {
                 val data = s.data;
                 val arrayList = ArrayList<NewsCommentBean.DataBean>()
-                data?.forEach {
-                    arrayList.add(it)
+
+                for (newsdata in data?.iterator()!!) {
+
+                    arrayList.add(newsdata)
                 }
                 mView.getNewsCommentSuccess(arrayList)
             }
         }
-        addSubscribe("getZhiHuNews", mRequestApi.getNewsComment(groupId, itemId, subscriber))
+        addSubscribe("getNewCommentLists", mRequestApi.getNewsComment(groupId, itemId, subscriber))
 
     }
 }

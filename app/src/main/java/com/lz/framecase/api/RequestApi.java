@@ -1,12 +1,16 @@
 package com.lz.framecase.api;
 
 
+import android.util.Base64;
+import android.util.Log;
+
 import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.observer.CommonSubscriber;
 import com.lz.fram.observer.Transformer;
 import com.lz.framecase.bean.MultNewsBean;
 import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
+import com.lz.framecase.bean.VideoContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
 import com.vondear.rxtool.RxTimeTool;
@@ -20,6 +24,8 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 /**
@@ -48,7 +54,7 @@ public class RequestApi {
         } else {
             return
                     mRetrofit.create(ApiService.class)
-                            .getNewsArticle(category, time)
+                            .getNewsArticle2(category, time)
                             .compose(Transformer.<MultNewsBean>switchSchedulers(mLpLoadDialog))
                             .subscribeWith(subscriber);
         }
@@ -75,11 +81,48 @@ public class RequestApi {
 
 
     @Nullable
-    public CommonSubscriber<NewsCommentBean> getNewsComment(@NotNull String groupId, int itemId, CommonSubscriber<NewsCommentBean> subscriber) {
+    public CommonSubscriber<NewsCommentBean> getNewsComment(@NotNull String groupId,long itemId, CommonSubscriber<NewsCommentBean> subscriber) {
         return
                 mRetrofit.create(ApiService.class)
                         .getNewsComment(groupId, itemId)
                         .compose(Transformer.<NewsCommentBean>switchSchedulers(mLpLoadDialog))
+                        .subscribeWith(subscriber);
+
+
+    }
+
+    @Nullable
+    public CommonSubscriber<String> getVideoUrl(@NotNull String url, CommonSubscriber<String> subscriber) {
+        return
+                mRetrofit.create(ApiService.class)
+                        .getVideoContent(url)
+                        .subscribeOn(Schedulers.io())
+                        .map(new Function<VideoContentBean, String>() {
+                            @Override
+                            public String apply(VideoContentBean videoContentBean) throws Exception {
+
+                                VideoContentBean.DataBean.VideoListBean videoList = videoContentBean.getData().getVideo_list();
+                                if (videoList.getVideo_3() != null) {
+                                    String base64 = videoList.getVideo_3().getMain_url();
+                                    String url1 = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
+                                    return url1;
+                                }
+
+                                if (videoList.getVideo_2() != null) {
+                                    String base64 = videoList.getVideo_2().getMain_url();
+                                    String url1 = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
+                                    return url1;
+                                }
+
+                                if (videoList.getVideo_1() != null) {
+                                    String base64 = videoList.getVideo_1().getMain_url();
+                                    String url1 = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
+                                    return url1;
+                                }
+                                return null;
+                            }
+                        })
+                        .compose(Transformer.<String>switchSchedulers(mLpLoadDialog))
                         .subscribeWith(subscriber);
 
 

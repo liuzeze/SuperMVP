@@ -4,6 +4,7 @@ package com.lz.framecase.api;
 import com.lz.framecase.bean.MultNewsBean;
 import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
+import com.lz.framecase.bean.VideoContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 import com.lz.framecase.bean.WendaArticleDataBean;
 
@@ -47,8 +48,17 @@ public interface ApiService {
     @GET
     Observable<NewsContentBean> getNewsContent(@Url String url);
 
-    @GET("http://is.snssdk.com/article/v53/tab_comments/")
+    @GET("http://is.snssdk.com/article/v62/tab_comments/")
     Flowable<NewsCommentBean> getNewsComment(
             @Query("group_id") String groupId,
-            @Query("offset") int offset);
+            @Query("offset") long offset);
+
+
+    /**
+     * 获取视频信息
+     * <p>
+     * http://ib.365yg.com/video/urls/v/1/toutiao/mp4/视频ID?r=17位随机数&s=加密结果
+     */
+    @GET
+    Flowable<VideoContentBean> getVideoContent(@Url String url);
 }

@@ -139,9 +139,6 @@ class NewsListAdapter(arrayList: ArrayList<NewsDataBean>)
                     helper.setText(R.id.tv_video_time, tv_video_time)
                     helper.addOnClickListener(R.id.tv_dots)
 
-                    /*RxView.clicks(holder.itemView)
-                            .throttleFirst(1, TimeUnit.SECONDS)
-                            .subscribe({ o -> VideoContentActivity.launch(item) })*/
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

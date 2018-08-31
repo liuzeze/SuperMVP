@@ -29,9 +29,9 @@
         <activity android:name=".activity.NewDetailActivity" />
         <activity
             android:name=".activity.ImagePreviewActivity"
-
-            android:theme="@style/imagethem"></activity>
-        <activity android:name=".activity.NewsCommentActivity"></activity>
+            android:theme="@style/imagethem" />
+        <activity android:name=".activity.NewsCommentActivity" />
+        <activity android:name=".activity.VideoPlayerActivity"></activity>
     </application>
 
 </manifest>

@@ -8,15 +8,15 @@ import com.lz.framecase.bean.NewsCommentBean
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-interface NewsCommentContract {
+interface VideoPlayerContract {
 
 
     interface View : BaseView {
-        fun getNewsCommentSuccess(data: ArrayList<NewsCommentBean.DataBean>)
+        fun getVideoUrlSuccess(url: String)
     }
 
     interface Presenter : BasePresenter<View> {
-        fun getNewCommentLists(groupId: String, itemId: Long)
+        fun getVideoUrl(videoId: String)
     }
 
 

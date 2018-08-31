@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
+import com.lz.framecase.activity.VideoPlayerActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
@@ -107,16 +108,20 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
                 intent.putExtra(NewDetailActivity.IMG, imgUrl)
                 startActivity(intent)
             }
+            if (item.itemType === NewsDataBean.NEWSVIDEO) {
+                var intent = Intent(MyApplication.mApplication, VideoPlayerActivity::class.java)
+                intent.putExtra(NewDetailActivity.TAG, item)
+                startActivity(intent)
+
+            }
         })
     }
 
-    private var time: String = ""
     private fun initValue() {
         gson = Gson()
         category = arguments?.getString("category")!!
         newsListAdapter = NewsListAdapter(mNewsBean)
         RecyclerView.adapter = newsListAdapter
-        time = (RxTimeTool.getCurTimeMills() / 1000).toString()
 
 
     }
