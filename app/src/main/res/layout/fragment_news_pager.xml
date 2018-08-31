@@ -5,16 +5,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/TabLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/colorPrimaryDark"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/common_app_white_ffffff"
-        app:tabTextColor="@color/common_app_gray_aaaaaa">
+        android:gravity="center_vertical"
 
-    </android.support.design.widget.TabLayout>
+        android:orientation="horizontal">
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/TabLayout"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/common_app_white_ffffff"
+            app:tabTextColor="@color/common_app_gray_aaaaaa">
+
+        </android.support.design.widget.TabLayout>
+
+        <ImageView
+            android:id="@+id/iv_catgory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_4"
+            android:src="@drawable/ic_add" />
+
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/news_viewpager"

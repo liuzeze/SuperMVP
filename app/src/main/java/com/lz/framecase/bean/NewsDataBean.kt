@@ -2,6 +2,7 @@ package com.lz.framecase.bean
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.google.gson.annotations.SerializedName
+import com.lz.framecase.fragment.NewsPagerFragment
 import java.io.Serializable
 
 /**

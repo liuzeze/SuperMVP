@@ -1,6 +1,7 @@
 package com.lz.framecase.fragment
 
 import android.support.v4.app.Fragment
+import android.view.View
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseFragment
@@ -27,6 +28,14 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
 
     override fun init() {
         intView()
+        initLIstener()
+    }
+
+    private fun initLIstener() {
+
+        iv_catgory.setOnClickListener(View.OnClickListener {
+
+        })
     }
 
     private fun intView() {
@@ -35,7 +44,6 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
         val stringId = resources.getStringArray(R.array.mobile_news_id)
         val arrayList = ArrayList<Fragment>();
         for (s in stringId) {
-
 
             when (s) {
                 "question_and_answer" -> {
@@ -52,6 +60,7 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
         newsPagerAdapter.setTitleList(string)
         news_viewpager.adapter = newsPagerAdapter
         TabLayout.setupWithViewPager(news_viewpager)
+
     }
 
 }

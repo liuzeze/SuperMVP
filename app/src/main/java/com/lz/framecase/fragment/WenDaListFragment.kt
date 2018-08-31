@@ -21,6 +21,7 @@ import com.lz.framecase.fragment.presenter.WenDaListContract
 import com.lz.framecase.fragment.presenter.WenDaListPresenter
 import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.ShareAction
+import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxTimeTool
 import kotlinx.android.synthetic.main.fragment_news_list.*
 
@@ -66,6 +67,9 @@ class WenDaListFragment : BaseFragment<WenDaListPresenter>(), WenDaListContract.
         newsListAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
             mPresenter.getWenDaList()
         })
+        newsListAdapter?.setOnItemClickListener { adapter, view, position ->
+            SnackbarUtils.show(view, "未开发")
+        }
     }
 
     private fun initValue() {
