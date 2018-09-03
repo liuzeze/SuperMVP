@@ -125,7 +125,7 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                refresh_layout.setRefreshing(false)
+                refresh_layout?.setRefreshing(false)
 
                 // 注入 js 函数监听
                 view.loadUrl(JS_INJECT_IMG)

@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_arrow_down" />
-                            <entry key="sourceFile" value="C:\Users\Administrator\AppData\Local\Temp\箭头.svg" />
+                            <entry key="outputName" value="ic_cancel" />
+                            <entry key="sourceFile" value="C:\Users\Administrator\AppData\Local\Temp\关闭.svg" />
                           </map>
                         </option>
                       </PersistentState>

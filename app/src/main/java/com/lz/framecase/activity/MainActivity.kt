@@ -2,7 +2,6 @@ package com.lz.framecase.activity
 
 
 import com.lz.framecase.R
-import com.lz.framecase.R.id.bottom_navigation
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
@@ -10,6 +9,7 @@ import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
 import com.lz.framecase.presenter.Main2Contract
 import com.lz.framecase.presenter.Main2Presenter
+import kotlinx.android.synthetic.main.activity_main2.*
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
@@ -23,6 +23,7 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
 
     override fun onCreate() {
         initFragment()
+
     }
 
     private fun initFragment() {

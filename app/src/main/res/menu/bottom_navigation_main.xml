@@ -5,24 +5,20 @@
         android:id="@+id/action_news"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_news"
-        android:title="新闻"
-        app:showAsAction="ifRoom" />
+        android:title="新闻" />
     <item
         android:id="@+id/action_photo"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_image"
-        android:title="图片"
-        app:showAsAction="ifRoom" />
+        android:title="图片"/>
     <item
         android:id="@+id/action_video"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_video"
-        android:title="视屏"
-        app:showAsAction="ifRoom" />
+        android:title="视屏" />
     <item
         android:id="@+id/action_media"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_news_title"
-        android:title="头条号"
-        app:showAsAction="ifRoom" />
+        android:title="头条号"/>
 </menu>

@@ -16,8 +16,17 @@
     <style name="GreyText">
         <item name="android:textColor">#666666</item>
     </style>
-    <style name="imagethem"  parent="AppTheme">
+
+    <style name="imagethem" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <!--http://www.jianshu.com/p/7b2d842267ab--> <!--BottomNavigationView 的选中没有选中的字体大小-->
+    <dimen name="design_bottom_navigation_active_text_size">10sp</dimen>
+    <dimen name="design_bottom_navigation_text_size">10sp
+    </dimen> <!--BottomNavigationView 只放图标时的设置-->
+    <!--  <dimen name="design_bottom_navigation_active_text_size">0sp</dimen>
+      <dimen name="design_bottom_navigation_text_size">0sp</dimen>-->
+
 </resources>

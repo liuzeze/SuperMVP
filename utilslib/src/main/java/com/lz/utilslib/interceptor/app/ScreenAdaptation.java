@@ -49,10 +49,10 @@ public class ScreenAdaptation {
         //获取屏幕的数值
         ((WindowManager) context.getSystemService(WINDOW_SERVICE)).getDefaultDisplay().getSize(point);
         //dp适配 getResources().getDisplayMetrics().density
-        context.getResources().getDisplayMetrics().density = point.x / width;
+        context.getResources().getDisplayMetrics().density = point.x / width*2;
         // context.getResources().getDisplayMetrics().density = point.y/height*2f;
         //sp适配 getResources().getDisplayMetrics().scaledDensity
-        context.getResources().getDisplayMetrics().scaledDensity = point.x / width;
+        context.getResources().getDisplayMetrics().scaledDensity = point.x / width*2;
         //  context.getResources().getDisplayMetrics().scaledDensity = point.y/height*2f;
     }
 

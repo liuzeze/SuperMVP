@@ -31,7 +31,8 @@
             android:name=".activity.ImagePreviewActivity"
             android:theme="@style/imagethem" />
         <activity android:name=".activity.NewsCommentActivity" />
-        <activity android:name=".activity.VideoPlayerActivity"></activity>
+        <activity android:name=".activity.VideoPlayerActivity" />
+        <activity android:name=".activity.CatgoryActivity"></activity>
     </application>
 
 </manifest>
