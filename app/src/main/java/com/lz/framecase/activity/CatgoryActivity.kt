@@ -23,6 +23,7 @@ import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.TitleBean
+import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
 import java.util.*
@@ -85,6 +86,7 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
         mDragAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             if (titles.get(position).name.equals("推荐") ||
                     titles.get(position).name.equals("视频")) {
+                SnackbarUtils.show(view,"不可取消")
                 return@OnItemClickListener
             }
             var count2 = 0
@@ -167,7 +169,7 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
         view.isDrawingCacheEnabled = true
         val mirrorView = ImageView(recyclerView.context)
         val bitmap = Bitmap.createBitmap(view.drawingCache)
-//        mirrorView.setImageBitmap(bitmap)
+        mirrorView.setImageBitmap(bitmap)
         mirrorView.setBackgroundResource(R.color.common_app_red_ff0000)
         view.isDrawingCacheEnabled = false
         val locations = IntArray(2)

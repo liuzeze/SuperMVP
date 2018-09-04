@@ -14,15 +14,16 @@
         <item
             android:id="@+id/nav_switch_night_mode"
             android:icon="@drawable/ic_nav_them"
-            android:title="主题切换" />
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_nav_setting"
-            android:title="设置" />
+            android:title="导航栏颜色修改" />
+
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_nav_share"
             android:title="分享" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_nav_setting"
+            android:title="版本1.0.0" />
     </group>
 
 </menu>

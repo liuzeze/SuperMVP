@@ -72,7 +72,7 @@ public class SuspensionView implements View.OnTouchListener {
 
         // 以屏幕左上角为原点，设置x、y初始值
         wmParams.x = mWindowManager.getDefaultDisplay().getWidth();
-        wmParams.y = 25;
+        wmParams.y = 205;
 
         //设置悬浮窗口长宽数据
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
