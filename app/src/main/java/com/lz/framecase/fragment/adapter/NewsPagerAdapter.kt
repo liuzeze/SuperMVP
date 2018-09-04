@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter
  */
 class NewsPagerAdapter(fm: FragmentManager?, var arrayList: ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
 
-    private var titleArray: Array<String>? = null;
+    private var titleArray: ArrayList<String>? = null;
     override fun getItem(position: Int): Fragment = arrayList.get(position)
 
     override fun getCount(): Int = arrayList.size
@@ -20,7 +20,7 @@ class NewsPagerAdapter(fm: FragmentManager?, var arrayList: ArrayList<Fragment>)
         return titleArray?.get(position)
     }
 
-    fun setTitleList(string: Array<String>?) {
+    fun setTitleList(string: ArrayList<String>?) {
         titleArray = string;
     }
 

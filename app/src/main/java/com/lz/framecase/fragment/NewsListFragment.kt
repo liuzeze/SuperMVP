@@ -140,7 +140,7 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
         }*/
         SwipeRefreshLayout.setRefreshing(false)
         mNewsBean.addAll(bean)
-        newsListAdapter?.notifyItemRangeChanged(newsListAdapter!!.itemCount, bean.size)
+        newsListAdapter?.notifyDataSetChanged()
         //成功获取更多数据
         newsListAdapter?.loadMoreComplete();
 

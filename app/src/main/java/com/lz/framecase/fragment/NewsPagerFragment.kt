@@ -44,10 +44,35 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
 
     private fun intView() {
 
-        val string = resources.getStringArray(R.array.mobile_news_name)
-        val stringId = resources.getStringArray(R.array.mobile_news_id)
+        val string = ArrayList<String>()
+        val stringId = ArrayList<String>()
         val arrayList = ArrayList<Fragment>();
         val category = RxSPTool.getContent(mContext, CatgoryActivity.NEWSCATGORY)
+
+        if (!TextUtils.isEmpty(category)) {
+
+            val nameId = category.split("&")
+            for (s in nameId) {
+                val split = s.split("|")
+                val s1 = split[0]
+                val s2 = split[1]
+                string.add(s1)
+                stringId.add(s2)
+            }
+        } else {
+            for (s in resources.getStringArray(R.array.mobile_news_name)) {
+                string.add(s)
+                if (string.size == 6) {
+                    break
+                }
+            }
+            for (s in resources.getStringArray(R.array.mobile_news_id)) {
+                stringId.add(s)
+                if (stringId.size == 6) {
+                    break
+                }
+            }
+        }
 
         for (s in stringId.indices) {
             if (TextUtils.isEmpty(category) && s == 6) {
@@ -74,5 +99,8 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1000) {
+            intView()
+        }
     }
 }

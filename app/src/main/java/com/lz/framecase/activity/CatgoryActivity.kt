@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemDragListener
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
+import com.lz.framecase.R.id.recycler_view
 import com.lz.framecase.activity.adapter.drag.DragAdapter
 import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
@@ -25,6 +26,7 @@ import com.lz.framecase.bean.TitleBean
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
 
@@ -81,61 +83,78 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
             false
         })
         mDragAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-            if (mDragAdapter?.isItemDraggable!!) {
-                if (titles.get(position).name.equals("推荐")) {
-                    return@OnItemClickListener
-                }
-                var count2 = 0
-                for (title in titles) {
+            if (titles.get(position).name.equals("推荐") ||
+                    titles.get(position).name.equals("视频")) {
+                return@OnItemClickListener
+            }
+            var count2 = 0
+            for (title in titles) {
 
-                    if (title.itemType === TitleBean.MYTITLESub) {
-                        count2++
-                    }
+                if (title.itemType === TitleBean.MYTITLESub) {
+                    count2++
                 }
+            }
 
+            val titleBean = titles.get(position)
+
+
+            var isRun = false
+            if (titleBean?.itemTypes === TitleBean.ORTHERTITLESUB) {
                 val imageView = addMirrorView(recycler_view.getParent() as ViewGroup, recycler_view, view)
-                mDragAdapter?.notifyItemRangeChanged(position, titles.size - 1)
 
+                titleBean.itemTypes = TitleBean.MYTITLESub
+                titles.removeAt(position)
+                titles.add(count2 + 1, titleBean)
+                mDragAdapter?.notifyItemRangeChanged(count2, titles.size - 1)
 
-                val titleBean = titles.get(position)
-                if (titleBean?.itemTypes === TitleBean.MYTITLESub) {
-                    titleBean?.itemTypes = TitleBean.ORTHERTITLESUB
-                    titles.removeAt(position)
-                    titles.add(count2 + 2, titleBean)
-                    imageView.setTranslationX(view.left.toFloat())
-                    imageView.setTranslationY(view.top.toFloat())
-                    imageView.animate().translationX(0f).setDuration(500).start()
-                    val i = (count2 - 1) / 4
-                    imageView.animate().translationY((view.measuredHeight * (if (i == 0) i + 2 else i + 3)).toFloat() + 50)
-                            .setListener(object : AnimatorListenerAdapter() {
-                                override fun onAnimationEnd(animation: Animator) {
-                                    super.onAnimationEnd(animation)
-                                    (recycler_view.getParent() as ViewGroup).removeView(imageView)
+                imageView.setTranslationX(view.left.toFloat())
+                imageView.setTranslationY(view.top.toFloat())
+                imageView.animate().translationX((view.measuredWidth * (count2 % 4)).toFloat()).setDuration(500).start()
 
-                                }
-                            }).setDuration(500).start()
+                imageView.animate().translationY((view.measuredHeight * if (count2 / 4 == 0) count2 / 4 else count2 / 4 + 1).toFloat() + 50).setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        super.onAnimationEnd(animation)
+                        (recycler_view.getParent() as ViewGroup).removeView(imageView)
 
-                } else if (titleBean.itemType === TitleBean.ORTHERTITLESUB) {
-                    titleBean.itemTypes = TitleBean.MYTITLESub
-                    titles.removeAt(position)
-                    titles.add(count2 + 1, titleBean)
-                    mDragAdapter?.notifyItemRangeChanged(count2, titles.size - 1)
-
-                    imageView.setTranslationX(view.left.toFloat())
-                    imageView.setTranslationY(view.top.toFloat())
-                    imageView.animate().translationX((view.measuredWidth * (count2 % 4)).toFloat()).setDuration(500).start()
-
-                    imageView.animate().translationY((view.measuredHeight * if (count2 / 4 == 0) count2 / 4 else count2 / 4 + 1).toFloat() + 50).setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            super.onAnimationEnd(animation)
-                            (recycler_view.getParent() as ViewGroup).removeView(imageView)
-
-                        }
-                    }).setDuration(500).start()
-                }
-            } else {
+                    }
+                }).setDuration(500).start()
+                isRun = true
 
             }
+
+            if (mDragAdapter?.isItemDraggable!! && titleBean.itemType === TitleBean.MYTITLESub && !isRun) {
+                val imageView = addMirrorView(recycler_view.getParent() as ViewGroup, recycler_view, view)
+                titleBean?.itemTypes = TitleBean.ORTHERTITLESUB
+                titles.removeAt(position)
+                titles.add(count2 + 2, titleBean)
+                mDragAdapter?.notifyItemRangeChanged(position, titles.size - 1)
+                imageView.setTranslationX(view.left.toFloat())
+                imageView.setTranslationY(view.top.toFloat() + 50)
+                imageView.animate().translationX(0f).setDuration(500).start()
+                val i = (count2 - 1) / 4
+                imageView.animate().translationY((view.measuredHeight * (if (i == 0) i + 2 else i + 3)).toFloat() + 50)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                (recycler_view.getParent() as ViewGroup).removeView(imageView)
+
+                            }
+                        }).setDuration(500).start()
+            }
+
+
+            var catgorys = ""
+            for (title in titles) {
+                if (title.itemTypes === TitleBean.MYTITLESub) {
+                    if (TextUtils.isEmpty(catgorys)) {
+                        catgorys = title.name + "|" + title.newsId
+                    } else {
+                        catgorys = catgorys + "&" + title.name + "|" + title.newsId
+                    }
+                }
+            }
+            RxSPTool.putString(mActivity, NEWSCATGORY, catgorys)
+
         })
     }
 
@@ -189,50 +208,51 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
     }
 
     private fun getData() {
-        val newsName = resources.getStringArray(R.array.mobile_news_name)
-        val newsId = resources.getStringArray(R.array.mobile_news_id)
+        try {
+            val newsName = resources.getStringArray(R.array.mobile_news_name)
+            val newsId = resources.getStringArray(R.array.mobile_news_id)
 
-        val category = RxSPTool.getContent(mActivity, NEWSCATGORY)
+            val category = RxSPTool.getContent(mActivity, NEWSCATGORY)
 
-        val titleBean = TitleBean()
-        titleBean.itemTypes = TitleBean.MYTITLE
-        titleBean.name = "我的频道  长按编辑 拖拽"
-        titles.add(titleBean)
-        var selectCount = 0
-        for (index in newsName.indices) {
-            var s = newsName.get(index)
             val titleBean = TitleBean()
-            titleBean.name = s
-            titleBean.newsId = newsId.get(index)
-
-            if (TextUtils.isEmpty(category)) {
-                if (index < 6) {
-                    titleBean.itemTypes = TitleBean.MYTITLESub
-                    selectCount++
-                } else {
-                    titleBean.itemTypes = TitleBean.ORTHERTITLESUB
-                }
-            } else {
-                if (s in category) {
-                    selectCount++
-                    titleBean.itemTypes = TitleBean.MYTITLESub
-                } else {
-                    titleBean.itemTypes = TitleBean.ORTHERTITLESUB
-                    if (newsName.get(index - 1) in category) {
-                        val titleBean = TitleBean()
-                        titleBean.itemTypes = TitleBean.ORTHERTITLE
-                        titles.add(titleBean)
-                    }
-                }
-            }
+            titleBean.itemTypes = TitleBean.MYTITLE
+            titleBean.name = "我的频道  长按编辑 拖拽"
             titles.add(titleBean)
 
-        }
-        val titleBean1 = TitleBean()
-        titleBean1.name = "隐藏频道"
+            var tempList = ArrayList<TitleBean>()
+            for (index in newsName.indices) {
+                var s = newsName.get(index)
+                val titleBean = TitleBean()
+                titleBean.name = s
+                titleBean.newsId = newsId.get(index)
 
-        titleBean1.itemTypes = TitleBean.ORTHERTITLE
-        titles.add(selectCount + 1, titleBean1)
+                if (TextUtils.isEmpty(category)) {
+                    if (index < 6) {
+                        titleBean.itemTypes = TitleBean.MYTITLESub
+                        titles.add(titleBean)
+
+                    } else {
+                        titleBean.itemTypes = TitleBean.ORTHERTITLESUB
+                        tempList.add(titleBean)
+                    }
+                } else {
+                    if (s in category) {
+                        titleBean.itemTypes = TitleBean.MYTITLESub
+                        titles.add(titleBean)
+                    } else {
+                        titleBean.itemTypes = TitleBean.ORTHERTITLESUB
+                        tempList.add(titleBean)
+                    }
+                }
+
+            }
+            val titleBean1 = TitleBean()
+            titleBean1.name = "隐藏频道"
+            titleBean1.itemTypes = TitleBean.ORTHERTITLE
+            titles.add(titleBean1)
+            titles.addAll(tempList)
+        } catch (e: Exception) {
+        }
 
 
     }
