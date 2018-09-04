@@ -11,6 +11,7 @@
 
     <style name="whiteText">
         <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="GreyText">
