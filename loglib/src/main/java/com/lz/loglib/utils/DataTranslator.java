@@ -51,15 +51,6 @@ public class DataTranslator {
             headersMap.put(name, value);
         }
         networkFeedModel.setRequestHeadersMap(headersMap);
-        try {
-            byte[] body = request.body();
-            if (body != null) {
-                String s = new String(body, "utf-8");
-                networkFeedModel.setReqBody(URLDecoder.decode(s, "UTF-8"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -86,17 +77,9 @@ public class DataTranslator {
     }
 
     public InputStream saveInterpretResponseStream(String requestId, String contentType, String contentEncoding, InputStream inputStream) {
-
         NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
         networkFeedModel.setContentType(contentType);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        if (contentType != null && contentType.contains("json")) {
-            byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel);
-        } else if (contentEncoding != null && contentEncoding.contains("gzip")) {
-            byteArrayOutputStream = parseGzipAndSaveBody(inputStream, networkFeedModel);
-        } else {
-            return inputStream;
-        }
+        ByteArrayOutputStream byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel, contentEncoding);
         InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         try {
             byteArrayOutputStream.close();
@@ -106,7 +89,7 @@ public class DataTranslator {
         return newInputStream;
     }
 
-    private ByteArrayOutputStream parseAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel) {
+    private ByteArrayOutputStream parseAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel, String contentEncoding) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int len;
@@ -115,34 +98,24 @@ public class DataTranslator {
                 byteArrayOutputStream.write(buffer, 0, len);
             }
             byteArrayOutputStream.flush();
-            InputStream newStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            /*InputStream newStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(newStream));
             StringBuilder bodyBuilder = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 bodyBuilder.append(line + '\n');
             }
-            String body = bodyBuilder.toString();
-            networkFeedModel.setBody(body);
-            networkFeedModel.setSize(body.getBytes().length);
-        } catch (Exception e) {
-            Log.e(TAG, TAG, e);
-        }
-        return byteArrayOutputStream;
-    }
 
-    private ByteArrayOutputStream parseGzipAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int len;
-        try {
-            while ((len = inputStream.read(buffer)) > -1) {
-                byteArrayOutputStream.write(buffer, 0, len);
+*/
+            InputStream newStream;
+            if (contentEncoding != null && contentEncoding.contains("gzip")) {
+                newStream = new GZIPInputStream(
+                        new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+            }else{
+                newStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
             }
-            byteArrayOutputStream.flush();
-            GZIPInputStream gzip = new GZIPInputStream(
-                    new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
-            InputStreamReader isr = new InputStreamReader(gzip);
+
+            InputStreamReader isr = new InputStreamReader(newStream);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder bodyBuilder = new StringBuilder();
             String temp;
@@ -151,18 +124,19 @@ public class DataTranslator {
                 bodyBuilder.append("\r\n");
             }
             isr.close();
-            gzip.close();
+            newStream.close();
 
             String body = bodyBuilder.toString();
             networkFeedModel.setBody(body);
             networkFeedModel.setSize(body.getBytes().length);
 
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.e(TAG, TAG, e);
         }
 
 
         return byteArrayOutputStream;
     }
+
 }

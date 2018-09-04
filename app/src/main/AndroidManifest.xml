@@ -32,7 +32,8 @@
             android:theme="@style/imagethem" />
         <activity android:name=".activity.NewsCommentActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
-        <activity android:name=".activity.CatgoryActivity"></activity>
+        <activity android:name=".activity.CatgoryActivity" />
+        <activity android:name=".activity.SearchActivity"></activity>
     </application>
 
 </manifest>
