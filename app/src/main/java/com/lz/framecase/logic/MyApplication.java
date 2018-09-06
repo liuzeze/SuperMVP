@@ -10,6 +10,8 @@ import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
+import java.util.HashMap;
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-03       创建class
@@ -35,7 +37,7 @@ public class MyApplication extends FrameApplication {
                 //栈管理
                 RxActivityTool.addActivity(activity);
                 //dp sp 适配
-                new ScreenAdaptation(activity, 720).register();
+                new ScreenAdaptation(activity, 2500).register();
             }
 
             @Override

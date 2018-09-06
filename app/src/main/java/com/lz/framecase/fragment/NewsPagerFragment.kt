@@ -4,13 +4,19 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.View
+import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout
+import com.jakewharton.rxbinding2.support.v4.view.RxViewPager
+import com.jakewharton.rxbinding2.view.RxView
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.activity.CatgoryActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.fragment.adapter.NewsPagerAdapter
 import com.vondear.rxtool.RxSPTool
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_news_pager.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -36,10 +42,12 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
     }
 
     private fun initLIstener() {
-        iv_catgory.setOnClickListener(View.OnClickListener {
-            val intent = Intent(mContext, CatgoryActivity::class.java)
-            this@NewsPagerFragment.startActivityForResult(intent, 1000)
-        })
+        RxView.clicks(iv_catgory).debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    val intent = Intent(mContext, CatgoryActivity::class.java)
+                    this@NewsPagerFragment.startActivityForResult(intent, 1000)
+                })
     }
 
     private fun intView() {
@@ -93,6 +101,7 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
         newsPagerAdapter.setTitleList(string)
         news_viewpager.adapter = newsPagerAdapter
         TabLayout.setupWithViewPager(news_viewpager)
+
 
     }
 

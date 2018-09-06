@@ -57,4 +57,19 @@ dependencies {
 
     // 饺子视频播放器
     api 'cn.jzvd:jiaozivideoplayer:6.2.7'
+
+    api 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
+
+
+    api 'com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:2.1.1'
+
+
+    api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.1.1'
+
+
+    api 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.1.1'
+
+
+    api 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:2.1.1'
+
 }

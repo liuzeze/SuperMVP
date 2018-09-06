@@ -25,11 +25,13 @@ import android.provider.Telephony.MmsSms.PendingMessages.ERROR_TYPE
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import com.jakewharton.rxbinding2.widget.RxToolbar
 import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.activity.NewsCommentActivity
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
+import com.vondear.rxtool.RxWebViewTool
 import java.util.ArrayList
 
 
@@ -111,6 +113,7 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
     }
 
     @SuppressLint("JavascriptInterface")
@@ -206,6 +209,7 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
         toolbar.setNavigationIcon(R.drawable.ic_white_back)
         toolbar.inflateMenu(R.menu.menu_browser)
         activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     override fun onSetWebView(url: String?, b: Boolean) {
