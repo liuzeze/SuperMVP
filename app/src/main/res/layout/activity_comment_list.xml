@@ -9,7 +9,8 @@
         android:id="@+id/comment_toobar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"></android.support.v7.widget.Toolbar>
+        android:background="@color/app_them_blue"
+        android:tag="skin:app_them:background"></android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"

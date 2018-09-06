@@ -14,6 +14,8 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
+            android:background="@color/app_them_blue"
+            android:tag="skin:app_them:background"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar

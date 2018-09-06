@@ -10,6 +10,8 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.widget.DrawerLayout
 import android.view.View
+import android.view.WindowManager
+import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
@@ -21,6 +23,8 @@ import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
 import com.lz.framecase.presenter.Main2Contract
 import com.lz.framecase.presenter.Main2Presenter
+import com.zhy.changeskin.SkinManager
+import com.zhy.changeskin.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -72,13 +76,16 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
 
                         }
                         R.id.nav_setting -> {
-
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                val tDesc = ActivityManager.TaskDescription("头条",
-                                        BitmapFactory.decodeResource(resources, R.drawable.ic_launcher), Color.RED)
-                                mActivity.setTaskDescription(tDesc)
-                            }
-
+                            val suffix = PrefUtils(mActivity).suffix
+                            SkinManager.getInstance().changeSkin(if (suffix.equals("red")) "blue" else "red")
+                            ImmersionBar.with(this)
+                                    //同时自定义状态栏和导航栏颜色，不写默认状态栏为透明色，导航栏为黑色
+                                    .barColor(if (suffix === "blue") R.color.app_them_red else R.color.app_them_blue)
+                                    //状态栏和导航栏变色后的颜色
+                                    //  .barColorTransform(R.color.orange)
+                                    //必须调用方可沉浸式
+                                    .init()
+                            drawerlayout.closeDrawers()
                         }
                         R.id.nav_share -> {
                             val shareIntent = Intent()
@@ -100,22 +107,18 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 val mContent = drawerlayout.getChildAt(0)
                 val scale = 1 - slideOffset
-                val rightScale = 0.9f + scale * 0.2f
-
                 if (drawerView.tag == "LEFT") {
 
-                    val leftScale = 1 - 0.3f * scale
-
-                    drawerView.scaleX = leftScale
-                    drawerView.scaleY = leftScale
-                    drawerView.alpha = 0.6f + 0.4f * (1 - scale)
+                    drawerView.scaleX = slideOffset
+                    drawerView.scaleY = slideOffset
+                    drawerView.alpha = slideOffset
 
                     mContent.pivotX = 0F;
                     mContent.pivotY = mContent.getMeasuredHeight() / 2f
                     mContent.invalidate()
-                    mContent.scaleY = rightScale
-                    mContent.scaleX = rightScale
-                    mContent.translationX = mContent.measuredWidth * (1 - rightScale)
+                    mContent.scaleY = if (scale > 0.8) scale else 0.8f
+                    mContent.scaleX = if (scale > 0.8) scale else 0.8f
+                    mContent.translationX = drawerView.measuredWidth * 0.8f * slideOffset
 
                 }
             }

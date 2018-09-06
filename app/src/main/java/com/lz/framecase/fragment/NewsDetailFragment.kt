@@ -204,7 +204,6 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
         // 判断是否为无图模式
         //        settings.setBlockNetworkImage(SettingUtil.getInstance().getIsNoPhotoMode())
 
-
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.setNavigationIcon(R.drawable.ic_white_back)
         toolbar.inflateMenu(R.menu.menu_browser)

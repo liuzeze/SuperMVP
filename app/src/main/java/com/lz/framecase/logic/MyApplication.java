@@ -9,6 +9,7 @@ import com.lz.framecase.env.SuspensionView;
 import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
+import com.zhy.changeskin.SkinManager;
 
 import java.util.HashMap;
 
@@ -21,6 +22,7 @@ public class MyApplication extends FrameApplication {
     public void onCreate() {
         super.onCreate();
         RxTool.init(this);
+        SkinManager.getInstance().init(this);
         SuspensionView.getInstance().init(this);
         registerActivityCycle();
 

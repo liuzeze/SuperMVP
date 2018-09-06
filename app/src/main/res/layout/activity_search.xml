@@ -10,16 +10,17 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/app_them_blue"
+        android:tag="skin:app_them:background">
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
+            android:background="@color/common_app_white_ffffff"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="@color/common_app_white_ffffff">
+            android:focusableInTouchMode="true">
 
             <EditText
                 android:layout_width="match_parent"
