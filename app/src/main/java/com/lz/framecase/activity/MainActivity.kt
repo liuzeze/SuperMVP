@@ -15,16 +15,20 @@ import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
-import com.lz.framecase.R.id.iv_search
+import com.lz.framecase.R.id.*
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
+import com.lz.framecase.logic.Constans
 import com.lz.framecase.presenter.Main2Contract
 import com.lz.framecase.presenter.Main2Presenter
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
+import com.lz.utilslib.interceptor.utils.SnackbarUtils
+import com.lz.utilslib.interceptor.utils.ToastUtils
+import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -64,14 +68,9 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
                 .subscribe(Consumer {
                     when (it.itemId) {
                         R.id.nav_switch_night_mode -> {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                if (mActivity.getWindow().navigationBarColor == Color.BLUE) {
-                                    mActivity.getWindow().setNavigationBarColor(Color.BLACK)
-                                } else {
-                                    mActivity.getWindow().setNavigationBarColor(Color.BLUE)
-                                }
-
-                            }
+                            val b = !RxSPTool.getBoolean(mActivity, Constans.SLIDBACKENABLE)
+                            RxSPTool.putBoolean(mActivity, Constans.SLIDBACKENABLE, b)
+                            SnackbarUtils.show(nav_view, (if (b) "开启" else "关闭") + "滑动返回")
                             drawerlayout.closeDrawers()
 
                         }

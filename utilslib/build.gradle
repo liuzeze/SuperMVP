@@ -61,4 +61,7 @@ dependencies {
     api project(':skinlibs')
     //状态栏导航栏修改
     api 'com.gyf.immersionbar:immersionbar:2.3.1'
+
+    // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
+    api 'me.yokeyword:fragmentation-swipeback:1.3.6'
 }

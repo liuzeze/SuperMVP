@@ -21,6 +21,7 @@ import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.logic.MyApplication
+import com.lz.framecase.utils.DiffCallback
 import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.vondear.rxtool.RxTimeTool

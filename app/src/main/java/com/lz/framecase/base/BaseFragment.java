@@ -24,13 +24,14 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
  * Activity 基类
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends SupportFragment implements BaseView {
+public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFragment implements BaseView {
 
     @Inject
     protected T mPresenter;
@@ -52,7 +53,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         InjectUtils.inject(this);
         onViewCreated();
 
-        return rootView;
+        return attachToSwipeBack(rootView);
     }
 
     @Override
