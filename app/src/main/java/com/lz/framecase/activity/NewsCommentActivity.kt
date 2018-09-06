@@ -90,7 +90,8 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
         comment_list.addItemDecoration(DividerItemDecoration(mActivity, VERTICAL))
         newsCommentAdapter = NewsCommentAdapter(commentList)
         comment_list.adapter = newsCommentAdapter
-        newsCommentAdapter?.openLoadAnimation()
+        newsCommentAdapter?.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+
     }
 
     override fun getNewsCommentSuccess(data: ArrayList<NewsCommentBean.DataBean>) {

@@ -6,5 +6,6 @@ package com.lz.framecase.logic;
  */
 public interface Constans {
 
-    public final String SLIDBACKENABLE = "SLIDBACKENABLE";
+    String SLIDBACKENABLE = "SLIDBACKENABLE";
+    String ISNIGHTMODE = "ISNIGHTMODE";
 }

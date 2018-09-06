@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
 class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
+    var newsPagerAdapter: NewsPagerAdapter? = null
 
     companion object {
         fun getInstance(): NewsPagerFragment {
@@ -37,6 +38,10 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
 
 
     override fun init() {
+        newsPagerAdapter = NewsPagerAdapter(childFragmentManager, arrayList)
+        newsPagerAdapter?.setTitleList(string)
+        news_viewpager.adapter = newsPagerAdapter
+        TabLayout.setupWithViewPager(news_viewpager)
         intView()
         initLIstener()
     }
@@ -50,11 +55,14 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
                 })
     }
 
+    val string = ArrayList<String>()
+    val stringId = ArrayList<String>()
+    val arrayList = ArrayList<Fragment>();
     private fun intView() {
 
-        val string = ArrayList<String>()
-        val stringId = ArrayList<String>()
-        val arrayList = ArrayList<Fragment>();
+        string.clear()
+        stringId.clear()
+        arrayList.clear()
         val category = RxSPTool.getContent(mContext, CatgoryActivity.NEWSCATGORY)
 
         if (!TextUtils.isEmpty(category)) {
@@ -97,12 +105,7 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
                 }
             }
         }
-        val newsPagerAdapter = NewsPagerAdapter(childFragmentManager, arrayList)
-        newsPagerAdapter.setTitleList(string)
-        news_viewpager.adapter = newsPagerAdapter
-        TabLayout.setupWithViewPager(news_viewpager)
-
-
+        newsPagerAdapter?.notifyDataSetChanged()
     }
 
 

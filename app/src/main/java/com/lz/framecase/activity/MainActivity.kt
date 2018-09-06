@@ -1,21 +1,20 @@
 package com.lz.framecase.activity
 
 
-import android.app.ActivityManager
 import android.app.ActivityOptions
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.content.res.Configuration
 import android.os.Build
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.annotation.RequiresApi
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AppCompatDelegate
 import android.view.View
-import android.view.WindowManager
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
-import com.lz.framecase.R.id.*
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
@@ -24,10 +23,10 @@ import com.lz.framecase.fragment.VideoPagerFragment
 import com.lz.framecase.logic.Constans
 import com.lz.framecase.presenter.Main2Contract
 import com.lz.framecase.presenter.Main2Presenter
+import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -42,6 +41,7 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
     override fun getLayout(): Int {
         return R.layout.activity_main2
     }
+
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -68,9 +68,9 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
                 .subscribe(Consumer {
                     when (it.itemId) {
                         R.id.nav_switch_night_mode -> {
-                            val b = !RxSPTool.getBoolean(mActivity, Constans.SLIDBACKENABLE)
-                            RxSPTool.putBoolean(mActivity, Constans.SLIDBACKENABLE, b)
-                            SnackbarUtils.show(nav_view, (if (b) "开启" else "关闭") + "滑动返回")
+                            val isNight = !SettingUtils.getSlideBackMode()
+                            SettingUtils.saveSlideBackMode(isNight)
+                            SnackbarUtils.show(nav_view, (if (isNight) "开启" else "关闭") + "滑动返回")
                             drawerlayout.closeDrawers()
 
                         }
@@ -89,6 +89,16 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
                                     .putExtra(Intent.EXTRA_TEXT, "我要分享这个应用")
                             startActivity(Intent.createChooser(shareIntent, "分享"))
                             drawerlayout.closeDrawers()
+                        }
+                        R.id.nav_setting2 -> {
+                            if (SettingUtils.getNightMode()) {
+                                SettingUtils.saveNightMode(false)
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                            } else {
+                                SettingUtils.saveNightMode(true)
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                            }
+                            recreate()
                         }
                         else -> {
                         }
@@ -135,4 +145,7 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+    }
 }

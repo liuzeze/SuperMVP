@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
+import com.chad.library.adapter.base.animation.SlideInBottomAnimation
 import com.chad.library.adapter.base.listener.OnItemDragListener
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
@@ -86,7 +88,7 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
         mDragAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             if (titles.get(position).name.equals("推荐") ||
                     titles.get(position).name.equals("视频")) {
-                SnackbarUtils.show(view,"不可取消")
+                SnackbarUtils.show(view, "不可取消")
                 return@OnItemClickListener
             }
             var count2 = 0
@@ -188,7 +190,7 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
         val gridLayoutManager = GridLayoutManager(mActivity, 4)
         recycler_view.setLayoutManager(gridLayoutManager)
         mDragAdapter = DragAdapter(titles)
-
+        mDragAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
         mItemDragAndSwipeCallback = ItemTouchListCallBack(mDragAdapter!!)
         mItemTouchHelper = ItemTouchHelper(mItemDragAndSwipeCallback)
         mItemTouchHelper?.attachToRecyclerView(recycler_view)

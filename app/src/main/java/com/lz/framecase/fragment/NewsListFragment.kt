@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
 import com.lz.framecase.R
@@ -122,6 +123,7 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
         gson = Gson()
         category = arguments?.getString("category")!!
         newsListAdapter = NewsListAdapter(mNewsBean)
+        newsListAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
         RecyclerView.adapter = newsListAdapter
 
 

@@ -1,27 +1,16 @@
 package com.lz.framecase.fragment.presenter
 
 
-import android.content.Intent
 import android.text.TextUtils
-import android.util.Log
 import android.webkit.JavascriptInterface
-import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.observer.CommonSubscriber
-import com.lz.framecase.R
-import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.*
+import com.lz.framecase.utils.SettingUtils
 import com.lz.utilslib.interceptor.utils.ToastUtils
-import com.vondear.rxtool.RxTimeTool
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Action
 import io.reactivex.functions.Consumer
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 import java.util.regex.Pattern
@@ -100,9 +89,9 @@ constructor(var mRequestApi: RequestApi)
         if (content != null) {
 
             var css = "<link rel=\"stylesheet\" href=\"file:///android_asset/toutiao_light.css\" type=\"text/css\">"
-            /*if (SettingUtil.getInstance().getIsNightMode()) {
+            if (SettingUtils.getNightMode()) {
                 css = css.replace("toutiao_light", "toutiao_dark")
-            }*/
+            }
 
             html = "<!DOCTYPE html>\n" +
                     "<html lang=\"en\">\n" +

@@ -16,6 +16,7 @@ import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.component.ActivityComponent;
 import com.lz.framecase.component.DaggerActivityComponent;
 import com.lz.framecase.logic.Constans;
+import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
 import com.lz.skinlibs.utils.PrefUtils;
 import com.lz.utilslib.interceptor.base.InjectUtils;
@@ -49,6 +50,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
         InjectUtils.inject(this);
         onViewCreated();
         onCreate();
+
     }
 
     /**
@@ -68,7 +70,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
             e.printStackTrace();
         }
 
-        if (!RxSPTool.getBoolean(mActivity, Constans.SLIDBACKENABLE) ||
+        if (!SettingUtils.Companion.getSlideBackMode() ||
                 this instanceof MainActivity) {
             setSwipeBackEnable(false); // 是否允许滑动
         }
@@ -102,15 +104,19 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
      */
     @Override
     protected void onDestroy() {
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
-        if (mPresenterDispatch != null) {
-            mPresenterDispatch.detachView();
+        try {
+            if (mPresenter != null) {
+                mPresenter.detachView();
+            }
+            if (mPresenterDispatch != null) {
+                mPresenterDispatch.detachView();
 
+            }
+            mImmersionBar.destroy();
+            SkinManager.getInstance().unregister(this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mImmersionBar.destroy();
-        SkinManager.getInstance().unregister(this);
         super.onDestroy();
 
     }
