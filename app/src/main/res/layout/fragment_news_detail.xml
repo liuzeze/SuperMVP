@@ -12,16 +12,17 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/common_app_transparency_b100"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="skin:app_them:other"
             app:collapsedTitleGravity="center"
             app:collapsedTitleTextAppearance="@style/whiteText"
             app:contentScrim="@color/app_them_blue"
-            android:tag="skin:app_them:contentScrim"
             app:expandedTitleGravity="left|bottom"
             app:expandedTitleTextAppearance="@style/whiteText"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
@@ -45,8 +46,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
 

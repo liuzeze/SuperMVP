@@ -1,17 +1,16 @@
 package com.lz.framecase.logic;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.env.SuspensionView;
+import com.lz.skinlibs.ChangeListener;
+import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
-import com.zhy.changeskin.SkinManager;
-
-import java.util.HashMap;
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -22,7 +21,7 @@ public class MyApplication extends FrameApplication {
     public void onCreate() {
         super.onCreate();
         RxTool.init(this);
-        SkinManager.getInstance().init(this);
+        SkinManager.getInstance().init(this, new AttrChangeLisnter());
         SuspensionView.getInstance().init(this);
         registerActivityCycle();
 

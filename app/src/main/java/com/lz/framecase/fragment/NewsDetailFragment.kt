@@ -25,10 +25,12 @@ import android.provider.Telephony.MmsSms.PendingMessages.ERROR_TYPE
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.widget.RxToolbar
 import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.activity.NewsCommentActivity
+import com.lz.skinlibs.SkinManager
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxWebViewTool
@@ -107,8 +109,11 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
             val img = arguments?.getString(IMG)
             if (!TextUtils.isEmpty(img)) {
                 iv_image.visibility = View.VISIBLE
-            } else
+            } else {
                 iv_image.visibility = View.GONE
+                val instance = SkinManager.getInstance()
+                app_bar_layout.setBackgroundColor(instance.resourceManager?.getColor("app_them")!!)
+            }
             Glide.with(mContext).load(img).into(iv_image)
         } catch (e: Exception) {
             e.printStackTrace()

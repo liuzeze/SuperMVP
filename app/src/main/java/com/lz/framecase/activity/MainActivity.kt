@@ -23,8 +23,8 @@ import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
 import com.lz.framecase.presenter.Main2Contract
 import com.lz.framecase.presenter.Main2Presenter
-import com.zhy.changeskin.SkinManager
-import com.zhy.changeskin.utils.PrefUtils
+import com.lz.skinlibs.SkinManager
+import com.lz.skinlibs.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -79,11 +79,7 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
                             val suffix = PrefUtils(mActivity).suffix
                             SkinManager.getInstance().changeSkin(if (suffix.equals("red")) "blue" else "red")
                             ImmersionBar.with(this)
-                                    //同时自定义状态栏和导航栏颜色，不写默认状态栏为透明色，导航栏为黑色
-                                    .barColor(if (suffix === "blue") R.color.app_them_red else R.color.app_them_blue)
-                                    //状态栏和导航栏变色后的颜色
-                                    //  .barColorTransform(R.color.orange)
-                                    //必须调用方可沉浸式
+                                    .barColor(SkinManager.getInstance().themColor)
                                     .init()
                             drawerlayout.closeDrawers()
                         }
