@@ -1,5 +1,6 @@
 package com.lz.framecase.fragment
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
@@ -26,6 +27,7 @@ import com.lz.framecase.utils.DiffCallback
 import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.vondear.rxtool.RxTimeTool
+import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.fragment_news_list.*
 
 /**
@@ -92,10 +94,11 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
         newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
 
             val item = mNewsBean.get(position)
+           // view.transitionName = "SearchView"
+            var intent: Intent? = null
             if (item.itemType === NewsDataBean.NEWSTEXT) {
-                var intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
-                intent.putExtra(NewDetailActivity.TAG, item)
-                startActivity(intent)
+                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
             }
             if (item.itemType === NewsDataBean.NEWSIMG) {
                 var imgUrl = "http://p3.pstatp.com/"
@@ -105,17 +108,17 @@ class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.Vie
                         imgUrl += image_list!!.get(0).uri?.replace("list", "large")
                     }
                 }
-                var intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
-                intent.putExtra(NewDetailActivity.TAG, item)
-                intent.putExtra(NewDetailActivity.IMG, imgUrl)
-                startActivity(intent)
+                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
+                intent?.putExtra(NewDetailActivity.IMG, imgUrl)
             }
             if (item.itemType === NewsDataBean.NEWSVIDEO) {
-                var intent = Intent(MyApplication.mApplication, VideoPlayerActivity::class.java)
-                intent.putExtra(NewDetailActivity.TAG, item)
-                startActivity(intent)
+                intent = Intent(MyApplication.mApplication, VideoPlayerActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
 
             }
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, "SearchView").toBundle())
+
         })
     }
 

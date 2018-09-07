@@ -57,7 +57,6 @@ constructor(var mRequestApi: RequestApi)
         if (!TextUtils.isEmpty(url)) {
             val list = getAllImageUrlFromHtml(html)
             if (list.size > 0) {
-                ToastUtils.info("webview中的图片数量" + list.size)
                 mView.onJumpPreview(url, list)
             }
         }

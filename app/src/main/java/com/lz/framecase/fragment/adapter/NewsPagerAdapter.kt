@@ -3,12 +3,13 @@ package com.lz.framecase.fragment.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 
 /**
  *-----------作者----------日期----------变更内容-----
  *-          刘泽      2018-08-29       创建class
  */
-class NewsPagerAdapter(fm: FragmentManager?, var arrayList: ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
+class NewsPagerAdapter(fm: FragmentManager?, var arrayList: ArrayList<Fragment>) : FragmentStatePagerAdapter(fm) {
 
     private var titleArray: ArrayList<String>? = null;
     override fun getItem(position: Int): Fragment = arrayList.get(position)

@@ -14,8 +14,10 @@ import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
+import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.component.DaggerFragmentComponent;
 import com.lz.framecase.component.FragmentComponent;
+import com.lz.framecase.utils.SettingUtils;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 
@@ -50,6 +52,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
+        if (!SettingUtils.Companion.getSlideBackMode()) {
+            setSwipeBackEnable(false); // 是否允许滑动
+        }
         InjectUtils.inject(this);
         onViewCreated();
 

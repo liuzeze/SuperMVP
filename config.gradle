@@ -14,7 +14,7 @@ ext {
             targetSdkVersion : 22,
 
 
-            versionCode      : 42,
+            versionCode      : 1,
             /**
              * versionName      : "   3.         0.           5.                5"
              * -------------------重构修改+1--新功能上线+1---版本迭代+1------内部测试版本+1(对外上线删除这一位)

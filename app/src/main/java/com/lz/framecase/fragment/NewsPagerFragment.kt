@@ -1,5 +1,6 @@
 package com.lz.framecase.fragment
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.text.TextUtils
@@ -51,7 +52,7 @@ class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     val intent = Intent(mContext, CatgoryActivity::class.java)
-                    this@NewsPagerFragment.startActivityForResult(intent, 1000)
+                    this@NewsPagerFragment. startActivityForResult(intent, 1000,ActivityOptions.makeSceneTransitionAnimation(activity, iv_catgory, "SearchView").toBundle())
                 })
     }
 

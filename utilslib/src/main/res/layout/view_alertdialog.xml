@@ -64,8 +64,8 @@
 
             <Button
                 android:id="@+id/btn_neg"
-                android:layout_width="128dp"
-                android:layout_height="44dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/shape_diglog_cancel"
                 android:gravity="center"
@@ -75,8 +75,8 @@
 
             <Button
                 android:id="@+id/btn_pos"
-                android:layout_width="128dp"
-                android:layout_height="44dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/shape_diglog_confirm"
                 android:gravity="center"
                 android:text="确定"

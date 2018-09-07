@@ -117,7 +117,7 @@ class VideoPlayerHead(context: Context) : BaseUtils<BasePresenter<*>>(context) {
                                 override fun onAnimationEnd(animation: Animator) {
                                     super.onAnimationEnd(animation)
                                     mLlDesc!!.visibility = View.VISIBLE
-                                    mIvMenu!!.animate().rotation(180f)
+                                    mIvMenu!!.animate().rotation(360f)
                                 }
                             }).start()
                 }

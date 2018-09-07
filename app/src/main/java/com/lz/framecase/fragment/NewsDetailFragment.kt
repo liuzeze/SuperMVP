@@ -1,6 +1,7 @@
 package com.lz.framecase.fragment
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -179,7 +180,8 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
                     val intent = Intent(mContext, NewsCommentActivity::class.java)
                     intent.putExtra("group_id", newsDataBean?.group_id.toString())
                     intent.putExtra("item_id", newsDataBean?.item_id)
-                    startActivity(intent)
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, toolbar, "SearchView").toBundle())
+
                 }
                 R.id.action_share -> ShareAction.send(mContext, shareTitle + "\n" + shareUrl)
 
@@ -240,6 +242,7 @@ class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContra
         intent.putExtra("url", url)
         intent.putStringArrayListExtra("urlList", list)
         startActivity(intent)
+
 
 
     }

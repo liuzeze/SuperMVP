@@ -4,6 +4,7 @@ package com.lz.framecase.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.lz.fram.app.App;
@@ -138,4 +139,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
      */
     protected abstract void onCreate();
 
+    @Override
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
+        ActivityCompat.finishAfterTransition(this);
+    }
 }
