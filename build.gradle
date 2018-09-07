@@ -23,7 +23,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
-        maven { url "https://raw.githubusercontent.com/liuzeze/zgsy_frame/master" }
+        maven { url "https://raw.githubusercontent.com/liuzeze/SuperMVP/master" }
     }
 }
 
