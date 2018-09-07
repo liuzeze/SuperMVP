@@ -6,27 +6,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.lz.fram.app.App;
 import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.R;
 import com.lz.framecase.activity.MainActivity;
-import com.lz.framecase.component.ActivityComponent;
-import com.lz.framecase.component.DaggerActivityComponent;
-import com.lz.framecase.logic.Constans;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
-import com.lz.skinlibs.utils.PrefUtils;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
-import com.vondear.rxtool.RxSPTool;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportActivity;
+import dagger.android.AndroidInjection;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
@@ -44,10 +37,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         initConfig();
-        InjectUtils.inject(this);
+        //  InjectUtils.inject(this);
         onViewCreated();
         onCreate();
 
@@ -76,16 +70,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
         }
     }
 
-    /**
-     * 关联appCompomponet
-     *
-     * @return
-     */
-    public ActivityComponent getObjectComponent() {
-        return DaggerActivityComponent.builder()
-                .appComponent(((App) getApplicationContext()).getAppComponent())
-                .build();
-    }
 
     /**
      * 为presenter 注册毁掉

@@ -25,13 +25,14 @@ import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.TitleBean
+import com.lz.framecase.presenter.EmptyPresenter
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
+class CatgoryActivity : BaseActivity<EmptyPresenter>() {
 
     private val titles = ArrayList<TitleBean>()
     private var mDragAdapter: DragAdapter? = null

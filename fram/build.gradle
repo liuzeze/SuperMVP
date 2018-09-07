@@ -25,16 +25,17 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:2.15"
     //dagger库以及编译库
     api 'com.google.dagger:dagger:2.15'
+
     //异步处
     api 'com.squareup.retrofit2:retrofit:2.4.0'
-    api 'io.reactivex.rxjava2:rxjava:2.1.12'
+    api 'io.reactivex.rxjava2:rxjava:2.1.16'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
     // 网络库
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 //    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     api 'com.squareup.retrofit2:converter-scalars:2.3.0'
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
-    api 'com.alibaba:fastjson:1.2.40'
+    api 'com.alibaba:fastjson:1.2.48'
     //    api project(':dependlib')
 }
 
@@ -60,7 +61,6 @@ uploadArchives {
         }
     }
 }
-
 
 // 源代码一起打包
 task androidSourcesJar(type: Jar) {

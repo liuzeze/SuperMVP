@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lz.fram.component;
+package com.lz.framecase.component;
 
 
 import android.app.Application;
@@ -23,11 +23,15 @@ import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.model.AppModule;
 import com.lz.fram.model.ClientModule;
 import com.lz.fram.model.GlobalConfigBuild;
+import com.lz.framecase.logic.MyApplication;
 
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 import retrofit2.Retrofit;
 
 
@@ -36,8 +40,19 @@ import retrofit2.Retrofit;
  * 2017/12/26	9:24	    刘泽			    提供全局参数
  */
 @Singleton
-@Component(modules = {AppModule.class, ClientModule.class, GlobalConfigBuild.class})
-public interface AppComponent {
+@Component(modules = {
+        AndroidInjectionModule.class,
+        AndroidSupportInjectionModule.class,
+        ClientModule.class,
+        GlobalConfigBuild.class,
+
+        AppModule.class,
+        FragmentProvider.class,
+        ActivityProvider.class
+
+})
+public interface AppComponent extends AndroidInjector<MyApplication> {
+
     Application application();
 
     LpLoadDialog getLPDialog();
@@ -48,12 +63,11 @@ public interface AppComponent {
     Gson gson();
 
     @Component.Builder
-    interface Builder {
+    abstract class Builder extends AndroidInjector.Builder<MyApplication> {
         @BindsInstance
-        Builder application(Application application);
+        public abstract Builder application(Application application);
 
-        Builder globalConfigModule(GlobalConfigBuild globalConfigModule);
+        public abstract Builder globalConfigModule(GlobalConfigBuild globalConfigModule);
 
-        AppComponent build();
     }
 }

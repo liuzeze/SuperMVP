@@ -5,17 +5,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lz.fram.app.App;
 import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.component.DaggerFragmentComponent;
-import com.lz.framecase.component.FragmentComponent;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 
@@ -23,7 +21,9 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.SupportFragment;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.HasSupportFragmentInjector;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
@@ -31,7 +31,12 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFragment implements BaseView {
+public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFragment
+        implements BaseView, HasSupportFragmentInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
+
 
     @Inject
     protected T mPresenter;
@@ -41,6 +46,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
 
     @Override
     public void onAttach(Context context) {
+        try {
+            AndroidSupportInjection.inject(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onAttach(context);
         mContext = context;
     }
@@ -50,7 +60,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayout(), container, false);
         mUnbinder = ButterKnife.bind(this, rootView);
-        InjectUtils.inject(this);
+        //  InjectUtils.inject(this);
         onViewCreated();
 
         return attachToSwipeBack(rootView);
@@ -62,11 +72,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
         init();
     }
 
-    public FragmentComponent getObjectComponent() {
-        return DaggerFragmentComponent.builder()
-                .appComponent(((App) mContext.getApplicationContext()).getAppComponent())
-                .build();
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return childFragmentInjector;
     }
+
 
     protected void onViewCreated() {
         PresenterProviders providers = PresenterProviders.inject(this);

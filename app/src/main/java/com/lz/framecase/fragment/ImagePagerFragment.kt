@@ -1,15 +1,14 @@
 package com.lz.framecase.fragment
 
-import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseFragment
-import com.lz.framecase.fragment.presenter.NewsListContract
+import com.lz.framecase.presenter.EmptyPresenter
 
 
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class ImagePagerFragment : BaseFragment<BasePresenter<*>>() {
+class ImagePagerFragment : BaseFragment<EmptyPresenter>() {
 
     companion object {
         fun getInstance(): ImagePagerFragment {

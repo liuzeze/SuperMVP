@@ -2,7 +2,6 @@ package com.lz.fram.exception;
 
 
 
-import com.lz.fram.app.FrameApplication;
 
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
@@ -66,7 +65,6 @@ public class ApiException extends Exception {
             ex.message = "网络连接超时，请检查您的网络状态，稍后重试！";
             return ex;
         } else if (e instanceof UnknownHostException) {
-            FrameApplication.mApplication.setHostError(true);
             ex = new ApiException(e, ERROR.TIMEOUT_ERROR);
             ex.message = "网络连接异常，请检查您的网络状态，稍后重试！";
             return ex;

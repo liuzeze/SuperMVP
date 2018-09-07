@@ -1,5 +1,5 @@
 
-package com.lz.fram.app;
+package com.lz.framecase.component;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
