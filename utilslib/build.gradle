@@ -37,13 +37,7 @@ dependencies {
     api 'me.yokeyword:fragmentation:1.3.5'
     api 'com.jakewharton:butterknife:8.8.1'
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
-    //自己定义的注解的java lib
-    //    api 'com.lz:inject_annotations:1.0.2'
-    //    api 'com.lz:fram_lib:1.0.0'
-    api project(':fram')
-    //    api project(':loglib')
-    debugApi 'com.lz:intercept_debug:1.0.2'
-    releaseApi 'com.lz:intercept_release:1.0.0'
+
     api 'com.github.bumptech.glide:glide:4.8.0'
     api 'com.github.chrisbanes.photoview:library:1.2.4'
     api 'cn.bingoogolapple:bga-banner:2.2.4@aar'
@@ -56,11 +50,23 @@ dependencies {
     api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.1.1'
     api 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.1.1'
     api 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:2.1.1'
-    //换肤框架
-    api project(':skinlibs')
+
     //状态栏导航栏修改
     api 'com.gyf.immersionbar:immersionbar:2.3.1'
     // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
     api 'me.yokeyword:fragmentation-swipeback:1.3.6'
-    api project(':inject_annotation')
+
+
+
+    //自己定义的注解的java lib
+    api 'com.lz:inject_annotations:1.0.4'
+//    api project(':inject_annotation')
+    //换肤框架
+    api project(':skinlibs')
+
+    api 'com.lz:fram_lib:1.0.1'
+//    api project(':fram')
+    //    api project(':loglib')
+    debugApi 'com.lz:intercept_debug:1.0.2'
+    releaseApi 'com.lz:intercept_release:1.0.0'
 }
