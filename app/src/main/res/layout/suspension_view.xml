@@ -6,13 +6,13 @@
 
     <TextView
         android:id="@+id/tv_log"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@color/common_app_red_ff0000"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_red_circle"
         android:gravity="center"
         android:text="日志"
         android:textColor="#ffffff"
-        android:textSize="12dp" />
+        android:textSize="10dp" />
 
 
 

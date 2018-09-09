@@ -65,6 +65,8 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
     override fun init() {
         initValue()
         initListener()
+        SwipeRefreshLayout.setRefreshing(true)
+
         mPresenter.getNewLists(category)
     }
 

@@ -41,7 +41,7 @@ public class SuspensionView implements View.OnTouchListener {
 
     public void init(Context context) {
         mContext = context;
-        onRemoveView();
+       // onRemoveView();
         createFloatView(context);
     }
 
@@ -57,14 +57,14 @@ public class SuspensionView implements View.OnTouchListener {
     }
 
     private synchronized void createFloatView(final Context context) {
-        onRemoveView();
         wmParams = new WindowManager.LayoutParams();
         mWindowManager = (WindowManager) context.getApplicationContext().getSystemService(context.getApplicationContext().WINDOW_SERVICE);
-        wmParams.type = WindowManager.LayoutParams.TYPE_TOAST;
+        wmParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         //设置图片格式，效果为背景透明
         wmParams.format = PixelFormat.RGBA_8888;
         //设置浮动窗口不可聚焦（实现操作除浮动窗口外的其他可见窗口的操作）
-        wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
         wmParams.format = PixelFormat.TRANSLUCENT;
 
         //调整悬浮窗显示的停靠位置为左侧置顶

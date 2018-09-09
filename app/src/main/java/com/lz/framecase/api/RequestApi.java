@@ -49,13 +49,13 @@ public class RequestApi {
             return
                     mRetrofit.create(ApiService.class)
                             .getNewsArticle(category, time)
-                            .compose(Transformer.<MultNewsBean>switchSchedulers(mLpLoadDialog))
+                            .compose(Transformer.<MultNewsBean>switchSchedulers())
                             .subscribeWith(subscriber);
         } else {
             return
                     mRetrofit.create(ApiService.class)
                             .getNewsArticle2(category, time)
-                            .compose(Transformer.<MultNewsBean>switchSchedulers(mLpLoadDialog))
+                            .compose(Transformer.<MultNewsBean>switchSchedulers())
                             .subscribeWith(subscriber);
         }
 
@@ -66,7 +66,7 @@ public class RequestApi {
         return
                 mRetrofit.create(ApiService.class)
                         .getWendaArticle(time)
-                        .compose(Transformer.<WendaArticleBean>switchSchedulers(mLpLoadDialog))
+                        .compose(Transformer.<WendaArticleBean>switchSchedulers())
                         .subscribeWith(subscriber);
 
     }

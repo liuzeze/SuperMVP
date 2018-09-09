@@ -62,6 +62,8 @@ class WenDaListFragment : BaseFragment(), WenDaListContract.View {
     override fun init() {
         initValue()
         initListener()
+        SwipeRefreshLayout.setRefreshing(true)
+
         mPresenter.getWenDaList()
     }
 
