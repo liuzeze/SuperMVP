@@ -37,7 +37,7 @@ public class ResourceManager {
             L.e("name = " + name + " , " + mPluginPackageName);
             return mResources.getDrawable(mResources.getIdentifier(name, DEFTYPE_DRAWABLE, mPluginPackageName));
         } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
+          //  e.printStackTrace();
             return null;
         }
     }

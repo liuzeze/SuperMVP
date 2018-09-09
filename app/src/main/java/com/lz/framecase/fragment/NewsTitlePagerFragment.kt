@@ -9,7 +9,7 @@ import com.lz.framecase.fragment.presenter.NewsListContract
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsTitlePagerFragment : BaseFragment<BasePresenter<*>>() {
+class NewsTitlePagerFragment : BaseFragment() {
 
     companion object {
         fun getInstance(): NewsTitlePagerFragment {

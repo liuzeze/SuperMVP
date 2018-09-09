@@ -7,27 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.lz.fram.app.App;
-import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.R;
 import com.lz.framecase.activity.MainActivity;
-import com.lz.framecase.component.ActivityComponent;
-import com.lz.framecase.component.DaggerActivityComponent;
-import com.lz.framecase.logic.Constans;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
-import com.lz.skinlibs.utils.PrefUtils;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
-import com.vondear.rxtool.RxSPTool;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
@@ -35,10 +24,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackActivity implements BaseView {
+public abstract class BaseActivity extends SwipeBackActivity implements BaseView {
 
-    @Inject
-    protected T mPresenter;
     protected Activity mActivity;
     private PresenterDispatch mPresenterDispatch;
     private ImmersionBar mImmersionBar;
@@ -50,7 +37,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
         initConfig();
         InjectUtils.inject(this);
         onViewCreated();
-        onCreate();
+        init();
 
     }
 
@@ -78,26 +65,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
     }
 
     /**
-     * 关联appCompomponet
-     *
-     * @return
-     */
-    public ActivityComponent getObjectComponent() {
-        return DaggerActivityComponent.builder()
-                .appComponent(((App) getApplicationContext()).getAppComponent())
-                .build();
-    }
-
-    /**
      * 为presenter 注册毁掉
      */
     protected void onViewCreated() {
-        PresenterProviders providers = PresenterProviders.inject(this);
-        mPresenterDispatch = new PresenterDispatch(providers);
+        mPresenterDispatch=  PresenterProviders.inject(this).presenterCreate();
         mPresenterDispatch.attachView(this);
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
     }
 
     /**
@@ -106,9 +78,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
     @Override
     protected void onDestroy() {
         try {
-            if (mPresenter != null) {
-                mPresenter.detachView();
-            }
             if (mPresenterDispatch != null) {
                 mPresenterDispatch.detachView();
 
@@ -137,7 +106,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SwipeBackAct
     /**
      * 初始化数据
      */
-    protected abstract void onCreate();
+    protected abstract void init();
 
     @Override
     public void onBackPressedSupport() {

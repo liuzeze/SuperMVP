@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.TYPE)
-public @interface InjectComponet {
+public @interface InjectUtils {
 }

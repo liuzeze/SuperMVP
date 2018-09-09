@@ -19,19 +19,26 @@ import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.fragment.presenter.WenDaListContract
 import com.lz.framecase.fragment.presenter.WenDaListPresenter
-import com.lz.inject_annotation.InjectComponet
+import com.lz.framecase.presenter.NewsCommentPresenter
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxTimeTool
 import kotlinx.android.synthetic.main.fragment_news_list.*
+import com.lz.inject_annotation.InjectFragment
+import javax.inject.Inject
+import com.lz.fram.scope.AttachView
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-@InjectComponet
-class WenDaListFragment : BaseFragment<WenDaListPresenter>(), WenDaListContract.View {
+@InjectFragment
+class WenDaListFragment : BaseFragment(), WenDaListContract.View {
 
+
+    @AttachView
+    @Inject
+    lateinit var mPresenter: WenDaListPresenter
 
     private var gson: Gson? = null
     private var category: String = ""

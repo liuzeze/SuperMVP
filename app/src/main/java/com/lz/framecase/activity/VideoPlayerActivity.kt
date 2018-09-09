@@ -4,7 +4,7 @@ import android.text.TextUtils
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
 import com.bumptech.glide.Glide
-import com.lz.fram.scope.PresenterInject
+import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.activity.adapter.NewsCommentAdapter
 import com.lz.framecase.base.BaseActivity
@@ -15,17 +15,21 @@ import com.lz.framecase.presenter.NewsCommentContract
 import com.lz.framecase.presenter.NewsCommentPresenter
 import com.lz.framecase.presenter.VideoPlayerContract
 import com.lz.framecase.presenter.VideoPlayerPresenter
-import com.lz.inject_annotation.InjectComponet
 import kotlinx.android.synthetic.main.activity_video_player.*
 import javax.inject.Inject
+import com.lz.inject_annotation.InjectActivity
 
 
-@InjectComponet
-class VideoPlayerActivity : BaseActivity<VideoPlayerPresenter>(), VideoPlayerContract.View, NewsCommentContract.View {
+@InjectActivity
+class VideoPlayerActivity : BaseActivity(), VideoPlayerContract.View, NewsCommentContract.View {
 
-    @PresenterInject
+    @AttachView
     @Inject
     lateinit var mPresenter2: NewsCommentPresenter
+
+    @AttachView
+    @Inject
+    lateinit var mPresenter: VideoPlayerPresenter
 
     var newsDataBean: NewsDataBean? = null
     var commentList = ArrayList<NewsCommentBean.DataBean>()
@@ -36,7 +40,7 @@ class VideoPlayerActivity : BaseActivity<VideoPlayerPresenter>(), VideoPlayerCon
         return R.layout.activity_video_player
     }
 
-    override fun onCreate() {
+    override fun init() {
         initData()
 
     }

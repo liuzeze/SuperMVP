@@ -25,7 +25,7 @@ public class InjectUtils {
             Method m1 = inject.getClass().getDeclaredMethod("inject", activity.getClass());
             m1.invoke(inject, activity);
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 }

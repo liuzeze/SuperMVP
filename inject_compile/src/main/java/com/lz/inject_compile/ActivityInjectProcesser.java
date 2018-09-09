@@ -64,17 +64,27 @@ public class ActivityInjectProcesser extends AbstractProcessor {
     }
 
 
-    private void processActivityCheck(RoundEnvironment roundEnv) throws IllegalArgumentException, ClassNotFoundException {
+    private void processActivityCheck(RoundEnvironment roundEnv ) throws IllegalArgumentException, ClassNotFoundException {
         //check ruleslass forName(String className
-        for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH))) {
+        for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_ACTIVITY))) {
             if (element.getKind() == ElementKind.CLASS) {
-                getAnnotatedClass(element);
+                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_ACTIVITY);
+            } else
+                error("ActivityInject only can use  in ElementKind.CLASS");
+        } for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_FRAGMENT))) {
+            if (element.getKind() == ElementKind.CLASS) {
+                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_FRAGMENT);
+            } else
+                error("ActivityInject only can use  in ElementKind.CLASS");
+        } for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_UTILS))) {
+            if (element.getKind() == ElementKind.CLASS) {
+                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_UTILS);
             } else
                 error("ActivityInject only can use  in ElementKind.CLASS");
         }
     }
 
-    private AnnotatedClass getAnnotatedClass(Element element) {
+    private AnnotatedClass getAnnotatedClass(Element element, String annotationPath) {
         // tipe . can not use chines  so  ....
         // get TypeElement  element is class's --->class  TypeElement typeElement = (TypeElement) element
         //  get TypeElement  element is method's ---> TypeElement typeElement = (TypeElement) element.getEnclosingElement();
@@ -82,7 +92,7 @@ public class ActivityInjectProcesser extends AbstractProcessor {
         String fullName = typeElement.getQualifiedName().toString();
         AnnotatedClass annotatedClass = mAnnotatedClassMap.get(fullName);
         if (annotatedClass == null) {
-            annotatedClass = new AnnotatedClass(typeElement, mElementUtils, mMessager);
+            annotatedClass = new AnnotatedClass(typeElement, mElementUtils, mMessager,annotationPath);
             mAnnotatedClassMap.put(fullName, annotatedClass);
         }
         return annotatedClass;
@@ -98,7 +108,9 @@ public class ActivityInjectProcesser extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> types = new LinkedHashSet<>();
-        types.add(TypeUtil.ANNOTATION_PATH);
+        types.add(TypeUtil.ANNOTATION_PATH_ACTIVITY);
+        types.add(TypeUtil.ANNOTATION_PATH_FRAGMENT);
+        types.add(TypeUtil.ANNOTATION_PATH_UTILS);
         return types;
     }
 

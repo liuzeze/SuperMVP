@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsPagerFragment : BaseFragment<BasePresenter<*>>() {
+class NewsPagerFragment : BaseFragment() {
     var newsPagerAdapter: NewsPagerAdapter? = null
 
     companion object {

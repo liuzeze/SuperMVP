@@ -6,7 +6,7 @@ import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.NewsDetailFragment
 
-class NewDetailActivity : BaseActivity<BasePresenter<*>>() {
+class NewDetailActivity : BaseActivity() {
 
 
     companion object {
@@ -19,7 +19,7 @@ class NewDetailActivity : BaseActivity<BasePresenter<*>>() {
         return R.layout.container
     }
 
-    override fun onCreate() {
+    override fun init() {
         val intent = intent
         loadRootFragment(R.id.container,
                 NewsDetailFragment.getInstance(intent.getSerializableExtra(TAG) as NewsDataBean, intent.getStringExtra(IMG)))

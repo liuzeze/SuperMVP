@@ -63,8 +63,8 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
-//    annotationProcessor project(':inject_compile')
-    kapt 'com.lz:inject_compile:1.0.3'
+    kapt project(':inject_compile')
+//    kapt 'com.lz:inject_compile:1.0.3'
     implementation project(':utilslib')
 
 

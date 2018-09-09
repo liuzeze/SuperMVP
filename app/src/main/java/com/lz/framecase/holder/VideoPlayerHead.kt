@@ -28,7 +28,7 @@ import com.lz.fram.base.BasePresenter
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-class VideoPlayerHead(context: Context) : BaseUtils<BasePresenter<*>>(context) {
+class VideoPlayerHead(context: Context) : BaseUtils(context) {
     @BindView(R.id.tv_title)
     @JvmField
     internal var mTvTitle: TextView? = null

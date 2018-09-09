@@ -23,10 +23,9 @@ import javax.inject.Inject;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public class BaseUtils<T extends BasePresenter> implements BaseView {
+public class BaseUtils implements BaseView {
 
-    @Inject
-    protected T mPresenter;
+
     View convertView;
     protected Context mContext;
     private PresenterDispatch mPresenterDispatch;
@@ -51,25 +50,16 @@ public class BaseUtils<T extends BasePresenter> implements BaseView {
         return convertView;
     }
 
-    public UtilsComponent getObjectComponent() {
-        return DaggerUtilsComponent.builder()
-                .appComponent(((App) RxTool.getContext().getApplicationContext()).getAppComponent())
-                .build();
-    }
+
 
     protected void attachView() {
         PresenterProviders providers = PresenterProviders.inject(this);
         mPresenterDispatch = new PresenterDispatch(providers);
         mPresenterDispatch.attachView(this);
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
+
     }
 
     public void detachView() {
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
         if (mPresenterDispatch != null) {
             mPresenterDispatch.detachView();
         }

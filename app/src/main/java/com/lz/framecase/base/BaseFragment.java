@@ -33,10 +33,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFragment implements BaseView {
+public abstract class BaseFragment extends SwipeBackFragment implements BaseView {
 
-    @Inject
-    protected T mPresenter;
     protected Context mContext;
     private Unbinder mUnbinder;
     private PresenterDispatch mPresenterDispatch;
@@ -67,30 +65,17 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
         init();
     }
 
-    public FragmentComponent getObjectComponent() {
-        return DaggerFragmentComponent.builder()
-                .appComponent(((App) mContext.getApplicationContext()).getAppComponent())
-                .build();
-    }
 
     protected void onViewCreated() {
-        PresenterProviders providers = PresenterProviders.inject(this);
-        mPresenterDispatch = new PresenterDispatch(providers);
+        mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
         mPresenterDispatch.attachView(this);
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
         if (mPresenterDispatch != null) {
             mPresenterDispatch.detachView();
-
         }
         if (mUnbinder != null) {
             mUnbinder.unbind();

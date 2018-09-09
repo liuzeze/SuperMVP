@@ -31,14 +31,14 @@ import uk.co.senab.photoview.PhotoViewAttacher
 import java.io.File
 import java.util.*
 
-class ImagePreviewActivity : BaseActivity<BasePresenter<*>>() {
+class ImagePreviewActivity : BaseActivity() {
 
     var mColorDrawable: ColorDrawable? = null
     override fun getLayout(): Int {
         return R.layout.activity_image_preview
     }
 
-    override fun onCreate() {
+    override fun init() {
 
 
         initData()

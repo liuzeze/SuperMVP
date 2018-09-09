@@ -19,17 +19,25 @@ import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsCommentBean
 import com.lz.framecase.presenter.NewsCommentContract
 import com.lz.framecase.presenter.NewsCommentPresenter
-import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.LpDialogUtils
 import com.lz.utilslib.interceptor.utils.ShareAction
 import kotlinx.android.synthetic.main.activity_comment_list.*
+import com.lz.inject_annotation.InjectActivity
+import javax.inject.Inject
+import com.lz.fram.scope.AttachView
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-@InjectComponet
-class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentContract.View {
+@InjectActivity
+class NewsCommentActivity : BaseActivity(), NewsCommentContract.View {
+
+    @AttachView
+    @Inject
+    lateinit var mPresenter: NewsCommentPresenter
+
+
     var commentList = ArrayList<NewsCommentBean.DataBean>()
     var newsCommentAdapter: NewsCommentAdapter? = null
     var groupId = ""
@@ -38,7 +46,7 @@ class NewsCommentActivity : BaseActivity<NewsCommentPresenter>(), NewsCommentCon
         return R.layout.activity_comment_list
     }
 
-    override fun onCreate() {
+    override fun init() {
         initView()
         initData()
         initLisrtener()

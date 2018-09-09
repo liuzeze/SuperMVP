@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
+class MainActivity : BaseActivity(), Main2Contract.View {
 
     override fun getLayout(): Int {
         return R.layout.activity_main2
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity<Main2Presenter>(), Main2Contract.View {
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun onCreate() {
+    override fun init() {
         initFragment()
         initlIstener()
 

@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_catgory.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
+class CatgoryActivity : BaseActivity() {
 
     private val titles = ArrayList<TitleBean>()
     private var mDragAdapter: DragAdapter? = null
@@ -43,7 +43,7 @@ class CatgoryActivity : BaseActivity<BasePresenter<*>>() {
 
     }
 
-    override fun onCreate() {
+    override fun init() {
         toolbar.title = "分类排序"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.setNavigationIcon(R.drawable.ic_white_back)

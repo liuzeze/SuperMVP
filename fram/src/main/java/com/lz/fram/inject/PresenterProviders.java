@@ -2,7 +2,7 @@ package com.lz.fram.inject;
 
 
 import com.lz.fram.base.BasePresenter;
-import com.lz.fram.scope.PresenterInject;
+import com.lz.fram.scope.AttachView;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -27,7 +27,7 @@ public class PresenterProviders {
             if (anns.length < 1) {
                 continue;
             }
-            if (anns[0] instanceof PresenterInject) {
+            if (anns[0] instanceof AttachView) {
                 String canonicalName = field.getType().getName();
                 try {
                     mPresenterStore.put(canonicalName, (BasePresenter) field.get(obj));
@@ -51,5 +51,10 @@ public class PresenterProviders {
 
     public PresenterStore getPresenterStore() {
         return mPresenterStore;
+    }
+
+    public PresenterDispatch presenterCreate() {
+        PresenterDispatch presenterDispatch = new PresenterDispatch(this);
+        return presenterDispatch;
     }
 }

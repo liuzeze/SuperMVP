@@ -20,22 +20,28 @@ import com.lz.framecase.activity.VideoPlayerActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
+import com.lz.framecase.fragment.presenter.NewsDetailPresenter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.logic.MyApplication
 import com.lz.framecase.utils.DiffCallback
-import com.lz.inject_annotation.InjectComponet
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.vondear.rxtool.RxTimeTool
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.fragment_news_list.*
+import com.lz.inject_annotation.InjectFragment
+import javax.inject.Inject
+import com.lz.fram.scope.AttachView
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-@InjectComponet
-class NewsListFragment : BaseFragment<NewsListPresenter>(), NewsListContract.View {
+@InjectFragment
+class NewsListFragment : BaseFragment(), NewsListContract.View {
+    @AttachView
+    @Inject
+    lateinit var mPresenter: NewsListPresenter
 
     private var gson: Gson? = null
     private var category: String = ""

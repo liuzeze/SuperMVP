@@ -20,7 +20,6 @@ import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.presenter.NewsDetailContract
 import com.lz.framecase.fragment.presenter.NewsDetailPresenter
-import com.lz.inject_annotation.InjectComponet
 import kotlinx.android.synthetic.main.fragment_news_detail.*
 import android.provider.Telephony.MmsSms.PendingMessages.ERROR_TYPE
 import android.support.v7.widget.Toolbar
@@ -31,20 +30,28 @@ import com.jakewharton.rxbinding2.widget.RxToolbar
 import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.activity.NewsCommentActivity
+import com.lz.framecase.presenter.NewsCommentPresenter
 import com.lz.skinlibs.SkinManager
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxWebViewTool
 import java.util.ArrayList
+import com.lz.inject_annotation.InjectFragment
+import javax.inject.Inject
+import com.lz.fram.scope.AttachView
 
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-30       创建class
  */
-@InjectComponet
-class NewsDetailFragment : BaseFragment<NewsDetailPresenter>(), NewsDetailContract.View {
+@InjectFragment
+class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
 
+
+    @AttachView
+    @Inject
+    lateinit var mPresenter: NewsDetailPresenter
 
     var newsDataBean: NewsDataBean? = null
 

@@ -4,12 +4,12 @@ import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseActivity
 
-class SearchActivity : BaseActivity<BasePresenter<*>>() {
+class SearchActivity : BaseActivity() {
     override fun getLayout(): Int {
         return R.layout.activity_search
     }
 
-    override fun onCreate() {
+    override fun init() {
     }
 
 }
