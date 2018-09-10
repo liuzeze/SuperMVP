@@ -30,7 +30,7 @@
    //apt注解工具
    kapt 'com.lz:inject_compile:1.0.4'
    
-   //fragment  和侧滑退出类库
+   //fragment管理  和侧滑退出类库
    api 'me.yokeyword:fragmentation:1.3.5'
    api 'me.yokeyword:fragmentation-swipeback:1.3.6'
    
