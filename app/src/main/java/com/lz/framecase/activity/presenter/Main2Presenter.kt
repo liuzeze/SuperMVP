@@ -1,11 +1,11 @@
-package com.lz.framecase.presenter
+package com.lz.framecase.activity.presenter
 
 
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
 import com.lz.utilslib.interceptor.utils.ToastUtils
-import com.vondear.rxtool.view.RxToast
+import com.vondear.rxtool.RxTimeTool
 import javax.inject.Inject
 
 
@@ -25,7 +25,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<Main2Contract.Vi
 
             }
         }
-//        addSubscribe("getZhiHuNews", mRequestApi.getNewLists(subscriber))
+        addSubscribe("getZhiHuNews", mRequestApi.getNewLists("",(RxTimeTool.getCurTimeMills()/1000).toString(),subscriber))
 
     }
 }

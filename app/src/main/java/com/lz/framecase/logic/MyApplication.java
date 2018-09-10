@@ -2,13 +2,9 @@ package com.lz.framecase.logic;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.view.View;
 
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.env.SuspensionView;
-import com.lz.framecase.utils.SettingUtils;
-import com.lz.skinlibs.ChangeListener;
 import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.vondear.rxtool.RxActivityTool;
@@ -25,11 +21,6 @@ public class MyApplication extends FrameApplication {
         RxTool.init(this);
         SkinManager.getInstance().init(this, new AttrChangeLisnter());
         SuspensionView.getInstance().init(this);
-        if (SettingUtils.Companion.getNightMode()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
         registerActivityCycle();
 
     }
@@ -45,7 +36,7 @@ public class MyApplication extends FrameApplication {
                 //栈管理
                 RxActivityTool.addActivity(activity);
                 //dp sp 适配
-                new ScreenAdaptation(activity, 720).register();
+                new ScreenAdaptation(activity, 2500).register();
             }
 
             @Override

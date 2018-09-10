@@ -10,8 +10,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.activity.MainActivity;
-import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
@@ -58,17 +56,15 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
             e.printStackTrace();
         }
 
-        if (!SettingUtils.Companion.getSlideBackMode() ||
-                this instanceof MainActivity) {
-            setSwipeBackEnable(false); // 是否允许滑动
-        }
+        //   setSwipeBackEnable(false); // 是否允许滑动
+
     }
 
     /**
      * 为presenter 注册毁掉
      */
     protected void onViewCreated() {
-        mPresenterDispatch=  PresenterProviders.inject(this).presenterCreate();
+        mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
         mPresenterDispatch.attachView(this);
     }
 

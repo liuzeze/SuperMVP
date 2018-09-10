@@ -4,19 +4,11 @@ package com.lz.framecase.base;
 import android.content.Context;
 import android.view.View;
 
-import com.lz.fram.app.App;
-import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.component.DaggerUtilsComponent;
-import com.lz.framecase.component.UtilsComponent;
 import com.lz.utilslib.interceptor.base.InjectUtils;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
-import com.vondear.rxtool.RxTool;
-import com.vondear.rxtool.view.RxToast;
-
-import javax.inject.Inject;
 
 /**
  * Activity 基类

@@ -1,4 +1,4 @@
-package com.lz.framecase.presenter
+package com.lz.framecase.activity.presenter
 
 
 import com.lz.fram.base.BasePresenter
