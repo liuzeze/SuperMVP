@@ -2,6 +2,8 @@ package com.lz.framecase.base;
 
 
 import android.app.Activity;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -24,16 +26,17 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseActivity extends SwipeBackActivity implements BaseView {
+public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackActivity implements BaseView {
 
     protected Activity mActivity;
     private PresenterDispatch mPresenterDispatch;
     private ImmersionBar mImmersionBar;
+    protected T mBind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayout());
+        mBind = DataBindingUtil.setContentView(this, getLayout());
         initConfig();
         InjectUtils.inject(this);
         onViewCreated();
@@ -68,7 +71,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
      * 为presenter 注册毁掉
      */
     protected void onViewCreated() {
-        mPresenterDispatch=  PresenterProviders.inject(this).presenterCreate();
+        mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
         mPresenterDispatch.attachView(this);
     }
 

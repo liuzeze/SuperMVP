@@ -1,11 +1,13 @@
 package com.lz.framecase.activity
 
+import android.databinding.ViewDataBinding
 import android.text.TextUtils
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
 import com.bumptech.glide.Glide
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
+import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.adapter.NewsCommentAdapter
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsCommentBean
@@ -21,7 +23,7 @@ import com.lz.inject_annotation.InjectActivity
 
 
 @InjectActivity
-class VideoPlayerActivity : BaseActivity(), VideoPlayerContract.View, NewsCommentContract.View {
+class VideoPlayerActivity : BaseActivity<ViewDataBinding>(), VideoPlayerContract.View, NewsCommentContract.View {
 
     @AttachView
     @Inject

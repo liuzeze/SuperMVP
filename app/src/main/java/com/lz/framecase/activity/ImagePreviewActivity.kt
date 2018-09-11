@@ -2,6 +2,7 @@ package com.lz.framecase.activity
 
 import android.Manifest
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -12,6 +13,8 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
+import com.lz.framecase.R.id.bgabanner
+import com.lz.framecase.R.id.preview_root
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.widget.imagebrowser.DismissFrameLayout
 import com.lz.utilslib.interceptor.utils.LpDialogUtils
@@ -31,7 +34,7 @@ import uk.co.senab.photoview.PhotoViewAttacher
 import java.io.File
 import java.util.*
 
-class ImagePreviewActivity : BaseActivity() {
+class ImagePreviewActivity : BaseActivity<ViewDataBinding>() {
 
     var mColorDrawable: ColorDrawable? = null
     override fun getLayout(): Int {

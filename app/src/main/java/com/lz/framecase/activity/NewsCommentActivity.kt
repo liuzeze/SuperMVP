@@ -3,6 +3,7 @@ package com.lz.framecase.activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.DefaultItemAnimator
@@ -12,8 +13,6 @@ import android.view.View
 import android.widget.LinearLayout.VERTICAL
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.lz.framecase.R
-import com.lz.framecase.R.id.comment_list
-import com.lz.framecase.R.id.comment_toobar
 import com.lz.framecase.activity.adapter.NewsCommentAdapter
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsCommentBean
@@ -25,13 +24,14 @@ import kotlinx.android.synthetic.main.activity_comment_list.*
 import com.lz.inject_annotation.InjectActivity
 import javax.inject.Inject
 import com.lz.fram.scope.AttachView
+import com.lz.framecase.R.id.*
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
 @InjectActivity
-class NewsCommentActivity : BaseActivity(), NewsCommentContract.View {
+class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract.View {
 
     @AttachView
     @Inject

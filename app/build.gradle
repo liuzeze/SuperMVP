@@ -16,7 +16,9 @@ android {
         multiDexKeepProguard file("multiDexKeep.pro") //分包时，将部分包放入主dex
 
     }
-
+    dataBinding {
+        enabled = true
+    }
     /*  signingConfigs {
         //开发者签名
         production {

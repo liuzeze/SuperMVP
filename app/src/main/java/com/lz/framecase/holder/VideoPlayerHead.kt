@@ -63,10 +63,8 @@ class VideoPlayerHead(context: Context) : BaseUtils(context) {
     @JvmField
     internal var mMediaLayout: LinearLayout? = null
 
-    override fun initView(): View? {
-        val inflate = View.inflate(mContext, R.layout.item_video_content_header, null)
-        ButterKnife.bind(this, inflate)
-        return inflate
+    override fun getLayout(): Int {
+        return R.layout.item_video_content_header
     }
 
     fun setData(item: NewsDataBean?) {

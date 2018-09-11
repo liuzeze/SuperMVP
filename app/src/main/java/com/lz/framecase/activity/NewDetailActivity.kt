@@ -1,12 +1,13 @@
 package com.lz.framecase.activity
 
+import android.databinding.ViewDataBinding
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.NewsDetailFragment
 
-class NewDetailActivity : BaseActivity() {
+class NewDetailActivity : BaseActivity<ViewDataBinding>() {
 
 
     companion object {

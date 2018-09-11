@@ -2,6 +2,7 @@ package com.lz.framecase.activity
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.support.v7.widget.DefaultItemAnimator
@@ -20,6 +21,7 @@ import com.chad.library.adapter.base.listener.OnItemDragListener
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.R.id.recycler_view
+import com.lz.framecase.R.id.toolbar
 import com.lz.framecase.activity.adapter.drag.DragAdapter
 import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
@@ -31,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_catgory.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CatgoryActivity : BaseActivity() {
+class CatgoryActivity : BaseActivity<ViewDataBinding>() {
 
     private val titles = ArrayList<TitleBean>()
     private var mDragAdapter: DragAdapter? = null

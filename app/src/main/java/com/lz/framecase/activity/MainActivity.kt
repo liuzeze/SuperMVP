@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.annotation.RequiresApi
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatDelegate
 import android.view.View
@@ -15,7 +16,9 @@ import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
+import com.lz.framecase.R.id.*
 import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.databinding.ActivityMain2Binding
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.fragment.NewsTitlePagerFragment
@@ -36,30 +39,29 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class MainActivity : BaseActivity(), Main2Contract.View {
+class MainActivity : BaseActivity<ActivityMain2Binding>(), Main2Contract.View {
 
     override fun getLayout(): Int {
         return R.layout.activity_main2
     }
 
 
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun init() {
         initFragment()
         initlIstener()
-
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initlIstener() {
-        RxView.clicks(iv_search)
+
+        RxView.clicks(mBind.ivSearch)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     val intent = Intent(mActivity, SearchActivity::class.java)
 
-                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, iv_search, "SearchView").toBundle())
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
 
                 })
 

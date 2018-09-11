@@ -2,6 +2,9 @@ package com.lz.framecase.base;
 
 
 import android.content.Context;
+import android.databinding.DataBindingComponent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,6 +41,7 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
     protected Context mContext;
     private Unbinder mUnbinder;
     private PresenterDispatch mPresenterDispatch;
+    private ViewDataBinding mBind;
 
     @Override
     public void onAttach(Context context) {
@@ -48,7 +52,17 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(getLayout(), container, false);
+        View rootView;
+        try {
+            mBind = DataBindingUtil.inflate(inflater, getLayout(), container, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (mBind == null) {
+            rootView = inflater.inflate(getLayout(), container, false);
+        } else {
+            rootView = mBind.getRoot();
+        }
         mUnbinder = ButterKnife.bind(this, rootView);
         if (!SettingUtils.Companion.getSlideBackMode()) {
             setSwipeBackEnable(false); // 是否允许滑动
