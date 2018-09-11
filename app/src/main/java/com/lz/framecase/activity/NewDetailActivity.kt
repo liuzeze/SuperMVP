@@ -20,7 +20,7 @@ class NewDetailActivity : BaseActivity<ViewDataBinding>() {
         return R.layout.container
     }
 
-    override fun init() {
+    override fun initViewData() {
         val intent = intent
         loadRootFragment(R.id.container,
                 NewsDetailFragment.getInstance(intent.getSerializableExtra(TAG) as NewsDataBean, intent.getStringExtra(IMG)))

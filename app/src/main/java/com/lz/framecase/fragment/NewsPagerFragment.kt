@@ -2,6 +2,7 @@ package com.lz.framecase.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.View
@@ -10,6 +11,8 @@ import com.jakewharton.rxbinding2.support.v4.view.RxViewPager
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
+import com.lz.framecase.R.id.iv_catgory
+import com.lz.framecase.R.id.news_viewpager
 import com.lz.framecase.activity.CatgoryActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.fragment.adapter.NewsPagerAdapter
@@ -23,7 +26,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsPagerFragment : BaseFragment() {
+class NewsPagerFragment : BaseFragment<ViewDataBinding>() {
     var newsPagerAdapter: NewsPagerAdapter? = null
 
     companion object {
@@ -38,7 +41,7 @@ class NewsPagerFragment : BaseFragment() {
     }
 
 
-    override fun init() {
+    override fun initViewData() {
         newsPagerAdapter = NewsPagerAdapter(childFragmentManager, arrayList)
         newsPagerAdapter?.setTitleList(string)
         news_viewpager.adapter = newsPagerAdapter

@@ -4,23 +4,17 @@ package com.lz.framecase.base;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.lz.fram.app.App;
-import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.component.DaggerUtilsComponent;
-import com.lz.framecase.component.UtilsComponent;
 import com.lz.framecase.logic.MyApplication;
-import com.lz.utilslib.interceptor.base.InjectUtils;
+import com.lz.inject_annotation.InjectUtils;
+import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
-import com.vondear.rxtool.RxTool;
-import com.vondear.rxtool.view.RxToast;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,21 +24,17 @@ import butterknife.Unbinder;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public class BaseUtils implements BaseView {
+public class BaseUtils<T extends ViewDataBinding> implements BaseView {
 
 
     View convertView;
     protected Context mContext;
     private PresenterDispatch mPresenterDispatch;
     private Unbinder mUnbinder;
-    private ViewDataBinding mBind;
+    private T mBind;
 
 
-    public BaseUtils() {
-        init();
-    }
-
-    public BaseUtils(Context context) {
+    protected BaseUtils(@Nullable Context context) {
         mContext = context;
         init();
 
@@ -53,24 +43,32 @@ public class BaseUtils implements BaseView {
 
     private void init() {
         //初始化convertView
-        LayoutInflater inflater = LayoutInflater.from(mContext == null ? MyApplication.mApplication : mContext);
-        try {
-            mBind = DataBindingUtil.inflate(inflater,
-                    getLayout(), null, false);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (getLayout() != -1) {
+            LayoutInflater inflater = LayoutInflater.from(mContext == null ? MyApplication.mApplication : mContext);
+            try {
+                mBind = DataBindingUtil.inflate(inflater,
+                        getLayout(), null, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (mBind == null) {
+                convertView = inflater.inflate(getLayout(), null, false);
+            } else {
+                convertView = mBind.getRoot();
+            }
+            mUnbinder = ButterKnife.bind(this, convertView);
         }
-        if (mBind == null) {
-            convertView = inflater.inflate(getLayout(), null, false);
-        } else {
-            convertView = mBind.getRoot();
-        }
-        mUnbinder = ButterKnife.bind(this, convertView);
 
-        initInject();
+        InjectUtils annotation = this.getClass().getAnnotation(InjectUtils.class);
+        if (annotation != null) {
+            InjectTools.inject(this);
+        }
         attachView();
+        initLisenter();
     }
 
+    protected void initLisenter() {
+    }
 
     public View getHolderView() {
         return convertView;
@@ -93,9 +91,6 @@ public class BaseUtils implements BaseView {
         }
     }
 
-    protected void initInject() {
-        InjectUtils.inject(this);
-    }
 
     protected int getLayout() {
         return -1;

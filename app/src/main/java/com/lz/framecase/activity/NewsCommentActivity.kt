@@ -46,7 +46,7 @@ class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract
         return R.layout.activity_comment_list
     }
 
-    override fun init() {
+    override fun initViewData() {
         initView()
         initData()
         initLisrtener()

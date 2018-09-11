@@ -2,8 +2,10 @@ package com.lz.framecase.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.Gravity
@@ -38,7 +40,7 @@ import com.lz.fram.scope.AttachView
  * -          刘泽      2018-08-29       创建class
  */
 @InjectFragment
-class NewsListFragment : BaseFragment(), NewsListContract.View {
+class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View {
     @AttachView
     @Inject
     lateinit var mPresenter: NewsListPresenter
@@ -62,15 +64,19 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
         return R.layout.fragment_news_list
     }
 
-    override fun init() {
-        initValue()
-        initListener()
+    override fun initViewData() {
+        gson = Gson()
+        category = arguments?.getString("category")!!
+        newsListAdapter = NewsListAdapter(mNewsBean)
+        newsListAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
+        RecyclerView.adapter = newsListAdapter
         SwipeRefreshLayout.setRefreshing(true)
 
         mPresenter.getNewLists(category)
     }
 
-    private fun initListener() {
+    override fun initLisenter() {
+        super.initLisenter()
         SwipeRefreshLayout.setOnRefreshListener {
             mNewsBean.clear()
             mPresenter.dataList.clear()
@@ -102,7 +108,7 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
         newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
 
             val item = mNewsBean.get(position)
-           // view.transitionName = "SearchView"
+            // view.transitionName = "SearchView"
             var intent: Intent? = null
             if (item.itemType === NewsDataBean.NEWSTEXT) {
                 intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
@@ -130,15 +136,6 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
         })
     }
 
-    private fun initValue() {
-        gson = Gson()
-        category = arguments?.getString("category")!!
-        newsListAdapter = NewsListAdapter(mNewsBean)
-        newsListAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
-        RecyclerView.adapter = newsListAdapter
-
-
-    }
 
     override fun getNewsListSuccess(bean: java.util.ArrayList<NewsDataBean>, has_more_to_refresh: Boolean) {
         /*if (!has_more_to_refresh) {

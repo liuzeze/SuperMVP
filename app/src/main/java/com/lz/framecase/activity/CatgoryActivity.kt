@@ -45,7 +45,7 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
 
     }
 
-    override fun init() {
+    override fun initViewData() {
         toolbar.title = "分类排序"
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.setNavigationIcon(R.drawable.ic_white_back)

@@ -1,5 +1,6 @@
 package com.lz.framecase.fragment
 
+import android.databinding.ViewDataBinding
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseFragment
@@ -9,7 +10,7 @@ import com.lz.framecase.fragment.presenter.NewsListContract
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class VideoPagerFragment : BaseFragment() {
+class VideoPagerFragment : BaseFragment<ViewDataBinding>() {
 
     companion object {
         fun getInstance(): VideoPagerFragment {
@@ -23,7 +24,7 @@ class VideoPagerFragment : BaseFragment() {
     }
 
 
-    override fun init() {
+    override fun initViewData() {
     }
 
 }

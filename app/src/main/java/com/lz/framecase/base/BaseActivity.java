@@ -15,7 +15,7 @@ import com.lz.fram.inject.PresenterProviders;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
-import com.lz.utilslib.interceptor.base.InjectUtils;
+import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 
 import butterknife.ButterKnife;
@@ -38,10 +38,13 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, getLayout());
         initConfig();
-        InjectUtils.inject(this);
+        InjectTools.inject(this);
         onViewCreated();
-        init();
+        initViewData();
+        initLisenter();
+    }
 
+    protected void initLisenter() {
     }
 
     /**
@@ -109,7 +112,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     /**
      * 初始化数据
      */
-    protected abstract void init();
+    protected abstract void initViewData();
 
     @Override
     public void onBackPressedSupport() {

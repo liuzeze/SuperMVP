@@ -3,6 +3,7 @@ package com.lz.framecase.holder
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.databinding.ViewDataBinding
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -28,7 +29,7 @@ import com.lz.fram.base.BasePresenter
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-class VideoPlayerHead(context: Context) : BaseUtils(context) {
+class VideoPlayerHead(context: Context) : BaseUtils<ViewDataBinding>(context) {
     @BindView(R.id.tv_title)
     @JvmField
     internal var mTvTitle: TextView? = null

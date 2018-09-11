@@ -47,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>(), Main2Contract.View {
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun init() {
+    override fun initViewData() {
         initFragment()
         initlIstener()
     }

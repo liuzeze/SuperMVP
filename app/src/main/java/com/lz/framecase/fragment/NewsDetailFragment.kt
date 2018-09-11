@@ -3,6 +3,7 @@ package com.lz.framecase.fragment
 import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -46,7 +47,7 @@ import com.lz.fram.scope.AttachView
  * -          刘泽      2018-08-30       创建class
  */
 @InjectFragment
-class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
+class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.View {
 
 
     @AttachView
@@ -94,7 +95,7 @@ class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
     }
 
     @SuppressLint("JavascriptInterface")
-    override fun init() {
+    override fun initViewData() {
         initView()
         initLIstener()
         initDarta()
@@ -249,7 +250,6 @@ class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
         intent.putExtra("url", url)
         intent.putStringArrayListExtra("urlList", list)
         startActivity(intent)
-
 
 
     }

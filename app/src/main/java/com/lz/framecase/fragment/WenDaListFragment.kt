@@ -1,5 +1,6 @@
 package com.lz.framecase.fragment
 
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.PopupMenu
 import android.view.Gravity
@@ -33,7 +34,7 @@ import com.lz.fram.scope.AttachView
  * -          刘泽      2018-08-29       创建class
  */
 @InjectFragment
-class WenDaListFragment : BaseFragment(), WenDaListContract.View {
+class WenDaListFragment : BaseFragment<ViewDataBinding>(), WenDaListContract.View {
 
 
     @AttachView
@@ -59,7 +60,7 @@ class WenDaListFragment : BaseFragment(), WenDaListContract.View {
         return R.layout.fragment_news_list
     }
 
-    override fun init() {
+    override fun initViewData() {
         initValue()
         initListener()
         SwipeRefreshLayout.setRefreshing(true)

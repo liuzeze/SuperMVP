@@ -41,7 +41,7 @@ class ImagePreviewActivity : BaseActivity<ViewDataBinding>() {
         return R.layout.activity_image_preview
     }
 
-    override fun init() {
+    override fun initViewData() {
 
 
         initData()

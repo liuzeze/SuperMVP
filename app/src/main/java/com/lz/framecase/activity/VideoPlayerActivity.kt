@@ -42,7 +42,7 @@ class VideoPlayerActivity : BaseActivity<ViewDataBinding>(), VideoPlayerContract
         return R.layout.activity_video_player
     }
 
-    override fun init() {
+    override fun initViewData() {
         initData()
 
     }

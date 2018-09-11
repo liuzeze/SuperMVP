@@ -2,7 +2,6 @@ package com.lz.framecase.base;
 
 
 import android.content.Context;
-import android.databinding.DataBindingComponent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -12,23 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lz.fram.app.App;
-import com.lz.fram.base.BasePresenter;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.framecase.activity.MainActivity;
-import com.lz.framecase.component.DaggerFragmentComponent;
-import com.lz.framecase.component.FragmentComponent;
 import com.lz.framecase.utils.SettingUtils;
-import com.lz.utilslib.interceptor.base.InjectUtils;
+import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.SupportFragment;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
@@ -36,12 +27,12 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseFragment extends SwipeBackFragment implements BaseView {
+public abstract class BaseFragment<T extends ViewDataBinding> extends SwipeBackFragment implements BaseView {
 
     protected Context mContext;
     private Unbinder mUnbinder;
     private PresenterDispatch mPresenterDispatch;
-    private ViewDataBinding mBind;
+    private T mBind;
 
     @Override
     public void onAttach(Context context) {
@@ -67,7 +58,7 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
         if (!SettingUtils.Companion.getSlideBackMode()) {
             setSwipeBackEnable(false); // 是否允许滑动
         }
-        InjectUtils.inject(this);
+        InjectTools.inject(this);
         onViewCreated();
 
         return attachToSwipeBack(rootView);
@@ -76,7 +67,11 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init();
+        initViewData();
+        initLisenter();
+    }
+
+    protected void initLisenter() {
     }
 
 
@@ -105,5 +100,5 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
     protected abstract int getLayout();
 
 
-    protected abstract void init();
+    protected abstract void initViewData();
 }
