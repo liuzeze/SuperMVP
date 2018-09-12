@@ -80,4 +80,47 @@
        }
    }
    ```
+   
+   
+1. 基于databinding 实现 选择器以及圆角背景在xml中的动态设置 ,省去了自己创建select  和 shape的项目里文件
+
+   ```
+              <layout>
+                <!--选择器使用方式-->
+                    <ImageView
+                           //默认颜色
+                            bind_def_color="@{@color/common_app_red_ff0000}"
+                            //选中原色
+                            bind_sel_color="@{@color/common_app_green_37fc00}"
+                            //圆角大小
+                            bind_sel_radius="@{10}"
+                            
+                            
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/ic_search"
+                            android:transitionName="SearchView"
+                            app:layout_constraintEnd_toEndOf="parent" />
+    <!--选圆角背景使用-->
+                          <ImageView
+                           //默认颜色
+                            bind_def_color="@{@color/common_app_red_ff0000}"
+                            //选中原色
+                            bind_sel_color="@{@color/common_app_green_37fc00}"
+                            //圆角大小
+                            bind_sel_radius="@{10}"
+                            
+                            
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/ic_search"
+                            android:transitionName="SearchView"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                </layout>l
+   ```
+
 
