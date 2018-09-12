@@ -4,6 +4,7 @@ package com.lz.framecase.activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -29,6 +30,7 @@ import com.lz.framecase.presenter.Main2Presenter
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
+import com.lz.utilslib.interceptor.utils.LzDrawableUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -54,13 +56,11 @@ class MainActivity : BaseActivity<ActivityMain2Binding>(), Main2Contract.View {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initlIstener() {
-
         RxView.clicks(mBind.ivSearch)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     val intent = Intent(mActivity, SearchActivity::class.java)
-
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
 
                 })

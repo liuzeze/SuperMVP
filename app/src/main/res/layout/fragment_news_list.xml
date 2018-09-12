@@ -10,6 +10,6 @@
         android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="10000dp"
-        app:layoutManager="LinearLayoutManager" />
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 </android.support.v4.widget.SwipeRefreshLayout>

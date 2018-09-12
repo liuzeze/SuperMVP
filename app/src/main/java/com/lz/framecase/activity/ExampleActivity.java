@@ -18,8 +18,5 @@ public class ExampleActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void initLisenter() {
-        super.initLisenter();
-    }
+
 }
