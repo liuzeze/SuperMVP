@@ -116,7 +116,7 @@
                             android:src="@drawable/ic_search"
                             android:transitionName="SearchView"
                             app:layout_constraintEnd_toEndOf="parent" />
-                </layout>l
+                </layout>
    ```
 
 
