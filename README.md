@@ -1,3 +1,5 @@
+# 项目使用kotlin 和java 混合开发,业务部分是kotlin开发,框架基类部分是java开发
+
 # 技术热点
 
 1. Dagger 模式解耦 
