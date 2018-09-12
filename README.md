@@ -94,7 +94,7 @@
    ```
    
    
-1. 基于databinding 实现 选择器以及圆角背景在xml中的动态设置 ,省去了自己创建select  和 shape的项目里文件
+1. 基于databinding 实现 选择器以及圆角背景在xml中的动态设置 ,省去了自己创建select  和 shape的xml文件
 
    ```
               <layout>
