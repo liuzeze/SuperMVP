@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatDelegate
+import android.view.Gravity
 import android.view.View
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
@@ -63,6 +64,12 @@ class MainActivity : BaseActivity<ActivityMain2Binding>(), Main2Contract.View {
                     val intent = Intent(mActivity, SearchActivity::class.java)
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
 
+                })
+        RxView.clicks(mBind.ivTitle)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    drawerlayout.openDrawer(Gravity.LEFT)
                 })
 
         RxNavigationView.itemSelections(nav_view).debounce(500, TimeUnit.MILLISECONDS)

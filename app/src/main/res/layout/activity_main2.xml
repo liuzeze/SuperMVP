@@ -36,7 +36,9 @@
                             android:id="@+id/iv_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_title_menu" />
+                            android:src="@drawable/ic_title_menu"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/tv_title_name"
@@ -45,9 +47,9 @@
                             android:paddingLeft="@dimen/dp_10"
                             android:text="头条"
                             android:textColor="@color/common_app_white_ffffff"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_search"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toRightOf="@+id/iv_title"
-                            app:layout_constraintTop_toTopOf="@+id/iv_title" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/iv_search"
@@ -60,7 +62,9 @@
                             android:padding="@dimen/dp_10"
                             android:src="@drawable/ic_search"
                             android:transitionName="SearchView"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.Toolbar>
 
