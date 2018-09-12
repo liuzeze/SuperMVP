@@ -62,9 +62,7 @@
    
 
 1. 继承BaseActivity/BaseFragment  基类  重写两个方法
-   这里用到了两个注解  @InjectActivity  和  @AttachView
-   @InjectActivity这个是注册当前class到component中的    
-   @AttachView 这个是管理presenter的回调周期 以及释放资源的 
+   这里用到了两个注解  @InjectActivity  和  @AttachView@InjectActivity这个是注册当前class到component中的 , @AttachView 这个是管理presenter的回调周期 以及释放资源的 .  其他Fragment 以及其他class的使用方式参照项目中的案例
 
    ```
    //Dagger 关联activity的注解
