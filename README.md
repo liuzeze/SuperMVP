@@ -50,7 +50,7 @@
        android:name="com.lz.framecase.logic.GlobalConfiguration"
        android:value="ConfigModule" />
    ```
- 1.创建Component 连接@module 注解类提供的资源对象
+1.创建Component 连接@module 注解类提供的资源对象
    ```
   @CustomizeScope
 @Component(dependencies = AppComponent.class)
