@@ -53,9 +53,9 @@
 
                         <ImageView
                             android:id="@+id/iv_search"
-                            bind_def_color="@{@color/common_app_red_ff0000}"
-                            bind_sel_color="@{@color/common_app_green_37fc00}"
-                            bind_sel_radius="@{10}"
+                            select_def_color="@{@color/common_app_red_ff0000}"
+                            select_sel_color="@{@color/common_app_green_37fc00}"
+                            select_radius="@{10}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"

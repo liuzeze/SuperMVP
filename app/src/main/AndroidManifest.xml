@@ -19,21 +19,23 @@
             android:name="com.lz.framecase.logic.GlobalConfiguration"
             android:value="ConfigModule" />
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NewDetailActivity" />
+
         <activity
             android:name=".activity.ImagePreviewActivity"
             android:theme="@style/imagethem" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.NewDetailActivity" />
         <activity android:name=".activity.NewsCommentActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.CatgoryActivity" />
-        <activity android:name=".activity.SearchActivity"/>
+        <activity android:name=".activity.SearchActivity" />
     </application>
 
 </manifest>

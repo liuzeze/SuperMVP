@@ -5,7 +5,6 @@
     <size
         android:width="25dp"
         android:height="25dp" />
-
     <solid android:color="@color/common_app_red_ff0000" />
 
 </shape>

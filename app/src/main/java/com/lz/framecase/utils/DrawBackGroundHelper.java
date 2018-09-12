@@ -22,13 +22,17 @@ public class DrawBackGroundHelper {
                       method = "setImageTintList"),
 })*/
 
+
     @BindingAdapter(value = {
-            "bind_shape_color",
-            "bind_shape_radius",
+            "shape_strokr_width",
+            "shape_solid_color",
+            "shape_strokr_color",
+            "shape_radius",
+            "shape_is_circle"
     }, requireAll = false)
-    public static void setViewShapeBackground(View view, int color, int radius) {
+    public static void setViewShapeBackground(View view, int width, int solidCorlor, int strokeCorlor, float radius, boolean isCircle) {
         try {
-            Drawable drawable = LzDrawableUtils.shapeDrawable(color, radius);
+            Drawable drawable = LzDrawableUtils.shapeStrokeDrawable(width, solidCorlor, strokeCorlor, radius,isCircle);
             view.setBackground(drawable);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
@@ -36,18 +40,23 @@ public class DrawBackGroundHelper {
     }
 
     @BindingAdapter(value = {
-            "bind_def_color",
-            "bind_sel_color",
-            "bind_sel_radius"
+            "select_strokr_width",
+            "select_def_color",
+            "select_def_stroke_color",
+            "select_sel_color",
+            "select_sel_stroke_color",
+            "select_radius",
+            "select_is_circle"
     }, requireAll = false)
-    public static void setViewSelecterBackground(View view, int defColor, int selectColor, int radius) {
+    public static void setViewSelecterBackground(View view, int width, int normal, int normalStroke, int pressed, int pressedStroke, int radius,boolean isCircle) {
         try {
-            Drawable drawable = LzDrawableUtils.shapeSelectorC(selectColor, defColor, radius);
+            Drawable drawable = LzDrawableUtils.shapeSelectorStroke(width, pressed, normal, pressedStroke, normalStroke, radius,isCircle);
             view.setBackground(drawable);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
     @BindingConversion
     public static ColorDrawable convertColorToDrawable(int color) {
