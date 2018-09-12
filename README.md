@@ -24,7 +24,9 @@
    //封装了mvp的基础代码
    api 'com.lz:fram_lib:1.0.1'
    
-   //注解库 ,用于减少dagger库连接acticity/fragment 的inject方式,需要在使用到dagger的类上使用InjectActivity/InjectFragment/InjectUtis 来注解当前class  会在编译时自动生成关联代码
+   //注解库 ,用于减少dagger库连接acticity/fragment 的inject方式,
+   需要在使用到dagger的类上使用InjectActivity/InjectFragment/InjectUtis 来注解当前class 
+   会在编译时自动生成关联代码
    //注解库
    api 'com.lz:inject_annotations:1.0.4'
    //apt注解工具
