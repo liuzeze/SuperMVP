@@ -86,7 +86,7 @@
 
    ```
               <layout>
-                <!--选择器使用方式-->
+     <!--选择器使用方式-->
                     <ImageView
                            //默认颜色
                             bind_def_color="@{@color/common_app_red_ff0000}"
@@ -94,8 +94,7 @@
                             bind_sel_color="@{@color/common_app_green_37fc00}"
                             //圆角大小
                             bind_sel_radius="@{10}"
-                            
-                            
+ 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
@@ -105,14 +104,11 @@
                             app:layout_constraintEnd_toEndOf="parent" />
     <!--选圆角背景使用-->
                           <ImageView
-                           //默认颜色
-                            bind_def_color="@{@color/common_app_red_ff0000}"
-                            //选中原色
-                            bind_sel_color="@{@color/common_app_green_37fc00}"
+                           //颜色
+                            bind_shape_color="@{@color/common_app_red_ff0000}"
                             //圆角大小
-                            bind_sel_radius="@{10}"
-                            
-                            
+                            bind_shape_radius="@{10}"
+              
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
