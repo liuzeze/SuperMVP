@@ -52,14 +52,13 @@
    ```
 1. 创建Component 连接@module 注解类提供的资源对象
    ```
-  @CustomizeScope
-@Component(dependencies = AppComponent.class)
-public interface FragmentComponent {
+    @CustomizeScope
+    @Component(dependencies = AppComponent.class)
+    public interface FragmentComponent {
+         void inject(ImagePagerFragment fragment);
+     }
 
-    void inject(ImagePagerFragment fragment);
-}
-
-   ```
+    ```
    
 
 1. 继承BaseActivity/BaseFragment  基类  重写两个方法
