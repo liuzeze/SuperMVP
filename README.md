@@ -1,3 +1,5 @@
+# 项目使用kotlin 和java 混合开发,业务部分是kotlin开发,框架基类部分是java开发
+
 # 技术热点
 
 1. Dagger 模式解耦 
@@ -24,7 +26,9 @@
    //封装了mvp的基础代码
    api 'com.lz:fram_lib:1.0.1'
    
-   //注解库 ,用于减少dagger库连接acticity/fragment 的inject方式,需要在使用到dagger的类上使用InjectActivity/InjectFragment/InjectUtis 来注解当前class  会在编译时自动生成关联代码
+   //注解库 ,用于减少dagger库连接acticity/fragment 的inject方式,
+   需要在使用到dagger的类上使用InjectActivity/InjectFragment/InjectUtis 来注解当前class 
+   会在编译时自动生成关联代码
    //注解库
    api 'com.lz:inject_annotations:1.0.4'
    //apt注解工具
@@ -48,8 +52,19 @@
        android:name="com.lz.framecase.logic.GlobalConfiguration"
        android:value="ConfigModule" />
    ```
+1. 创建Component 连接@module 注解类提供的资源对象
+   ```
+    @CustomizeScope
+    @Component(dependencies = AppComponent.class)
+    public interface FragmentComponent {
+         void inject(ImagePagerFragment fragment);
+     }
+
+    ```
+   
 
 1. 继承BaseActivity/BaseFragment  基类  重写两个方法
+   这里用到了两个注解  @InjectActivity  和  @AttachView@InjectActivity这个是注册当前class到component中的 , @AttachView 这个是管理presenter的回调周期 以及释放资源的 .  其他Fragment 以及其他class的使用方式参照项目中的案例
 
    ```
    //Dagger 关联activity的注解
@@ -80,4 +95,43 @@
        }
    }
    ```
+   
+   
+1. 基于databinding 实现 选择器以及圆角背景在xml中的动态设置 ,省去了自己创建select  和 shape的xml文件
+
+   ```
+              <layout>
+     <!--选择器使用方式-->
+                    <ImageView
+                           //默认颜色
+                            bind_def_color="@{@color/common_app_red_ff0000}"
+                            //选中原色
+                            bind_sel_color="@{@color/common_app_green_37fc00}"
+                            //圆角大小
+                            bind_sel_radius="@{10}"
+ 
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/ic_search"
+                            android:transitionName="SearchView"
+                            app:layout_constraintEnd_toEndOf="parent" />
+    <!--选圆角背景使用-->
+                          <ImageView
+                           //颜色
+                            bind_shape_color="@{@color/common_app_red_ff0000}"
+                            //圆角大小
+                            bind_shape_radius="@{10}"
+              
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:padding="@dimen/dp_10"
+                            android:src="@drawable/ic_search"
+                            android:transitionName="SearchView"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                </layout>
+   ```
+
 
