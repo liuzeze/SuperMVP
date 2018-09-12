@@ -111,6 +111,8 @@
                               shape_strokr_color="@{@color/common_app_white_ffffff}"
                               //填充颜色
                               shape_solid_color="@{@color/common_app_white_ffffff}"
+                              //是否需要圆形
+                              shape_is_circle="true"
                               android:layout_width="40dp"
                               android:layout_height="40dp"
                               android:layout_margin="30dp"
@@ -130,8 +132,10 @@
                               select_sel_color="@{@color/common_app_red_f01717}"
                               //选中边框颜色
                               select_sel_stroke_color="@{@color/common_app_purple_fb01ff}"
-                                //边框宽度大小 默认1
+                              //边框宽度大小 默认1
                               select_strokr_width="@{1}"
+                              //是否需要圆形
+                              select_is_circle="true"
                               android:layout_width="200dp"
                               android:layout_height="50dp"
                               android:layout_marginBottom="50dp"
