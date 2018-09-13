@@ -15,6 +15,8 @@ import com.lz.fram.inject.PresenterProviders;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.utils.SettingUtils;
+import com.lz.inject_annotation.InjectActivity;
+import com.lz.inject_annotation.InjectFragment;
 import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
@@ -39,7 +41,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, getLayout());
         initConfig();
-        InjectTools.inject(this);
         onViewCreated();
         initViewData();
         initLisenter();
@@ -79,6 +80,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
      * 为presenter 注册毁掉
      */
     protected void onViewCreated() {
+        InjectActivity annotation = this.getClass().getAnnotation(InjectActivity.class);
+        if (annotation != null) {
+            InjectTools.inject(this);
+        }
         PresenterDispatch mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
         mPresenterDispatch.attachView(this, getLifecycle());
     }

@@ -2,7 +2,6 @@ package com.lz.framecase.holder
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Context
 import android.databinding.ViewDataBinding
 import android.text.TextUtils
 import android.view.View
@@ -10,26 +9,23 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-
+import butterknife.BindView
 import com.bumptech.glide.Glide
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseUtils
+import com.lz.framecase.base.BaseUiPresenter
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.widget.CircleImageView
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-
-import java.util.concurrent.TimeUnit
-
-import butterknife.BindView
-import butterknife.ButterKnife
-import com.lz.fram.base.BasePresenter
+import javax.inject.Inject
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-class VideoPlayerHead(context: Context) : BaseUtils<ViewDataBinding>(context) {
+class VideoPlayerHead @Inject constructor() : BaseUiPresenter<ViewDataBinding>() {
+
+
     @BindView(R.id.tv_title)
     @JvmField
     internal var mTvTitle: TextView? = null
@@ -72,7 +68,7 @@ class VideoPlayerHead(context: Context) : BaseUtils<ViewDataBinding>(context) {
         try {
             val media_avatar_url = item!!.media_info!!.avatar_url
             if (!TextUtils.isEmpty(media_avatar_url)) {
-                Glide.with(mContext).load(media_avatar_url).into(mIvMediaAvatarUrl!!)
+                Glide.with(holderView.context).load(media_avatar_url).into(mIvMediaAvatarUrl!!)
             }
 
             val title = item.title
@@ -124,7 +120,7 @@ class VideoPlayerHead(context: Context) : BaseUtils<ViewDataBinding>(context) {
 
             val videoTitle = item.title
             val shareUrl = item.display_url
-            mLlShare!!.setOnClickListener { ShareAction.send(mContext, videoTitle + "\n" + shareUrl) }
+            mLlShare!!.setOnClickListener { ShareAction.send(holderView.context, videoTitle + "\n" + shareUrl) }
 
             mLlDl!!.setOnClickListener { v -> SnackbarUtils.show(v, "未开发") }
 

@@ -17,6 +17,8 @@ import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.utils.SettingUtils;
+import com.lz.inject_annotation.InjectFragment;
+import com.lz.inject_annotation.InjectUtils;
 import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -62,7 +64,10 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends SwipeBackF
         if (!SettingUtils.Companion.getSlideBackMode()) {
             setSwipeBackEnable(false); // 是否允许滑动
         }
-        InjectTools.inject(this);
+        InjectFragment annotation = this.getClass().getAnnotation(InjectFragment.class);
+        if (annotation != null) {
+            InjectTools.inject(this);
+        }
         onViewCreated();
         return attachToSwipeBack(rootView);
     }
