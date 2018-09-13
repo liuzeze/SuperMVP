@@ -27,19 +27,20 @@ constructor(var mRequestApi: RequestApi)
     override fun loadUrl(dataBean: NewsDataBean) {
         val url = dataBean.display_url
 
-        val subscribe: Any = Observable
-                .create(ObservableOnSubscribe<String> { emitter ->
+        val subscribe: Any = Flowable
+                .create(FlowableOnSubscribe<String> { emitter ->
                     // https://toutiao.com/group/6530252650288513540/
                     // https://m.toutiao.com/i6530252650288513540/info/
                     val api = url?.replace("www.", "")
                             ?.replace("toutiao", "m.toutiao")
                             ?.replace("group/", "i") + "info/"
                     emitter.onNext(api)
-                })
+                }, BackpressureStrategy.BUFFER)
                 .subscribeOn(Schedulers.io())
                 .switchMap<NewsContentBean> { s -> mRequestApi.getNewsContent(s) }
                 .map { o -> getHTML(o) }
                 .observeOn(AndroidSchedulers.mainThread())
+                .`as`(bindLifecycle())
                 .subscribe(Consumer<String?> { r -> mView?.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
                     mView?.onSetWebView(null, false)
                 })

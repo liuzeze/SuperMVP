@@ -15,7 +15,7 @@ interface VideoPlayerContract {
         fun getVideoUrlSuccess(url: String)
     }
 
-    interface Presenter : BasePresenter<View> {
+    interface Presenter : BasePresenter{
         fun getVideoUrl(videoId: String)
     }
 

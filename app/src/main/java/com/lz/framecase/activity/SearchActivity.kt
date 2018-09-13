@@ -23,7 +23,7 @@ class SearchActivity : BaseActivity<ViewDataBinding>() {
     }
 
     override fun initViewData() {
-        mApi.getNewLists("", (RxTimeTool.getCurTimeMills() / 1000).toString(), object : CommonSubscriber<MultNewsBean>() {
+        mApi.getNewLists("", (RxTimeTool.getCurTimeMills() / 1000).toString())?.`as`(bindLifecycle())?.subscribeWith(object : CommonSubscriber<MultNewsBean>() {
             override fun onNext(t: MultNewsBean?) {
                 ToastUtils.show(t.toString())
             }

@@ -15,7 +15,7 @@ interface NewsListContract {
         fun getNewsListSuccess(bean: ArrayList<NewsDataBean>, has_more_to_refresh: Boolean)
     }
 
-    interface Presenter : BasePresenter<View> {
+    interface Presenter : BasePresenter{
         //��¼
         fun getNewLists(category: String?)
     }

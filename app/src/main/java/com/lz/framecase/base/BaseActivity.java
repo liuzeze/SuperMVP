@@ -12,11 +12,13 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
+import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
+import com.uber.autodispose.AutoDisposeConverter;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
@@ -29,7 +31,6 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackActivity implements BaseView {
 
     protected Activity mActivity;
-    private PresenterDispatch mPresenterDispatch;
     private ImmersionBar mImmersionBar;
     protected T mBind;
 
@@ -45,6 +46,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     }
 
     protected void initLisenter() {
+    }
+
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        return RxLifecycleUtils.bindLifecycle(this);
     }
 
     /**
@@ -74,8 +79,8 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
      * 为presenter 注册毁掉
      */
     protected void onViewCreated() {
-        mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
-        mPresenterDispatch.attachView(this);
+        PresenterDispatch mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
+        mPresenterDispatch.attachView(this, getLifecycle());
     }
 
     /**
@@ -84,10 +89,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackA
     @Override
     protected void onDestroy() {
         try {
-            if (mPresenterDispatch != null) {
-                mPresenterDispatch.detachView();
-
-            }
             mImmersionBar.destroy();
             SkinManager.getInstance().unregister(this);
         } catch (Exception e) {

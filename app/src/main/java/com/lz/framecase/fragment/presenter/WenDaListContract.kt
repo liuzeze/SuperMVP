@@ -14,7 +14,7 @@ interface WenDaListContract {
         fun getWenDaListSuccess(bean: List<WendaArticleDataBean>)
     }
 
-    interface Presenter : BasePresenter<View> {
+    interface Presenter : BasePresenter{
         //��¼
         fun getWenDaList()
     }

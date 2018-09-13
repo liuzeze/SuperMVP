@@ -2,7 +2,6 @@ package com.lz.framecase.api;
 
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.observer.CommonSubscriber;
@@ -12,8 +11,6 @@ import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.VideoContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
-import com.lz.framecase.bean.WendaArticleDataBean;
-import com.vondear.rxtool.RxTimeTool;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +19,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -42,37 +39,34 @@ public class RequestApi {
     }
 
 
-    public CommonSubscriber<MultNewsBean> getNewLists(String category, String time, CommonSubscriber<MultNewsBean> subscriber) {
+    public Flowable<MultNewsBean> getNewLists(String category, String time) {
 
         int i = new Random().nextInt(10);
         if (i % 2 == 0) {
             return
                     mRetrofit.create(ApiService.class)
                             .getNewsArticle(category, time)
-                            .compose(Transformer.<MultNewsBean>switchSchedulers())
-                            .subscribeWith(subscriber);
+                            .compose(Transformer.<MultNewsBean>switchSchedulers());
         } else {
             return
                     mRetrofit.create(ApiService.class)
                             .getNewsArticle2(category, time)
-                            .compose(Transformer.<MultNewsBean>switchSchedulers())
-                            .subscribeWith(subscriber);
+                            .compose(Transformer.<MultNewsBean>switchSchedulers());
         }
 
 
     }
 
-    public CommonSubscriber<WendaArticleBean> getWenDaLists(String time, CommonSubscriber<WendaArticleBean> subscriber) {
+    public Flowable<WendaArticleBean> getWenDaLists(String time) {
         return
                 mRetrofit.create(ApiService.class)
                         .getWendaArticle(time)
-                        .compose(Transformer.<WendaArticleBean>switchSchedulers())
-                        .subscribeWith(subscriber);
+                        .compose(Transformer.<WendaArticleBean>switchSchedulers());
 
     }
 
     @Nullable
-    public ObservableSource<NewsContentBean> getNewsContent(@NotNull String s) {
+    public Flowable<NewsContentBean> getNewsContent(@NotNull String s) {
         return
                 mRetrofit.create(ApiService.class)
                         .getNewsContent(s);
@@ -81,18 +75,18 @@ public class RequestApi {
 
 
     @Nullable
-    public CommonSubscriber<NewsCommentBean> getNewsComment(@NotNull String groupId,long itemId, CommonSubscriber<NewsCommentBean> subscriber) {
+    public Flowable<NewsCommentBean> getNewsComment(@NotNull String groupId, long itemId) {
         return
                 mRetrofit.create(ApiService.class)
                         .getNewsComment(groupId, itemId)
-                        .compose(Transformer.<NewsCommentBean>switchSchedulers(mLpLoadDialog))
-                        .subscribeWith(subscriber);
+                        .compose(Transformer.<NewsCommentBean>switchSchedulers(mLpLoadDialog));
+
 
 
     }
 
     @Nullable
-    public CommonSubscriber<String> getVideoUrl(@NotNull String url, CommonSubscriber<String> subscriber) {
+    public Flowable<String> getVideoUrl(@NotNull String url) {
         return
                 mRetrofit.create(ApiService.class)
                         .getVideoContent(url)
@@ -122,8 +116,7 @@ public class RequestApi {
                                 return null;
                             }
                         })
-                        .compose(Transformer.<String>switchSchedulers(mLpLoadDialog))
-                        .subscribeWith(subscriber);
+                        .compose(Transformer.<String>switchSchedulers(mLpLoadDialog));
 
 
     }

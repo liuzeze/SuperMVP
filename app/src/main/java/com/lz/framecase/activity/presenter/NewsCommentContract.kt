@@ -15,7 +15,7 @@ interface NewsCommentContract {
         fun getNewsCommentSuccess(data: ArrayList<NewsCommentBean.DataBean>)
     }
 
-    interface Presenter : BasePresenter<View> {
+    interface Presenter : BasePresenter {
         fun getNewCommentLists(groupId: String, itemId: Long)
     }
 

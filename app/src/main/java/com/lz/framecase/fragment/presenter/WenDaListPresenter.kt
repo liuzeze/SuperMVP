@@ -73,7 +73,7 @@ constructor(var mRequestApi: RequestApi)
                 mView.getWenDaListSuccess(dataList)
             }
         }
-        addSubscribe("getWenDaList", mRequestApi.getWenDaLists(time, subscriber))
+        mRequestApi.getWenDaLists(time)?.`as`(bindLifecycle())?.subscribeWith(subscriber)
 
     }
 }

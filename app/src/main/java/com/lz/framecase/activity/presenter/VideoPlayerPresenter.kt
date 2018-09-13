@@ -24,7 +24,8 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<VideoPlayerContr
                 mView.getVideoUrlSuccess(s)
             }
         }
-        addSubscribe("getVideoUrl", mRequestApi.getVideoUrl(getVideoContentApi(groupId), subscriber))
+        mRequestApi.getVideoUrl(getVideoContentApi(groupId))
+                ?.`as`(bindLifecycle())?.subscribeWith(subscriber)
 
     }
 

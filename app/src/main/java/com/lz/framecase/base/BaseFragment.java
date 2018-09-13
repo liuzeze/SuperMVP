@@ -1,6 +1,7 @@
 package com.lz.framecase.base;
 
 
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -14,9 +15,13 @@ import android.view.ViewGroup;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
+import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
+import com.uber.autodispose.AutoDisposeConverter;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,7 +36,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends SwipeBackF
 
     protected Context mContext;
     private Unbinder mUnbinder;
-    private PresenterDispatch mPresenterDispatch;
     private T mBind;
 
     @Override
@@ -60,7 +64,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends SwipeBackF
         }
         InjectTools.inject(this);
         onViewCreated();
-
         return attachToSwipeBack(rootView);
     }
 
@@ -74,18 +77,19 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends SwipeBackF
     protected void initLisenter() {
     }
 
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        return RxLifecycleUtils.bindLifecycle(this);
+    }
+
 
     protected void onViewCreated() {
-        mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
-        mPresenterDispatch.attachView(this);
+        PresenterDispatch mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
+        mPresenterDispatch.attachView(this, getLifecycle());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenterDispatch != null) {
-            mPresenterDispatch.detachView();
-        }
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }

@@ -46,7 +46,7 @@ public interface ApiService {
             @Query("max_behot_time") String maxBehotTime);
 
     @GET
-    Observable<NewsContentBean> getNewsContent(@Url String url);
+    Flowable<NewsContentBean> getNewsContent(@Url String url);
 
     @GET("http://is.snssdk.com/article/v62/tab_comments/")
     Flowable<NewsCommentBean> getNewsComment(

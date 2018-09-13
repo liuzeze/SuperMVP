@@ -1,10 +1,10 @@
 package com.lz.fram.base;
 
 
-import java.util.HashMap;
+import android.arch.lifecycle.LifecycleOwner;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import com.lz.fram.utils.RxLifecycleUtils;
+import com.uber.autodispose.AutoDisposeConverter;
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
@@ -12,72 +12,36 @@ import io.reactivex.disposables.Disposable;
  * 2017/12/26	9:24	    刘泽			    增加yyy属性
  */
 
-public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
+public class RxPresenter<T extends BaseView> implements BasePresenter {
 
     protected T mView;
-    private CompositeDisposable mCompositeDisposable;
-    private HashMap<Object, Disposable> mapDisposable;
+    private LifecycleOwner mLifecycleOwner;
 
 
-    /**
-     * 添加带有标记的订阅，方便手动注销，以免重复的订阅响应
-     *
-     * @param tag          订阅标记
-     * @param subscription 订阅者
-     */
-    protected void addSubscribe(String tag, Disposable subscription) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
+    protected <T> AutoDisposeConverter<T> bindLifecycle() {
+        if (null == mLifecycleOwner) {
+            throw new NullPointerException("lifecycleOwner == null");
         }
-        if (mapDisposable == null) {
-            mapDisposable = new HashMap<>();
-        }
-        //添加前先移除
-        removeSubscribe(tag);
-
-        //添加到队列
-        mCompositeDisposable.add(subscription);
-
-        //加入到管理
-        mapDisposable.put(tag, subscription);
-    }
-
-
-    /**
-     * 为了防止重复请求，这里我们进行移除指定的订阅者
-     *
-     * @param tag 订阅者标记
-     */
-    private void removeSubscribe(String tag) {
-        if (mapDisposable != null) {
-            //取出队列中订阅者进行主动消费掉
-            Disposable disposable = mapDisposable.get(tag);
-
-            if (disposable != null) {
-                //主动的进行消费
-                disposable.dispose();
-                //从管理集合中移除
-                mapDisposable.remove(tag);
-            }
-        }
+        return RxLifecycleUtils.bindLifecycle(mLifecycleOwner);
     }
 
 
     @Override
-    public void attachView(T view) {
-        this.mView = view;
+    public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
+        mLifecycleOwner = lifecycleOwner;
+        this.mView = (T) lifecycleOwner;
     }
 
     @Override
     public void detachView() {
         this.mView = null;
-        unSubscribe();
     }
 
-    private void unSubscribe() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
-            mCompositeDisposable = null;
-        }
+
+    @Override
+    public void onDestroy(LifecycleOwner owner) {
+        detachView();
     }
+
+
 }

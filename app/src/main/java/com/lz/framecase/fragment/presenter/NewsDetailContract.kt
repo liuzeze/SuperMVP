@@ -17,7 +17,7 @@ interface NewsDetailContract {
         fun onJumpPreview(url: String, list: ArrayList<String>)
     }
 
-    interface Presenter : BasePresenter<View> {
+    interface Presenter : BasePresenter {
         fun loadUrl(dataBean: NewsDataBean)
     }
 

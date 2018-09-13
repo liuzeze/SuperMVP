@@ -3,13 +3,9 @@ package com.lz.framecase.activity
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.annotation.RequiresApi
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
@@ -18,22 +14,17 @@ import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
-import com.lz.framecase.R.id.*
+
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.databinding.ActivityMain2Binding
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
-import com.lz.framecase.logic.Constans
-import com.lz.framecase.presenter.Main2Contract
-import com.lz.framecase.presenter.Main2Presenter
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
-import com.lz.utilslib.interceptor.utils.LzDrawableUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -42,7 +33,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class MainActivity : BaseActivity<ActivityMain2Binding>(), Main2Contract.View {
+class MainActivity : BaseActivity<ActivityMain2Binding>() {
 
     override fun getLayout(): Int {
         return R.layout.activity_main2
