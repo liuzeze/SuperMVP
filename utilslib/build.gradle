@@ -55,7 +55,8 @@ dependencies {
     api 'com.gyf.immersionbar:immersionbar:2.3.1'
     // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
     api 'me.yokeyword:fragmentation-swipeback:1.3.6'
-
+    //svg动画
+    api 'com.github.yyued:SVGAPlayer-Android:2.1.8'
 
 
     //自己定义的注解的java lib
@@ -69,5 +70,6 @@ dependencies {
     //    api project(':loglib')
     debugApi 'com.lz:intercept_debug:1.0.2'
     releaseApi 'com.lz:intercept_release:1.0.0'
-    api 'com.github.yyued:SVGAPlayer-Android:2.1.8'
+
+
 }

@@ -14,11 +14,16 @@ import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
+import hugo.weaving.DebugLog;
+import hugo.weaving.internal.Hugo;
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-03       创建class
  */
 public class MyApplication extends FrameApplication {
+
+    @DebugLog
     @Override
     public void onCreate() {
         super.onCreate();
