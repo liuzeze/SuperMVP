@@ -1,6 +1,7 @@
 package com.lz.framecase.activity
 
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator.RESTART
 import android.animation.ValueAnimator.REVERSE
 import android.content.Intent
@@ -41,18 +42,15 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
     }
 
     override fun initViewData() {
-        val ofFloat = ObjectAnimator.ofFloat(bgbanner, "scaleY", 1f, 1.2f)
-        ofFloat.setDuration(5000)
-        ofFloat.repeatMode = REVERSE
-        ofFloat.repeatCount = 1000
-        ofFloat.start()
-        val ofFloat2 = ObjectAnimator.ofFloat(bgbanner, "scaleX", 1f, 1.2f)
-        ofFloat2.setDuration(5000)
-        ofFloat2.repeatMode = REVERSE
-        ofFloat2.repeatCount = 1000
-        ofFloat2.start()
 
-        window
+        val ofFloat1 = PropertyValuesHolder.ofFloat("scaleY", 1.2f)
+        val ofFloat2 = PropertyValuesHolder.ofFloat("scaleX", 1.2f)
+        val animator = ObjectAnimator.ofPropertyValuesHolder(bgbanner, ofFloat1, ofFloat2)
+        animator.setDuration(5000)
+        animator.repeatMode= REVERSE
+        animator.repeatCount=1000
+        animator.start()
+//        bgbanner.animate().withLayer()  硬件加速
         subscribe = Observable
                 .timer(5000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
