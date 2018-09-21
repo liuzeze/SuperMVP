@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public class BaseUiPresenter<T extends ViewDataBinding> extends RxPresenter {
+public abstract class BaseUiPresenter<T extends ViewDataBinding> extends RxPresenter {
 
 
     private View convertView;
@@ -63,9 +63,8 @@ public class BaseUiPresenter<T extends ViewDataBinding> extends RxPresenter {
     }
 
 
-    protected int getLayout() {
-        return -1;
-    }
+    protected abstract int getLayout();
+
     @Override
     public void detachView() {
         super.detachView();
