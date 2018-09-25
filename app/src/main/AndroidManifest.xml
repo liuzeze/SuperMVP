@@ -35,8 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".activity.ImagePreviewActivity"
             android:theme="@style/imagethem" />
@@ -47,6 +45,8 @@
         <activity android:name=".activity.CatgoryActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.FaceActivity" />
+        <activity android:name=".activity.FaceDetail"></activity>
+        <activity android:name=".activity.FaceDetailActivity"></activity>
     </application>
 
 </manifest>

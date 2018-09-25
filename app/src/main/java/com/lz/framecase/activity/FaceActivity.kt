@@ -1,18 +1,16 @@
 package com.lz.framecase.activity
 
 import android.Manifest
-import android.annotation.TargetApi
-import android.content.ContentUris
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
-import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.FileProvider
 import android.util.Log
 import android.view.View
@@ -29,11 +27,7 @@ import com.lz.inject_annotation.InjectActivity
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.vondear.rxtool.RxImageTool
-import com.vondear.rxtool.RxPhotoTool
 import io.reactivex.Flowable
-import io.reactivex.FlowableOnSubscribe
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -86,7 +80,17 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
     override fun initLisenter() {
         super.initLisenter()
         faceAdapter?.setOnItemClickListener { adapter, view, position ->
-
+            if (mFaces.get(position).expression != null) {
+                val intent = Intent(this, FaceDetailActivity::class.java)
+                val image = android.support.v4.util.Pair(iv_photo as View, "image")
+                val beauty = android.support.v4.util.Pair(view.findViewById<View>(R.id.beauty), "beauty")
+                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, image!!, beauty!!)
+                intent.putExtra("mFacesBean", mFaces.get(position))
+                val bundle = Bundle()
+                bundle.putParcelable("bitmap", bitmap)
+                intent.putExtras(bundle)
+                startActivity(intent, optionsCompat.toBundle())
+            }
         }
         bt_album.setOnClickListener(View.OnClickListener {
             var albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

@@ -1,10 +1,12 @@
 package com.lz.framecase.bean
 
+import java.io.Serializable
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-09-25       创建class
  */
-class FaceListEntity {
+class FaceListEntity :Serializable{
     /**
      * face_token : 35235asfas21421fakghktyfdgh68bio
      * location : {"left":117,"top":131,"width":172,"height":170,"rotation":4}
@@ -19,7 +21,8 @@ class FaceListEntity {
      * glasses : {"type":"sun","probability":0.99999964237213}
      * race : {"type":"yellow","probability":0.99999976158142}
      * face_shape : {"type":"triangle","probability":0.5543018579483}
-     * quality : {"occlusion":{"left_eye":0,"right_eye":0,"nose":0,"mouth":0,"left_cheek":0.0064102564938366,"right_cheek":0.0057411273010075,"chin":0},"blur":1.1886881756684E-10,"illumination":141,"completeness":1}
+     * quality : {"occlusion":{"left_eye":0,"right_eye":0,"nose":0,"mouth":0,"left_cheek":0.0064102564938366,"right_cheek":0.0057411273010075,"chin":0},
+     * "blur":1.1886881756684E-10,"illumination":141,"completeness":1}
      */
 
     var face_token: String? = null
