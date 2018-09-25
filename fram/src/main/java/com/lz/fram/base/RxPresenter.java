@@ -2,6 +2,7 @@ package com.lz.fram.base;
 
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.view.ViewDebug;
 
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -18,7 +19,6 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class RxPresenter<T extends BaseView> implements BasePresenter {
-
     protected T mView;
     private LifecycleOwner mLifecycleOwner;
 

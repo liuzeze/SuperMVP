@@ -1,17 +1,19 @@
 package com.lz.framecase.api;
 
 
+import com.lz.framecase.bean.FaceResponse;
 import com.lz.framecase.bean.MultNewsBean;
 import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
+import com.lz.framecase.bean.TokenBean;
 import com.lz.framecase.bean.VideoContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
-import com.lz.framecase.bean.WendaArticleDataBean;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -61,4 +63,31 @@ public interface ApiService {
      */
     @GET
     Flowable<VideoContentBean> getVideoContent(@Url String url);
+
+
+    /**
+     * @return
+     */
+//    @Headers("Content-Type : application/json")
+    @POST("https://aip.baidubce.com/rest/2.0/face/v3/detect?access_token=24.92daa52691d8390d47f94ced2251b527.2592000.1540451248.282335-14279355")
+    @FormUrlEncoded
+    Flowable<FaceResponse> getFaceInfo(
+            @Field("image") String imageBase64,
+            @Field("image_type") String image_type,
+            @Field("face_field") String face_field,
+            @Field("max_face_num") int num,
+            @Field("face_type") String face_type,
+            @Field("access_token") String access_token);
+
+    /**
+     * @param apikey
+     * @param apiSecret
+     * @return
+     */
+    @GET("https://aip.baidubce.com/oauth/2.0/token?")
+    Flowable<TokenBean> token(@Query("grant_type") String client_credentials,
+                              @Query("client_id") String apikey,
+                              @Query("client_secret") String apiSecret
+    );
 }
+

@@ -3,6 +3,7 @@ package com.lz.framecase.component;
 
 import com.lz.fram.component.AppComponent;
 import com.lz.fram.scope.CustomizeScope;
+import com.lz.framecase.activity.FaceActivity;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.activity.NewsCommentActivity;
 import com.lz.framecase.activity.SearchActivity;
@@ -27,4 +28,6 @@ public interface ActivityComponent {
     void inject(VideoPlayerActivity activity);
 
     void inject(SearchActivity activity);
+
+    void inject(FaceActivity activity);
 }

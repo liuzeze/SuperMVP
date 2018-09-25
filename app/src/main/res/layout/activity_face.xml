@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:fitsSystemWindows="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/face_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/app_them_blue"
+            android:text="人脸识别">
+
+        </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@color/common_app_gray_cccccc"
+            android:src="@drawable/ic_img_default"
+            android:transitionName="SearchView"
+            app:layout_constraintTop_toBottomOf="@+id/face_toolbar" />
+
+        <Button
+            android:id="@+id/bt_open_photo"
+            select_def_color="@{@color/common_app_white_ffffff}"
+            select_radius="@{10}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="授权"
+            android:textColor="@color/common_app_gray_333333"
+            app:layout_constraintEnd_toStartOf="@+id/bt_take_photo"
+            app:layout_constraintHorizontal_weight="1"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+
+        <Button
+            android:id="@+id/bt_take_photo"
+            select_def_color="@{@color/common_app_white_ffffff}"
+            select_radius="@{10}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="拍照"
+
+            android:textColor="@color/common_app_gray_333333"
+            app:layout_constraintEnd_toStartOf="@+id/bt_change"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/bt_open_photo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+
+        <Button
+            android:id="@+id/bt_change"
+            select_def_color="@{@color/common_app_white_ffffff}"
+            select_radius="@{10}"
+            select_sel_color="@{@color/common_app_green_37fc00}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="切换"
+            android:textColor="@color/common_app_gray_333333"
+            app:layout_constraintEnd_toStartOf="@+id/bt_album"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+
+        <Button
+            android:id="@+id/bt_album"
+            select_def_color="@{@color/common_app_white_ffffff}"
+            select_radius="@{10}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="5dp"
+            android:text="相册"
+            android:textColor="@color/common_app_gray_333333"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            android:orientation="horizontal"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/bt_album">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

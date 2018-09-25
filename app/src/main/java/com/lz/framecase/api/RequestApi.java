@@ -4,11 +4,13 @@ package com.lz.framecase.api;
 import android.util.Base64;
 
 import com.lz.fram.base.LpLoadDialog;
-import com.lz.fram.observer.CommonSubscriber;
 import com.lz.fram.observer.Transformer;
+import com.lz.framecase.BuildConfig;
+import com.lz.framecase.bean.FaceResponse;
 import com.lz.framecase.bean.MultNewsBean;
 import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
+import com.lz.framecase.bean.TokenBean;
 import com.lz.framecase.bean.VideoContentBean;
 import com.lz.framecase.bean.WendaArticleBean;
 
@@ -20,7 +22,6 @@ import java.util.Random;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -82,7 +83,6 @@ public class RequestApi {
                         .compose(Transformer.<NewsCommentBean>switchSchedulers(mLpLoadDialog));
 
 
-
     }
 
     @Nullable
@@ -118,6 +118,20 @@ public class RequestApi {
                         })
                         .compose(Transformer.<String>switchSchedulers(mLpLoadDialog));
 
+
+    }
+
+    public Flowable<FaceResponse> getNewPicture(String img, String token, String des) {
+        return mRetrofit.create(ApiService.class)
+                .getFaceInfo(img, "BASE64", des, 10, "LIVE", token)
+                .compose(Transformer.<FaceResponse>switchSchedulers(mLpLoadDialog));
+    }
+
+
+    public Flowable<TokenBean> token() {
+        return mRetrofit.create(ApiService.class)
+                .token("client_credentials", BuildConfig.API_KEY, BuildConfig.API_SECRET)
+                .compose(Transformer.<TokenBean>switchSchedulers(mLpLoadDialog));
 
     }
 }

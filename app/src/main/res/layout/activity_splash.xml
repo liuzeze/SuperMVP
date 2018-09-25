@@ -4,9 +4,9 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/root_layout"
         tools:context=".activity.SplashActivity">
 
         <cn.bingoogolapple.bgabanner.BGABanner
@@ -44,13 +44,13 @@
             select_def_color="@{@color/common_app_purple_fb01ff}"
             select_radius="@{20}"
             select_sel_color="@{@color/common_app_red_f01717}"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="点击进入"
             android:textColor="@color/common_app_white_ffffff"
-            android:textSize="30dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

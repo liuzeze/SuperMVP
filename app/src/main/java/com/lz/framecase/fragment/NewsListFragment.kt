@@ -160,6 +160,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
 
     override fun showErrorMsg(msg: String?) {
         super.showErrorMsg(msg)
+        SwipeRefreshLayout.setRefreshing(false)
         newsListAdapter?.loadMoreFail()
     }
 }

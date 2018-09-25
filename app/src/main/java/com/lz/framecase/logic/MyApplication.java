@@ -50,7 +50,7 @@ public class MyApplication extends FrameApplication {
                 //栈管理
                 RxActivityTool.addActivity(activity);
                 //dp sp 适配
-//                new ScreenAdaptation(activity, 720).register();
+                new ScreenAdaptation(activity, 720).register();
             }
 
             @Override

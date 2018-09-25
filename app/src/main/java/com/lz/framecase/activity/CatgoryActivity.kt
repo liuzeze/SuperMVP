@@ -16,12 +16,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
-import com.chad.library.adapter.base.animation.SlideInBottomAnimation
-import com.chad.library.adapter.base.listener.OnItemDragListener
-import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
-import com.lz.framecase.R.id.recycler_view
-import com.lz.framecase.R.id.toolbar
 import com.lz.framecase.activity.adapter.drag.DragAdapter
 import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
@@ -30,8 +25,6 @@ import com.lz.framecase.bean.TitleBean
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CatgoryActivity : BaseActivity<ViewDataBinding>() {
 

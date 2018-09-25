@@ -1,13 +1,10 @@
 package com.lz.framecase.presenter
 
 
-import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.NewsCommentBean
-import com.lz.utilslib.interceptor.utils.ToastUtils
-import com.uber.autodispose.AutoDisposeConverter
 import javax.inject.Inject
 
 

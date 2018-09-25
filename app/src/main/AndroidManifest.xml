@@ -13,6 +13,15 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.lz.framecase.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <!-- 网络框架配置 -->
         <meta-data
@@ -26,6 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".activity.ImagePreviewActivity"
             android:theme="@style/imagethem" />
@@ -35,6 +46,7 @@
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.CatgoryActivity" />
         <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.FaceActivity" />
     </application>
 
 </manifest>

@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
-                    val intent = Intent(mActivity, SearchActivity::class.java)
+                    val intent = Intent(mActivity, FaceActivity::class.java)
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
 
                 })

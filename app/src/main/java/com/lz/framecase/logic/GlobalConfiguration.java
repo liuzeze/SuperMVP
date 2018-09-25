@@ -26,10 +26,14 @@ import com.lz.fram.model.GlobalConfigBuild;
 import com.lz.framecase.BuildConfig;
 import com.lz.loglib.reporter.OkNetworkMonitorInterceptor;
 import com.lz.utilslib.interceptor.intercept.LoggerInterceptor;
+import com.orhanobut.logger.Logger;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 
 /**
