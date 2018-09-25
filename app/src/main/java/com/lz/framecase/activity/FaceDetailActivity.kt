@@ -42,7 +42,6 @@ class FaceDetailActivity : BaseActivity<ViewDataBinding>() {
         val beautynum = attributes.beauty
         age.setText(String.format("年龄：%s", agenum))
         sex.setText(String.format("性别：%s", if ("Male" == gender) "男" else "女"))
-        val maleScore = attributes?.beauty
         beauty.setText(String.format("%1.2f", beautynum))
 
         val type = attributes.expression?.type
