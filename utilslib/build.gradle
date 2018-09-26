@@ -64,7 +64,7 @@ dependencies {
     api 'me.jessyan:autosize:0.9.5'
 
     //自己定义的注解的java lib
-    api 'com.lz:inject_annotations:1.0.4'
+    api 'com.lz:inject_annotations:1.0.5'
 //    api project(':inject_annotation')
     //换肤框架
     api project(':skinlibs')

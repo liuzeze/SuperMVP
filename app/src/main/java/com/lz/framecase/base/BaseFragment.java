@@ -1,7 +1,6 @@
 package com.lz.framecase.base;
 
 
-import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -18,12 +17,9 @@ import com.lz.fram.inject.PresenterProviders;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.inject_annotation.InjectFragment;
-import com.lz.inject_annotation.InjectUtils;
 import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.uber.autodispose.AutoDisposeConverter;
-
-import org.jetbrains.annotations.NotNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

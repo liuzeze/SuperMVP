@@ -80,7 +80,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
 //    kapt project(':inject_compile')
-    kapt 'com.lz:inject_compile:1.0.4'
+    kapt 'com.lz:inject_compile:1.0.5'
     implementation project(':utilslib')
 
 

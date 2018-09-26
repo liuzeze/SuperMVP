@@ -76,11 +76,6 @@ public class ActivityInjectProcesser extends AbstractProcessor {
                 getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_FRAGMENT);
             } else
                 error("ActivityInject only can use  in ElementKind.CLASS");
-        } for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_UTILS))) {
-            if (element.getKind() == ElementKind.CLASS) {
-                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_UTILS);
-            } else
-                error("ActivityInject only can use  in ElementKind.CLASS");
         }
     }
 
@@ -110,7 +105,6 @@ public class ActivityInjectProcesser extends AbstractProcessor {
         Set<String> types = new LinkedHashSet<>();
         types.add(TypeUtil.ANNOTATION_PATH_ACTIVITY);
         types.add(TypeUtil.ANNOTATION_PATH_FRAGMENT);
-        types.add(TypeUtil.ANNOTATION_PATH_UTILS);
         return types;
     }
 

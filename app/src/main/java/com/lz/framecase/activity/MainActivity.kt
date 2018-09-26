@@ -10,10 +10,12 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
+
 
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.databinding.ActivityMain2Binding
@@ -21,6 +23,7 @@ import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
+import com.lz.framecase.logic.MyApplication
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
@@ -54,13 +57,14 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
                 .subscribe(Consumer {
                     val intent = Intent(mActivity, FaceActivity::class.java)
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
-
+                    Toast.makeText(MyApplication.mApplication, "就按个还记得哈国际化噶即可", Toast.LENGTH_SHORT).show()
                 })
         RxView.clicks(mBind.ivTitle)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     drawerlayout.openDrawer(Gravity.LEFT)
+
                 })
 
         RxNavigationView.itemSelections(nav_view).debounce(500, TimeUnit.MILLISECONDS)

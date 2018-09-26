@@ -42,16 +42,14 @@ public class AnnotatedClass {
         ClassName class1;
         if (mAnnotationPath.equals(TypeUtil.ANNOTATION_PATH_ACTIVITY)) {
             class1 = ClassName.get("com.lz.framecase.component", "DaggerActivityComponent");
-        } else if (mAnnotationPath.equals(TypeUtil.ANNOTATION_PATH_FRAGMENT)) {
-            class1 = ClassName.get("com.lz.framecase.component", "DaggerFragmentComponent");
         } else {
-            class1 = ClassName.get("com.lz.framecase.component", "DaggerUtilsComponent");
+            class1 = ClassName.get("com.lz.framecase.component", "DaggerFragmentComponent");
         }
         ClassName class2 = ClassName.get("com.lz.fram.app", "FrameApplication");
         injectMethod.addStatement("$T.builder()\n" +
                 "                .appComponent($T.mApplication.getAppComponent())\n" +
                 "                .build()\n" +
-                "                .inject(obj)",class1, class2);
+                "                .inject(obj)", class1, class2);
         //generaClas
 
         String packgeName = mElements.getPackageOf(mTypeElement).getQualifiedName().toString();
