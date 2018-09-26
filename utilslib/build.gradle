@@ -59,6 +59,10 @@ dependencies {
     api 'com.github.yyued:SVGAPlayer-Android:2.1.8'
     //lottie 动画
     api 'com.airbnb.android:lottie:2.2.0'
+
+    //适配库
+    api 'me.jessyan:autosize:0.9.5'
+
     //自己定义的注解的java lib
     api 'com.lz:inject_annotations:1.0.4'
 //    api project(':inject_annotation')

@@ -49,8 +49,6 @@ public class MyApplication extends FrameApplication {
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 //栈管理
                 RxActivityTool.addActivity(activity);
-                //dp sp 适配
-               // new ScreenAdaptation(activity, 720).register();
             }
 
             @Override
