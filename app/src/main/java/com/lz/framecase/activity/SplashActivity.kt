@@ -62,6 +62,7 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
                     if (!isDestroyed) {
                         startActivity(Intent(mActivity, MainActivity::class.java))
                         svgimage.stopAnimation()
+                        lav_show.cancelAnimation()
                         finish()
                     }
                 })
@@ -71,6 +72,7 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
         bgbanner.setEnterSkipViewIdAndDelegate(R.id.tv_enter, R.id.tv_skip, {
             startActivity(Intent(mActivity, MainActivity::class.java))
             svgimage.stopAnimation()
+            lav_show.cancelAnimation()
             finish()
         })
 
