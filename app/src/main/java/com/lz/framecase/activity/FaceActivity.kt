@@ -2,6 +2,7 @@ package com.lz.framecase.activity
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -70,7 +71,7 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
     }
 
     override fun initViewData() {
-        face_toolbar.setTitle("人脸识别")
+        face_toolbar.setTitle("人脸检测")
         face_toolbar.setTitleTextColor(Color.WHITE)
         faceAdapter = FaceAdapter(mFaces)
         recyclerview.adapter = faceAdapter
@@ -104,6 +105,12 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
             mPresenter?.auth(mActivity)
         })
         bt_take_photo.setOnClickListener(View.OnClickListener {
+
+            if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                ToastUtils.error("打开相册失败")
+                return@OnClickListener
+            }
+
             val rxPermissions = RxPermissions(this)
             rxPermissions.request(Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -129,6 +136,7 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
                         takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                         startActivityForResult(takeIntent, CODE_TAKE_PHOTO)
                     }
+
                 } else {
                     ToastUtils.error("权限获取失败")
                 }

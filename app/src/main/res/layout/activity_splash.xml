@@ -26,6 +26,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:source="angel.svga" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="AndroidWave.json"
+            app:lottie_loop="true" />
+
+
         <TextView
             android:id="@+id/tv_skip"
             shape_radius="@{90}"

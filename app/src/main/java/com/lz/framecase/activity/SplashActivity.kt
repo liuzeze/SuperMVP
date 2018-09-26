@@ -28,9 +28,13 @@ import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.os.Build.VERSION.SDK_INT
 import android.view.View
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieComposition
+import com.airbnb.lottie.OnCompositionLoadedListener
 import com.lz.framecase.R.id.bgbanner
 import com.lz.framecase.R.id.svgimage
 import com.lz.utilslib.interceptor.utils.LzStatueBarUtils
+import io.reactivex.annotations.Nullable
 
 
 class SplashActivity : BaseActivity<ViewDataBinding>() {
@@ -47,8 +51,8 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
         val ofFloat2 = PropertyValuesHolder.ofFloat("scaleX", 1.2f)
         val animator = ObjectAnimator.ofPropertyValuesHolder(bgbanner, ofFloat1, ofFloat2)
         animator.setDuration(5000)
-        animator.repeatMode= REVERSE
-        animator.repeatCount=1000
+        animator.repeatMode = REVERSE
+        animator.repeatCount = 1000
         animator.start()
 //        bgbanner.animate().withLayer()  硬件加速
         subscribe = Observable
@@ -71,6 +75,16 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
         })
 
         LzStatueBarUtils.setSystemUIVisible(this, false)
+
+
+/*
+//lottie 动画
+        LottieComposition.Factory.fromAssetFileName(this, "AndroidWave.json", OnCompositionLoadedListener {
+            lav_show.setComposition(it!!);
+
+        });*/
+
+
     }
 
     override fun onDestroy() {
