@@ -69,8 +69,8 @@ dependencies {
     //换肤框架
     api project(':skinlibs')
 
-//    api 'com.lz:fram_lib:1.0.1'
-    api project(':fram')
+    api 'com.lz:fram_lib:1.0.2'
+//    api project(':fram')
     //    api project(':loglib')
     debugApi 'com.lz:intercept_debug:1.0.2'
     releaseApi 'com.lz:intercept_release:1.0.0'
