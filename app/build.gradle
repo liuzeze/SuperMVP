@@ -86,9 +86,9 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
-    kapt project(':inject_compile')
+//    kapt project(':inject_compile')
     kapt 'com.lz:inject_compilee:1.0.6'
-//    implementation project(':utilslib')
+    implementation project(':utilslib')
 
 
     compile "com.android.support:multidex:1.0.3" // 多dex配置
