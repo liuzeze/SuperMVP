@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0927-09-53-57"
+def baseApkDir = "app-0927-18-59-13"
 //def myTinkerId = "base-" + rootProject.ext.android.versionName // 用于生成基准包（不用修改）
 def myTinkerId = "patch-" + rootProject.ext.android.versionName + ".0.0" // 用于生成补丁包（每次生成补丁包都要修改一次，最好是 patch-${versionName}.x.x）
 
@@ -36,13 +36,13 @@ tinkerSupport {
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
     // @{link tinkerPatch.oldApk }
-    baseApk = "${bakPath}/${baseApkDir}/app-debug-1.0.0-72.apk"
+    baseApk = "${bakPath}/${baseApkDir}/app-release-1.0.0-76.apk"
 
     // 对应tinker插件applyMapping
     baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-debug-mapping.txt"
 
     // 对应tinker插件applyResourceMapping
-    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-debug-R.txt"
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
 
     // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性
     tinkerId = "${myTinkerId}"
