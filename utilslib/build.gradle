@@ -27,7 +27,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //基础工具库
-    api 'com.github.vondear.RxTool:RxKit:v2.0.4'
+    api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    api 'com.github.vondear.RxTool:RxKit:v2.2.7'
+
     api 'com.orhanobut:logger:2.2.0'
     //support
     api rootProject.ext.dependencies.support_v4
@@ -64,7 +66,7 @@ dependencies {
     api 'me.jessyan:autosize:0.9.5'
 
     //自己定义的注解的java lib
-    api 'com.lz:inject_annotations:1.0.5'
+    api 'com.lz:inject_annotations:1.0.6'
 //    api project(':inject_annotation')
     //换肤框架
     api project(':skinlibs')

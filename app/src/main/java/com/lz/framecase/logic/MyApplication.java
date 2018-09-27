@@ -1,21 +1,21 @@
 package com.lz.framecase.logic;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
-import android.view.View;
 
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
-import com.lz.skinlibs.ChangeListener;
 import com.lz.skinlibs.SkinManager;
-import com.lz.utilslib.interceptor.app.ScreenAdaptation;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
 import hugo.weaving.DebugLog;
-import hugo.weaving.internal.Hugo;
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -36,9 +36,20 @@ public class MyApplication extends FrameApplication {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         registerActivityCycle();
+         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
+        // 调试时，将第三个参数改为true
+        Bugly.init(this, "4a8eea659f", false);
 
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+        super.attachBaseContext(base);
+        // 安装tinker
+        Beta.installTinker();
+    }
 
     /**
      * activity周期管理

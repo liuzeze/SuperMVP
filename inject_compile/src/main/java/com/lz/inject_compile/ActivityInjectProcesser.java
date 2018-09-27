@@ -1,7 +1,11 @@
 package com.lz.inject_compile;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.TypeSpec;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -17,6 +21,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
@@ -52,28 +57,41 @@ public class ActivityInjectProcesser extends AbstractProcessor {
             e.printStackTrace();
             error(e.getMessage());
         }
-
+        TypeSpec.Builder builder = TypeSpec.classBuilder(TypeUtil.CLASSNAME)
+                .addModifiers(Modifier.PUBLIC);
         for (AnnotatedClass annotatedClass : mAnnotatedClassMap.values()) {
             try {
-                annotatedClass.generateActivityFile().writeTo(mFiler);
+                builder.addMethod(annotatedClass.generateMethod());
             } catch (Exception e) {
                 error("Generate file failed, reason: %s", e.getMessage());
             }
         }
+
+        JavaFile javaFile = JavaFile
+                .builder(TypeUtil.PACKAGEPATH, builder.build())
+                .build();
+        try {
+            javaFile.writeTo(mFiler);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }
 
 
-    private void processActivityCheck(RoundEnvironment roundEnv ) throws IllegalArgumentException, ClassNotFoundException {
+    private void processActivityCheck(RoundEnvironment roundEnv) throws IllegalArgumentException, ClassNotFoundException {
         //check ruleslass forName(String className
         for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_ACTIVITY))) {
             if (element.getKind() == ElementKind.CLASS) {
-                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_ACTIVITY);
+                getAnnotatedClass(element, TypeUtil.ANNOTATION_PATH_ACTIVITY);
             } else
                 error("ActivityInject only can use  in ElementKind.CLASS");
-        } for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_FRAGMENT))) {
+        }
+        for (Element element : roundEnv.getElementsAnnotatedWith((Class<? extends Annotation>) Class.forName(TypeUtil.ANNOTATION_PATH_FRAGMENT))) {
             if (element.getKind() == ElementKind.CLASS) {
-                getAnnotatedClass(element,TypeUtil.ANNOTATION_PATH_FRAGMENT);
+                getAnnotatedClass(element, TypeUtil.ANNOTATION_PATH_FRAGMENT);
             } else
                 error("ActivityInject only can use  in ElementKind.CLASS");
         }
@@ -87,7 +105,7 @@ public class ActivityInjectProcesser extends AbstractProcessor {
         String fullName = typeElement.getQualifiedName().toString();
         AnnotatedClass annotatedClass = mAnnotatedClassMap.get(fullName);
         if (annotatedClass == null) {
-            annotatedClass = new AnnotatedClass(typeElement, mElementUtils, mMessager,annotationPath);
+            annotatedClass = new AnnotatedClass(typeElement, mElementUtils, mMessager, annotationPath);
             mAnnotatedClassMap.put(fullName, annotatedClass);
         }
         return annotatedClass;

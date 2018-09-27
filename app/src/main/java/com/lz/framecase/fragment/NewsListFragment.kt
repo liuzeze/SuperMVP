@@ -3,37 +3,31 @@ package com.lz.framecase.fragment
 import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.ViewDataBinding
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
+import com.lz.MyInjectUtils
+import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.activity.VideoPlayerActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
-import com.lz.framecase.fragment.presenter.NewsDetailPresenter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.logic.MyApplication
-import com.lz.framecase.utils.DiffCallback
-import com.lz.utilslib.interceptor.utils.ShareAction
-import com.vondear.rxtool.RxTimeTool
-import kotlinx.android.synthetic.main.activity_main2.*
-import kotlinx.android.synthetic.main.fragment_news_list.*
 import com.lz.inject_annotation.InjectFragment
+import com.lz.utilslib.interceptor.utils.ShareAction
+import com.vondear.rxtool.RxAppTool
+import kotlinx.android.synthetic.main.fragment_news_list.*
 import javax.inject.Inject
-import com.lz.fram.scope.AttachView
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -71,16 +65,15 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         newsListAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
         RecyclerView.adapter = newsListAdapter
         SwipeRefreshLayout.setRefreshing(true)
-
-        mPresenter.getNewLists(category)
+        mPresenter?.getNewLists(category)
     }
 
     override fun initLisenter() {
         super.initLisenter()
         SwipeRefreshLayout.setOnRefreshListener {
             mNewsBean.clear()
-            mPresenter.dataList.clear()
-            mPresenter.getNewLists(category)
+            mPresenter?.dataList?.clear()
+            mPresenter?.getNewLists(category)
         }
         newsListAdapter?.setOnItemChildClickListener { baseQuickAdapter: BaseQuickAdapter<Any, BaseViewHolder>, view: View, position: Int ->
             when (view.id) {
@@ -102,7 +95,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
             }
         }
         newsListAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
-            mPresenter.getNewLists(category)
+            mPresenter?.getNewLists(category)
         }, RecyclerView)
 
         newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->

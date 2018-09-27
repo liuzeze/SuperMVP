@@ -1,40 +1,22 @@
 package com.lz.framecase.activity
 
+
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.animation.ValueAnimator.RESTART
 import android.animation.ValueAnimator.REVERSE
 import android.content.Intent
 import android.databinding.ViewDataBinding
-import android.os.Build
-import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
 import android.widget.ImageView
 import cn.bingoogolapple.bgabanner.BGALocalImageSize
 import com.lz.framecase.R
-
-
 import com.lz.framecase.base.BaseActivity
+import com.lz.utilslib.interceptor.utils.LzStatueBarUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_splash.*
-import org.reactivestreams.Subscriber
 import java.util.concurrent.TimeUnit
-import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-import android.os.Build.VERSION.SDK_INT
-import android.view.View
-import com.airbnb.lottie.LottieAnimationView
-import com.airbnb.lottie.LottieComposition
-import com.airbnb.lottie.OnCompositionLoadedListener
-import com.lz.framecase.R.id.bgbanner
-import com.lz.framecase.R.id.svgimage
-import com.lz.utilslib.interceptor.utils.LzStatueBarUtils
-import io.reactivex.annotations.Nullable
 
 
 class SplashActivity : BaseActivity<ViewDataBinding>() {
@@ -46,7 +28,6 @@ class SplashActivity : BaseActivity<ViewDataBinding>() {
     }
 
     override fun initViewData() {
-
         val ofFloat1 = PropertyValuesHolder.ofFloat("scaleY", 1.2f)
         val ofFloat2 = PropertyValuesHolder.ofFloat("scaleX", 1.2f)
         val animator = ObjectAnimator.ofPropertyValuesHolder(bgbanner, ofFloat1, ofFloat2)

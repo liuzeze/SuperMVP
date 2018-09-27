@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.lz.MyInjectUtils;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
@@ -16,11 +17,13 @@ import com.lz.fram.utils.RxLifecycleUtils;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.inject_annotation.InjectActivity;
-import com.lz.inject_annotation.InjectFragment;
+import com.lz.inject_annotation.InjectTools;
 import com.lz.skinlibs.SkinManager;
-import com.lz.utilslib.interceptor.base.InjectTools;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.uber.autodispose.AutoDisposeConverter;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;

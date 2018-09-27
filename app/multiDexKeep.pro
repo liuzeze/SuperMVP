@@ -1,1 +1,4 @@
+-keep public class com.tencent.bugly.**{*;}
+-keep public class * implements com.lz.framecase.logic.GlobalConfiguration
 -keep public class * implements com.lz.fram.model.ConfigModule
+-keep public class * implements com.lz.MyInjectUtils
