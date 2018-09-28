@@ -60,7 +60,6 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
                 .subscribe(Consumer {
                     val intent = Intent(mActivity, FaceActivity::class.java)
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
-                    Toast.makeText(MyApplication.mApplication, "修复成功", Toast.LENGTH_SHORT).show()
                 })
         RxView.clicks(mBind.ivTitle)
                 .debounce(500, TimeUnit.MILLISECONDS)

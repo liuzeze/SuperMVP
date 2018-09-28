@@ -13,6 +13,7 @@ import com.lz.skinlibs.utils.L;
  */
 public class ResourceManager {
     private static final String DEFTYPE_DRAWABLE = "drawable";
+    private static final String DEFTYPE_MIPMAP = "mipmap";
     private static final String DEFTYPE_COLOR = "color";
     private static final String DIMENS_SIZER = "dimen";
     private Resources mResources;
@@ -35,10 +36,15 @@ public class ResourceManager {
         try {
             name = appendSuffix(name);
             L.e("name = " + name + " , " + mPluginPackageName);
-            return mResources.getDrawable(mResources.getIdentifier(name, DEFTYPE_DRAWABLE, mPluginPackageName));
+            return mResources.getDrawable(mResources.getIdentifier(name, DEFTYPE_MIPMAP, mPluginPackageName));
         } catch (Resources.NotFoundException e) {
-          //  e.printStackTrace();
-            return null;
+            try {
+                name = appendSuffix(name);
+                return mResources.getDrawable(mResources.getIdentifier(name, DEFTYPE_DRAWABLE, mPluginPackageName));
+            } catch (Resources.NotFoundException e1) {
+                e1.printStackTrace();
+                return null;
+            }
         }
     }
 
@@ -54,7 +60,7 @@ public class ResourceManager {
         return mResources.getIdentifier(name, DEFTYPE_COLOR, mPluginPackageName);
     }
 
-    public int getColorResDefault( String name) throws Resources.NotFoundException {
+    public int getColorResDefault(String name) throws Resources.NotFoundException {
         L.e("name = " + name);
         return mResources.getIdentifier(name, DEFTYPE_COLOR, mPluginPackageName);
     }
