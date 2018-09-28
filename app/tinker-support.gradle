@@ -7,7 +7,7 @@ def bakPath = file("${buildDir}/bakApk/")
  */
 def baseApkDir = "app-0927-18-59-13"
 //def myTinkerId = "base-" + rootProject.ext.android.versionName // 用于生成基准包（不用修改）
-def myTinkerId = "patch-" + rootProject.ext.android.versionName + ".0.0" // 用于生成补丁包（每次生成补丁包都要修改一次，最好是 patch-${versionName}.x.x）
+def myTinkerId = rootProject.ext.android.versionName  // 用于生成补丁包（每次生成补丁包都要修改一次，最好是 patch-${versionName}.x.x）
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -44,8 +44,9 @@ tinkerSupport {
     // 对应tinker插件applyResourceMapping
     baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
 
-    // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性
-    tinkerId = "${myTinkerId}"
+    // 构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性  基准包和 补丁包的这个tinkerid要区分开
+//    tinkerId = "${myTinkerId}"
+    tinkerId = "${myTinkerId}-patch"
 
     // 构建多渠道补丁时使用
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"

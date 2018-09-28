@@ -15,6 +15,8 @@ import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
+import com.lz.framecase.R.id.drawerlayout
+import com.lz.framecase.R.id.nav_view
 
 
 import com.lz.framecase.base.BaseActivity
@@ -57,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
                 .subscribe(Consumer {
                     val intent = Intent(mActivity, FaceActivity::class.java)
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
-                    Toast.makeText(MyApplication.mApplication, "就按个还记得哈国际化噶即可", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(MyApplication.mApplication, "修复成功", Toast.LENGTH_SHORT).show()
                 })
         RxView.clicks(mBind.ivTitle)
                 .debounce(500, TimeUnit.MILLISECONDS)
