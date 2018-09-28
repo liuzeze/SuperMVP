@@ -30,6 +30,7 @@ import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
+import com.tencent.bugly.beta.Beta
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*

@@ -37,10 +37,10 @@ public class MyApplication extends FrameApplication {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         registerActivityCycle();
-         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
-        // 调试时，将第三个参数改为true
-        Bugly.init(this, "4a8eea659f", true);
+        Beta.initDelay=3*1000;
         Beta.canShowUpgradeActs.add(MainActivity.class);
+        Bugly.init(this, "4a8eea659f", true);
+
     }
 
     @Override
