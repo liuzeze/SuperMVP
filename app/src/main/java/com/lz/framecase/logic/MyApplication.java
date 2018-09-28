@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.lz.fram.app.FrameApplication;
+import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
@@ -38,8 +39,8 @@ public class MyApplication extends FrameApplication {
         registerActivityCycle();
          // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         // 调试时，将第三个参数改为true
-        Bugly.init(this, "4a8eea659f", false);
-
+        Bugly.init(this, "4a8eea659f", true);
+        Beta.canShowUpgradeActs.add(MainActivity.class);
     }
 
     @Override

@@ -275,9 +275,11 @@ public static java.lang.String TABLENAME;
 #BUGLY
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
 # tinker混淆规则
 -dontwarn com.tencent.tinker.**
 -keep class com.tencent.tinker.** { *; }
+
 #配置文件
 -keep class com.lz.framecase.logic.GlobalConfiguration
 -keep class com.lz.MyInjectUtils{
@@ -321,5 +323,6 @@ public static java.lang.String TABLENAME;
 -keepclasseswithmembernames class * {
      @butterknife.* <methods>;
    }
+
 
 
