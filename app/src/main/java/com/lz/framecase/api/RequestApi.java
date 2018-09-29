@@ -130,7 +130,7 @@ public class RequestApi {
 
     public Flowable<TokenBean> token() {
         return mRetrofit.create(ApiService.class)
-                .token("client_credentials", BuildConfig.API_KEY, BuildConfig.API_SECRET)
+                .token("client_credentials", BuildConfig.FACE_API_KEY, BuildConfig.FACE_API_SECRET)
                 .compose(Transformer.<TokenBean>switchSchedulers(mLpLoadDialog));
 
     }

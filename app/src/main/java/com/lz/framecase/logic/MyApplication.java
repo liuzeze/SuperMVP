@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
+import android.support.v4.os.BuildCompat;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.lz.fram.app.FrameApplication;
+import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
@@ -39,7 +41,7 @@ public class MyApplication extends FrameApplication {
         registerActivityCycle();
         Beta.initDelay=3*1000;
         Beta.canShowUpgradeActs.add(MainActivity.class);
-        Bugly.init(this, "4a8eea659f", true);
+        Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
 
     }
 

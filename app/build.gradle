@@ -12,6 +12,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
+//        versionCode gitVersionCode()
         versionName rootProject.ext.android.versionName
         multiDexEnabled true
         multiDexKeepProguard file("multiDexKeep.pro") //分包时，将部分包放入主dex
@@ -40,32 +41,34 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.production
             buildConfigField("String", "API_URL", rootProject.ext.apiUrl.debugUrl)
-            buildConfigField "String", "API_KEY", '"PPSSlAbaCYZpe8IhLQwWWinS"'
-            buildConfigField "String", "API_SECRET", '"noqd2GKQmrpwhLu3hEuUi9X5cGQDfGw6"'
+            buildConfigField "String", "FACE_API_KEY", rootProject.ext.appKey.faceApiKey
+            buildConfigField "String", "FACE_API_SECRET", rootProject.ext.appKey.faceApiSecret
+            buildConfigField "String", "BUGGLY_APPID", rootProject.ext.appKey.buglyAppId
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.production
             buildConfigField("String", "API_URL", rootProject.ext.apiUrl.releaseUrl)
+            buildConfigField "String", "FACE_API_KEY", rootProject.ext.appKey.faceApiKey
+            buildConfigField "String", "FACE_API_SECRET", rootProject.ext.appKey.faceApiSecret
+            buildConfigField "String", "BUGGLY_APPID", rootProject.ext.appKey.buglyAppId
             // 进行压缩优化
             zipAlignEnabled true
             // 进行资源优化，移除无用的resource文件  跟快速编译不兼容
 //             shrinkResources true
-            buildConfigField "String", "API_KEY", '"PPSSlAbaCYZpe8IhLQwWWinS"'
-            buildConfigField "String", "API_SECRET", '"noqd2GKQmrpwhLu3hEuUi9X5cGQDfGw6"'
 
         }
 
         //修改apk包名
         applicationVariants.all { variant ->
-            // if (variant.buildType.name.equals('debug')) {
-            variant.mergedFlavor.versionCode = gitVersionCode()
-            //variant.mergedFlavor.versionName = gitVersionTag()
-            //   }
-
             variant.outputs.all { output ->
-                outputFileName = "app-${variant.name}-${variant.mergedFlavor.versionName}-${variant.mergedFlavor.versionCode}.apk"
+                //gradle 3.2.0 上无法修改,
+                // if (variant.buildType.name.equals('debug')) {
+//                variant.mergedFlavor.versionCode = gitVersionCode()
+                //variant.mergedFlavor.versionName = gitVersionTag()
+                //   }
+                outputFileName = "app-${variant.name}-${defaultConfig.versionName}-${defaultConfig.versionCode}.apk"
             }
         }
     }

@@ -63,7 +63,7 @@
         <!-- 宽高比例，如果大于 0，则会根据宽度来计算高度，否则使用 android:layout_height 指定的高度 -->
         <attr name="banner_aspectRatio" format="float" />
         <!-- 占位图和资源图片缩放模式 -->
-        <attr name="android:scaleType" />
+        <!--<attr name="android:scaleType" />-->
     </declare-styleable>
 
 

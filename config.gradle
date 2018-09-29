@@ -7,6 +7,12 @@ ext {
     ]
 
 
+    appKey = [
+
+            faceApiKey:'"PPSSlAbaCYZpe8IhLQwWWinS"',
+            faceApiSecret:'"noqd2GKQmrpwhLu3hEuUi9X5cGQDfGw6"',
+            buglyAppId:'"4a8eea659f"'
+    ]
     android = [
             applicationId    : "com.lz.framecase",
             compileSdkVersion: 28,
