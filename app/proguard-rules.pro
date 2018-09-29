@@ -282,6 +282,9 @@ public static java.lang.String TABLENAME;
 
 #配置文件
 -keep class com.lz.framecase.logic.GlobalConfiguration
+-keep class com.lz.framecase.anotation.MethodBehaviorAspect{
+        *;
+}
 -keep class com.lz.MyInjectUtils{
         *;
 }

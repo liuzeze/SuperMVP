@@ -86,7 +86,7 @@ class WenDaListFragment : BaseFragment<ViewDataBinding>(), WenDaListContract.Vie
         gson = Gson()
         category = arguments?.getString("category")!!
         newsListAdapter = WenDaListAdapter(mNewsBean)
-        RecyclerView.adapter = newsListAdapter
+        recyclerView.adapter = newsListAdapter
 
 
     }

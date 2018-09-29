@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatDelegate;
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
+import com.lz.framecase.anotation.ComponentInject;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
@@ -28,6 +29,7 @@ public class MyApplication extends FrameApplication {
 
     @DebugLog
     @Override
+    @ComponentInject("MyApplication")
     public void onCreate() {
         super.onCreate();
         RxTool.init(this);

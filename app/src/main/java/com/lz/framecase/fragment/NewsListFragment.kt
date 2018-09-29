@@ -4,10 +4,15 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.os.HandlerThread
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
+import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.util.SparseArray
 import android.view.Gravity
 import android.view.View
+import android.widget.AbsListView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
@@ -63,7 +68,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         category = arguments?.getString("category")!!
         newsListAdapter = NewsListAdapter(mNewsBean)
         newsListAdapter?.openLoadAnimation(SLIDEIN_BOTTOM)
-        RecyclerView.adapter = newsListAdapter
+        recyclerView.adapter = newsListAdapter
         SwipeRefreshLayout.setRefreshing(true)
         mPresenter?.getNewLists(category)
     }
@@ -75,6 +80,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
             mPresenter?.dataList?.clear()
             mPresenter?.getNewLists(category)
         }
+
         newsListAdapter?.setOnItemChildClickListener { baseQuickAdapter: BaseQuickAdapter<Any, BaseViewHolder>, view: View, position: Int ->
             when (view.id) {
                 R.id.tv_dots -> {
@@ -96,7 +102,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         }
         newsListAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
             mPresenter?.getNewLists(category)
-        }, RecyclerView)
+        }, recyclerView)
 
         newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
 

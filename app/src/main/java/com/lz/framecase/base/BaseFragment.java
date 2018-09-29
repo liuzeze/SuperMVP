@@ -16,6 +16,7 @@ import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
 import com.lz.fram.utils.RxLifecycleUtils;
+import com.lz.framecase.anotation.ComponentInject;
 import com.lz.framecase.fragment.NewsListFragment;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.inject_annotation.InjectFragment;
