@@ -12,6 +12,9 @@
 8. 使用apt编译时生成代码  减少重复代码
 9. svgplayer 动画
 10. AutoDispose 和 lifecycle 对订阅生命周期进行管理
+11. tinker 热更新
+12. 百度人脸检测
+13. Lottie 动画
 
 ## 使用方式
 
@@ -103,7 +106,7 @@
 
    ```
               <layout>
-     <!--选择器使用方式-->
+     <!--shape使用方式-->
                         <TextView
                               //边框宽度
                               shape_strokr_width="@{1}"
@@ -122,7 +125,7 @@
                               android:text="跳过"
                               app:layout_constraintEnd_toEndOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
-    <!--选圆角背景使用-->
+    <!--选择器-->
                          <TextView
                               //默认填充颜色
                               select_def_color="@{@color/common_app_purple_fb01ff}"
