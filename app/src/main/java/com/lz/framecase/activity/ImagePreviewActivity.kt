@@ -71,6 +71,10 @@ class ImagePreviewActivity : BaseActivity<ViewDataBinding>() {
             layout.setDismissListener(onDismissListener)
             arrayList.add(inflate)
         }
+        try {
+            bgabanner.currentItem=stringArrayExtra.indexOf(stringExtra)
+        } catch (e: Exception) {
+        }
         bgabanner.setTransitionEffect(TransitionEffect.Zoom)
         bgabanner.setData(arrayList)
         bgabanner.setAutoPlayAble(false)
