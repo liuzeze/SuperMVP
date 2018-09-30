@@ -15,6 +15,7 @@ import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
+import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;

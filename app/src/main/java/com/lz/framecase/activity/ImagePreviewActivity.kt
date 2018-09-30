@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.text.TextUtils
 import android.view.MotionEvent
 import android.view.View
+import cn.bingoogolapple.bgabanner.transformer.TransitionEffect
 import com.bumptech.glide.Glide
 import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
@@ -70,7 +71,7 @@ class ImagePreviewActivity : BaseActivity<ViewDataBinding>() {
             layout.setDismissListener(onDismissListener)
             arrayList.add(inflate)
         }
-
+        bgabanner.setTransitionEffect(TransitionEffect.Zoom)
         bgabanner.setData(arrayList)
         bgabanner.setAutoPlayAble(false)
     }

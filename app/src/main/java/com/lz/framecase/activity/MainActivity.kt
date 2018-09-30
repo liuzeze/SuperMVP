@@ -10,27 +10,20 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatDelegate
 import android.view.Gravity
 import android.view.View
-import android.widget.Toast
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
-import com.lz.framecase.R.id.drawerlayout
-import com.lz.framecase.R.id.nav_view
-
-
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.databinding.ActivityMain2Binding
 import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.fragment.NewsTitlePagerFragment
 import com.lz.framecase.fragment.VideoPagerFragment
-import com.lz.framecase.logic.MyApplication
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.tencent.bugly.beta.Beta
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*

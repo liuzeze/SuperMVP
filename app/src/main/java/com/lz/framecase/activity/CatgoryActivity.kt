@@ -110,7 +110,7 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                 imageView.setTranslationY(view.top.toFloat())
                 imageView.animate().translationX((view.measuredWidth * (count2 % 4)).toFloat()).setDuration(500).start()
 
-                imageView.animate().translationY((view.measuredHeight * if (count2 / 4 == 0) count2 / 4 else count2 / 4 + 1).toFloat() + 50).setListener(object : AnimatorListenerAdapter() {
+                imageView.animate().translationY((view.measuredHeight * if (count2 / 4 == 0) count2+1 / 4 else count2 / 4 + 2).toFloat() + 50).setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         super.onAnimationEnd(animation)
                         (recycler_view.getParent() as ViewGroup).removeView(imageView)
@@ -167,7 +167,6 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
         val mirrorView = ImageView(recyclerView.context)
         val bitmap = Bitmap.createBitmap(view.drawingCache)
         mirrorView.setImageBitmap(bitmap)
-        mirrorView.setBackgroundResource(R.color.common_app_red_ff0000)
         view.isDrawingCacheEnabled = false
         val locations = IntArray(2)
         view.getLocationOnScreen(locations)

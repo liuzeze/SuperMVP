@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.View
+import cn.bingoogolapple.bgabanner.transformer.ZoomPageTransformer
 import com.jakewharton.rxbinding2.support.design.widget.RxTabLayout
 import com.jakewharton.rxbinding2.support.v4.view.RxViewPager
 import com.jakewharton.rxbinding2.view.RxView
@@ -46,6 +47,7 @@ class NewsPagerFragment : BaseFragment<ViewDataBinding>() {
         newsPagerAdapter?.setTitleList(string)
         news_viewpager.adapter = newsPagerAdapter
         TabLayout.setupWithViewPager(news_viewpager)
+        news_viewpager.setPageTransformer(false, ZoomPageTransformer())
         intView()
         initLIstener()
     }
@@ -55,7 +57,7 @@ class NewsPagerFragment : BaseFragment<ViewDataBinding>() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     val intent = Intent(mContext, CatgoryActivity::class.java)
-                    this@NewsPagerFragment. startActivityForResult(intent, 1000,ActivityOptions.makeSceneTransitionAnimation(activity, iv_catgory, "SearchView").toBundle())
+                    this@NewsPagerFragment.startActivityForResult(intent, 1000, ActivityOptions.makeSceneTransitionAnimation(activity, iv_catgory, "SearchView").toBundle())
                 })
     }
 
