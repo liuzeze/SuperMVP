@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
-import android.support.v4.os.BuildCompat;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
-import com.lz.framecase.anotation.ComponentInject;
+import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
@@ -19,17 +18,14 @@ import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
-import hugo.weaving.DebugLog;
-
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-03       创建class
  */
+@ClassRuntime()
 public class MyApplication extends FrameApplication {
 
-    @DebugLog
     @Override
-    @ComponentInject("MyApplication")
     public void onCreate() {
         super.onCreate();
         RxTool.init(this);

@@ -22,6 +22,7 @@ import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.activity.VideoPlayerActivity
+import com.lz.framecase.anotation.MethodDot
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter

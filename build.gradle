@@ -11,7 +11,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath "com.tencent.bugly:tinker-support:1.1.2"
         classpath 'org.aspectj:aspectjtools:1.8.13'
         classpath 'org.aspectj:aspectjweaver:1.8.13'
