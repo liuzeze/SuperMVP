@@ -120,9 +120,9 @@ class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.V
                 iv_image.visibility = View.VISIBLE
             } else {
                 iv_image.visibility = View.GONE
-                val instance = SkinManager.getInstance()
-                app_bar_layout.setBackgroundColor(instance.resourceManager?.getColor("app_them")!!)
             }
+            val instance = SkinManager.getInstance()
+            app_bar_layout.setBackgroundColor(instance.resourceManager?.getColor("app_them")!!)
             Glide.with(mContext).load(img).into(iv_image)
         } catch (e: Exception) {
             e.printStackTrace()

@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
+import android.transition.Explode
 import android.view.View
 import android.widget.LinearLayout.VERTICAL
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -43,6 +44,9 @@ class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract
     var groupId = ""
     var itemId: Long = 0
     override fun getLayout(): Int {
+        window.enterTransition = Explode()
+        window.exitTransition = Explode()
+
         return R.layout.activity_comment_list
     }
 

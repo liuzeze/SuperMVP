@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.TextUtils
+import android.transition.Explode
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -34,6 +35,7 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
     private var mItemTouchHelper: ItemTouchHelper? = null
 
     override fun getLayout(): Int {
+
         return R.layout.activity_catgory
 
     }
