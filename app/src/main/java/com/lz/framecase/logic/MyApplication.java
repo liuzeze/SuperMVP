@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.github.moduth.blockcanary.BlockCanary;
+import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
@@ -41,6 +43,7 @@ public class MyApplication extends FrameApplication {
         Beta.canShowUpgradeActs.add(MainActivity.class);
         Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
 
+        BlockCanary.install(this, new BlockCanaryContext()).start();
     }
 
     @Override

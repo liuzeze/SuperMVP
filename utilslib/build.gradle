@@ -72,6 +72,8 @@ dependencies {
     api 'com.tencent.tinker:tinker-android-lib:1.9.8'
     api 'com.tencent.bugly:nativecrashreport:3.3.1'
 
+     debugApi 'com.github.markzhai:blockcanary-android:1.5.0'
+     releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
 
 
     //自己定义的注解的java lib

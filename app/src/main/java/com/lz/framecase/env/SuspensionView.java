@@ -41,7 +41,7 @@ public class SuspensionView implements View.OnTouchListener {
 
     public void init(Context context) {
         mContext = context;
-       // onRemoveView();
+        // onRemoveView();
         createFloatView(context);
     }
 
@@ -94,8 +94,13 @@ public class SuspensionView implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 NetworkLogListActivity.start(v.getContext());
+              /*  Intent intent = new Intent(context, DisplayActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                view.getContext().startActivity(intent);*/
             }
         });
+
+
     }
 
     private float StartX;
