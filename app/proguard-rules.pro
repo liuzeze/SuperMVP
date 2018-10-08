@@ -329,3 +329,9 @@ public static java.lang.String TABLENAME;
 
 
 
+#Hook类不能混淆
+-keep class com.tencent.wstt.gtr.collector.monitor.yhook.* {*;}
+
+#aidl相关类不混淆
+-keep class com.tencent.wstt.gt.* {*;}
+-keep class com.tencent.wstt.gtr.aidl.** {*;}

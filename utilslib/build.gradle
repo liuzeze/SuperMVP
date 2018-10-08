@@ -78,6 +78,8 @@ dependencies {
     debugApi 'me.ele:uetool:1.0.15'
     releaseApi 'me.ele:uetool-no-op:1.0.15'
 
+    //性能检测工具
+    api 'com.tencent.wstt.gt:gt-sdk:3.1.0'
     //自己定义的注解的java lib
     api 'com.lz:inject_annotations:1.0.6'
 //    api project(':inject_annotation')

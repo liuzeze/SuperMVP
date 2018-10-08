@@ -2,6 +2,7 @@ package com.lz.framecase.logic;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
@@ -18,6 +19,7 @@ import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.tencent.wstt.gt.controller.GTRController;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
@@ -46,9 +48,13 @@ public class MyApplication extends FrameApplication {
         Beta.canShowUpgradeActs.add(MainActivity.class);
         Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
 
-        UETool.showUETMenu();
+        if (BuildConfig.DEBUG) {
+            UETool.showUETMenu();
 
-        BlockCanary.install(this, new BlockCanaryContext()).start();
+            GTRController.init(this);
+
+            BlockCanary.install(this, new BlockCanaryContext()).start();
+        }
     }
 
     @Override
