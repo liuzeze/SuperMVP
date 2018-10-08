@@ -151,7 +151,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         }*/
         SwipeRefreshLayout.setRefreshing(false)
         mNewsBean.addAll(bean)
-        newsListAdapter?.notifyDataSetChanged()
+        newsListAdapter?.setNewData(mNewsBean)
         //成功获取更多数据
         newsListAdapter?.loadMoreComplete();
 

@@ -74,7 +74,9 @@ dependencies {
 
      debugApi 'com.github.markzhai:blockcanary-android:1.5.0'
      releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
-
+    //uetool
+    debugApi 'me.ele:uetool:1.0.15'
+    releaseApi 'me.ele:uetool-no-op:1.0.15'
 
     //自己定义的注解的java lib
     api 'com.lz:inject_annotations:1.0.6'

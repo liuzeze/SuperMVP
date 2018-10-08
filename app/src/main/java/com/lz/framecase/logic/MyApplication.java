@@ -21,6 +21,8 @@ import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
+import me.ele.uetool.UETool;
+
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-03       创建class
@@ -40,9 +42,11 @@ public class MyApplication extends FrameApplication {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         registerActivityCycle();
-        Beta.initDelay=3*1000;
+        Beta.initDelay = 3 * 1000;
         Beta.canShowUpgradeActs.add(MainActivity.class);
         Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
+
+        UETool.showUETMenu();
 
         BlockCanary.install(this, new BlockCanaryContext()).start();
     }
