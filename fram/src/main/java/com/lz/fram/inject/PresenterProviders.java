@@ -22,19 +22,23 @@ public class PresenterProviders {
     private PresenterProviders(Object obj) {
         checkNull(obj);
         for (Field field : obj.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
             //获取字段上的注解
             Annotation[] anns = field.getDeclaredAnnotations();
             if (anns.length < 1) {
                 continue;
             }
-            if (anns[0] instanceof AttachView) {
-                String canonicalName = field.getType().getName();
-                try {
-                    mPresenterStore.put(canonicalName, (BasePresenter) field.get(obj));
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+            for (Annotation ann : anns) {
 
+                if (ann instanceof AttachView) {
+                    String canonicalName = field.getType().getName();
+                    try {
+                        mPresenterStore.put(canonicalName, (BasePresenter) field.get(obj));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
             }
         }
     }

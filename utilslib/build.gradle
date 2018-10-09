@@ -81,12 +81,12 @@ dependencies {
     //性能检测工具
     api 'com.tencent.wstt.gt:gt-sdk:3.1.0'
     //自己定义的注解的java lib
-    api 'com.lz:inject_annotations:1.0.6'
+    api 'com.lz:inject_annotations:1.0.7'
 //    api project(':inject_annotation')
     //换肤框架
     api project(':skinlibs')
 
-    api 'com.lz:fram_lib:1.0.2'
+    api 'com.lz:fram_lib:1.0.3'
 //    api project(':fram')
     //    api project(':loglib')
     debugApi 'com.lz:intercept_debug:1.0.2'

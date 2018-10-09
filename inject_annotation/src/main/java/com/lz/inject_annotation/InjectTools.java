@@ -23,6 +23,7 @@ public class InjectTools {
                 injectMap.put(className, inject);
             }
             Method m1 = inject.getClass().getDeclaredMethod("inject" + object.getClass().getSimpleName(), object.getClass());
+            m1.setAccessible(true);
             m1.invoke(inject, object);
         } catch (Exception e) {
             e.printStackTrace();

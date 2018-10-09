@@ -2,14 +2,12 @@ package com.lz.fram.base;
 
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.view.ViewDebug;
 
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
 
 import java.util.HashMap;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -19,7 +17,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class RxPresenter<T extends BaseView> implements BasePresenter {
-    protected T mView;
+    protected T mBaseView;
     private LifecycleOwner mLifecycleOwner;
 
     private HashMap<Object, Disposable> mapDisposable;
@@ -73,12 +71,12 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     @Override
     public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
         mLifecycleOwner = lifecycleOwner;
-        this.mView = (T) lifecycleOwner;
+        this.mBaseView = (T) lifecycleOwner;
     }
 
     @Override
     public void detachView() {
-        this.mView = null;
+        this.mBaseView = null;
     }
 
 
