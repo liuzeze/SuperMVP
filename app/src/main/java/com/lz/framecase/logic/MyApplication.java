@@ -51,7 +51,7 @@ public class MyApplication extends FrameApplication {
         if (BuildConfig.DEBUG) {
             UETool.showUETMenu();
 
-            GTRController.init(this);
+           // GTRController.init(this);
 
             BlockCanary.install(this, new BlockCanaryContext()).start();
         }

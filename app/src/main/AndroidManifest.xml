@@ -28,6 +28,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!--适配全面屏手机-->
+        <meta-data android:name="android.max_aspect"
+            android:value="2.1"/>
 
         <!-- 网络框架配置 -->
         <meta-data
