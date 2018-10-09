@@ -21,7 +21,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<NewsCommentContr
         val newsComment = mRequestApi.getNewsComment(groupId, itemId)
         newsComment
                 ?.`as`(bindLifecycle<NewsCommentBean>())
-                ?.subscribeWith(object : CommonSubscriber<NewsCommentBean>(mView) {
+                ?.subscribeWith(object : CommonSubscriber<NewsCommentBean>(mBaseView) {
                     override fun onNext(s: NewsCommentBean) {
                         val data = s.data;
                         val arrayList = ArrayList<NewsCommentBean.DataBean>()
@@ -30,7 +30,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<NewsCommentContr
 
                             arrayList.add(newsdata)
                         }
-                        mView.getNewsCommentSuccess(arrayList)
+                        mBaseView.getNewsCommentSuccess(arrayList)
                     }
                 })
 

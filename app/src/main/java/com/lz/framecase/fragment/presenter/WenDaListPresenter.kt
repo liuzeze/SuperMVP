@@ -28,7 +28,7 @@ constructor(var mRequestApi: RequestApi)
      */
     override fun getWenDaList() {
         val gson = Gson()
-        val subscriber = object : CommonSubscriber<WendaArticleBean>(mView) {
+        val subscriber = object : CommonSubscriber<WendaArticleBean>(mBaseView) {
             override fun onNext(bean: WendaArticleBean) {
                 val list = ArrayList<WendaArticleDataBean>()
                 for (i in bean.data!!.indices) {
@@ -70,7 +70,7 @@ constructor(var mRequestApi: RequestApi)
 
                 }
 
-                mView.getWenDaListSuccess(dataList)
+                mBaseView.getWenDaListSuccess(dataList)
             }
         }
         mRequestApi.getWenDaLists(time)?.`as`(bindLifecycle())?.subscribeWith(subscriber)

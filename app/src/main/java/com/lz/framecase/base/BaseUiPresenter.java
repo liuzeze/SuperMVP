@@ -28,7 +28,7 @@ public abstract class BaseUiPresenter<T extends ViewDataBinding> extends RxPrese
 
     public void creatLayout() {
         //初始化convertView
-        Context context = (Context) mView;
+        Context context = (Context) mBaseView;
         try {
             if (getLayout() != -1) {
                 LayoutInflater inflater = LayoutInflater.from(context == null ? MyApplication.mApplication : context);

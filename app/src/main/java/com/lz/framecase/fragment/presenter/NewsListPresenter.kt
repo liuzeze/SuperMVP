@@ -27,7 +27,7 @@ constructor(var mRequestApi: RequestApi)
         val gson = Gson()
         mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
                 .`as`(bindLifecycle())
-                .subscribeWith(object : CommonSubscriber<MultNewsBean>(mView) {
+                .subscribeWith(object : CommonSubscriber<MultNewsBean>(mBaseView) {
                     override fun onNext(bean: MultNewsBean) {
                         val list = ArrayList<NewsDataBean>()
 
@@ -80,7 +80,7 @@ constructor(var mRequestApi: RequestApi)
                             }
 
 
-                            mView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
+                            mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
                         }
                     }
                 })

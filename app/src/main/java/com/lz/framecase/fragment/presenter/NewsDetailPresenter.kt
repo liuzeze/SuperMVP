@@ -41,8 +41,8 @@ constructor(var mRequestApi: RequestApi)
                 .map { o -> getHTML(o) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .`as`(bindLifecycle())
-                .subscribe(Consumer<String?> { r -> mView?.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
-                    mView?.onSetWebView(null, false)
+                .subscribe(Consumer<String?> { r -> mBaseView?.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
+                    mBaseView?.onSetWebView(null, false)
                 })
     }
 
@@ -58,7 +58,7 @@ constructor(var mRequestApi: RequestApi)
         if (!TextUtils.isEmpty(url)) {
             val list = getAllImageUrlFromHtml(html)
             if (list.size > 0) {
-                mView.onJumpPreview(url, list)
+                mBaseView.onJumpPreview(url, list)
             }
         }
     }

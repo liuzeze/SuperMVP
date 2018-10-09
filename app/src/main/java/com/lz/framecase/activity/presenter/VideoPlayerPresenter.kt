@@ -19,9 +19,9 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<VideoPlayerContr
      * 登录
      */
     override fun getVideoUrl(groupId: String) {
-        val subscriber = object : CommonSubscriber<String>(mView) {
+        val subscriber = object : CommonSubscriber<String>(mBaseView) {
             override fun onNext(s: String) {
-                mView.getVideoUrlSuccess(s)
+                mBaseView.getVideoUrlSuccess(s)
             }
         }
         mRequestApi.getVideoUrl(getVideoContentApi(groupId))

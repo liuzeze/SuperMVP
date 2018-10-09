@@ -31,15 +31,15 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.Vie
     override fun auth(context: Context) {
         mRequestApi.token()
                 ?.`as`(bindLifecycle<TokenBean>())
-                ?.subscribeWith(object : CommonSubscriber<TokenBean>(mView) {
+                ?.subscribeWith(object : CommonSubscriber<TokenBean>(mBaseView) {
                     override fun onError(mes: String?) {
                         super.onError(mes)
-                        mView.authFailed()
+                        mBaseView.authFailed()
                     }
 
                     override fun onNext(s: TokenBean) {
                         RxSPTool.putString(context, Constans.FACETOKEN, s.access_token)
-                        mView.authSuccess()
+                        mBaseView.authSuccess()
                     }
                 })
     }
@@ -55,7 +55,7 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.Vie
 
         newPicture
                 ?.`as`(bindLifecycle<FaceResponse>())
-                ?.subscribeWith(object : CommonSubscriber<FaceResponse>(mView) {
+                ?.subscribeWith(object : CommonSubscriber<FaceResponse>(mBaseView) {
                     override fun onError(e: Throwable?) {
                         super.onError(e)
                     }
@@ -74,11 +74,11 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.Vie
     private fun detectResult(photo: Bitmap?, faceppBean: FaceppBean?) {
         val faces = faceppBean?.face_list
         if (faces == null || faces!!.size == 0) {
-            mView.getNewPictureSuccess(null, null)
+            mBaseView.getNewPictureSuccess(null, null)
 
         } else {
             val photoMarkedFaces = markFacesInThePhoto(photo!!, faces!!)
-            mView.getNewPictureSuccess(photoMarkedFaces, faces)
+            mBaseView.getNewPictureSuccess(photoMarkedFaces, faces)
         }
     }
 
