@@ -4,24 +4,22 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.os.HandlerThread
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.SparseArray
 import android.view.Gravity
 import android.view.View
-import android.widget.AbsListView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
-import com.lz.MyInjectUtils
+import com.lz.fram.base.BasePresenter
+import com.lz.fram.inject.PresenterProviders
 import com.lz.fram.scope.AttachView
+import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.activity.VideoPlayerActivity
+import com.lz.framecase.anotation.ClassRuntime
 import com.lz.framecase.anotation.MethodDot
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
@@ -31,9 +29,10 @@ import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.logic.MyApplication
 import com.lz.inject_annotation.InjectFragment
 import com.lz.utilslib.interceptor.utils.ShareAction
-import com.vondear.rxtool.RxAppTool
 import kotlinx.android.synthetic.main.fragment_news_list.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashSet
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -65,6 +64,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
     }
 
     override fun initViewData() {
+        setSwipeBackEnable(false) // 是否允许滑动
         gson = Gson()
         category = arguments?.getString("category")!!
         newsListAdapter = NewsListAdapter(mNewsBean)
@@ -136,7 +136,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         })
     }
 
-
+    @CallBackAnnotion("getNewsListSuccess")
     override fun getNewsListSuccess(bean: java.util.ArrayList<NewsDataBean>, has_more_to_refresh: Boolean) {
         /*if (!has_more_to_refresh) {
             //数据全部加载完毕
@@ -151,12 +151,16 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
         }*/
         SwipeRefreshLayout.setRefreshing(false)
         mNewsBean.addAll(bean)
+        val set = HashSet<NewsDataBean>(mNewsBean)
+        mNewsBean.clear()
+        mNewsBean.addAll(set)
         newsListAdapter?.setNewData(mNewsBean)
         //成功获取更多数据
-        newsListAdapter?.loadMoreComplete();
+        newsListAdapter?.loadMoreComplete()
 
 
     }
+
 
     override fun showErrorMsg(msg: String?) {
         super.showErrorMsg(msg)

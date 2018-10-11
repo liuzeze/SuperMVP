@@ -5,6 +5,7 @@ import android.text.TextUtils
 import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
+import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.NewsDataBean
@@ -25,7 +26,7 @@ constructor(var mRequestApi: RequestApi)
     override fun getNewLists(category: String?) {
 
         val gson = Gson()
-        mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
+        val subscribeWith = mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
                 .`as`(bindLifecycle())
                 .subscribeWith(object : CommonSubscriber<MultNewsBean>(mBaseView) {
                     override fun onNext(bean: MultNewsBean) {
@@ -79,11 +80,12 @@ constructor(var mRequestApi: RequestApi)
                                 e.printStackTrace()
                             }
 
-
-                            mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
+                            callBack("getNewsListSuccess", list, bean.isHas_more_to_refresh)
+                            //  mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
                         }
                     }
                 })
 
     }
+
 }

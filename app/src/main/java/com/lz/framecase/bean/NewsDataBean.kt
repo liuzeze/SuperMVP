@@ -194,4 +194,17 @@ class NewsDataBean : MultiItemEntity, Serializable {
     var video_id: String? = null
 
 
+    override fun hashCode(): Int {
+        return (source+title)?.hashCode()!!
+    }
+
+    override fun equals(other: Any?): Boolean {
+
+        if (other == null || javaClass != other.javaClass) {
+            return false
+        }
+
+        val newsDataBean = other as NewsDataBean
+        return newsDataBean.source.equals(this.source)&&newsDataBean.title.equals(this.title)
+    }
 }

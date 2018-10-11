@@ -2,10 +2,15 @@ package com.lz.fram.base;
 
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.widget.Toast;
 
+import com.lz.fram.app.FrameApplication;
+import com.lz.fram.scope.CallBackAnnotion;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -85,5 +90,27 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
         detachView();
     }
 
+    protected void callBack(String tag, Object... obj) {
+        Method[] declaredMethods = mBaseView.getClass().getDeclaredMethods();
+        for (Method declaredMethod : declaredMethods) {
+            declaredMethod.setAccessible(true);
+            CallBackAnnotion annotation = declaredMethod.getAnnotation(CallBackAnnotion.class);
+            if (annotation != null) {
+                if (annotation.value().equals(tag)) {
+                    try {
+                        declaredMethod.invoke(mBaseView, obj);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        if (mBaseView != null) {
+                            mBaseView.showErrorMsg(e.getMessage());
+                        } else {
+                            Toast.makeText(FrameApplication.mApplication, "mBaseView is null", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    break;
+                }
+            }
 
+        }
+    }
 }

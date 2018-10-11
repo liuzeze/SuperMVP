@@ -94,7 +94,10 @@ class WenDaListFragment : BaseFragment<ViewDataBinding>(), WenDaListContract.Vie
     override fun getWenDaListSuccess(bean: List<WendaArticleDataBean>) {
         SwipeRefreshLayout.setRefreshing(false)
         mNewsBean.addAll(bean)
-        newsListAdapter?.notifyItemRangeChanged(newsListAdapter!!.itemCount, bean.size)
+        val set = HashSet<WendaArticleDataBean>(mNewsBean)
+        mNewsBean.clear()
+        mNewsBean.addAll(set)
+        newsListAdapter?.setNewData(mNewsBean)
 
     }
 }

@@ -47,7 +47,7 @@ class NewsPagerFragment : BaseFragment<ViewDataBinding>() {
         newsPagerAdapter?.setTitleList(string)
         news_viewpager.adapter = newsPagerAdapter
         TabLayout.setupWithViewPager(news_viewpager)
-        news_viewpager.setPageTransformer(false, ZoomPageTransformer())
+      //  news_viewpager.setPageTransformer(false, ZoomPageTransformer())
         intView()
         initLIstener()
     }
