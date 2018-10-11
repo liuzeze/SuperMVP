@@ -1,1 +1,1 @@
-include ':app', ':fram', ':utilslib', ':loglib', ':UeToolnolib', ':inject_compile', ':inject_annotation', ':skinlibs', ':uetool', ':uetool-base'
+include ':app', ':fram', ':utilslib', ':loglib', ':UeToolnolib', ':inject_compile', ':inject_annotation', ':skinlibs', ':uetool', ':uetool-base', ':logreleaselib'

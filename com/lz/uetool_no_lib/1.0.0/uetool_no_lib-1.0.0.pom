@@ -6,4 +6,12 @@
   <artifactId>uetool_no_lib</artifactId>
   <version>1.0.0</version>
   <packaging>aar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.lz</groupId>
+      <artifactId>intercept_release</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 </project>

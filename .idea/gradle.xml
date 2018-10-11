@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/inject_annotation" />
             <option value="$PROJECT_DIR$/inject_compile" />
             <option value="$PROJECT_DIR$/loglib" />
+            <option value="$PROJECT_DIR$/logreleaselib" />
             <option value="$PROJECT_DIR$/skinlibs" />
             <option value="$PROJECT_DIR$/uetool" />
             <option value="$PROJECT_DIR$/uetool-base" />

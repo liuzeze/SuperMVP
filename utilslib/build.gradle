@@ -95,6 +95,6 @@ dependencies {
 //    api project(':fram')
 
 //    api project(':uetool')
-    api 'com.lz:uetools:1.0.0'
-    api 'com.lz:uetool_no_lib:1.0.0'
+    debugApi 'com.lz:uetools:1.0.0'
+    releaseApi 'com.lz:uetool_no_lib:1.0.0'
 }
