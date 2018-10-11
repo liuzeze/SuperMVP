@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+//    api project(':uetool-base')
+    api "me.ele:uetool-base:1.0.15"
+    implementation "com.android.support:recyclerview-v7:27.1.1"
+//    api project(':loglib')
+    api 'com.lz:intercept_debug:1.0.3'
+
+
+}

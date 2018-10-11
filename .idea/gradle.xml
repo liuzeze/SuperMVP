@@ -15,6 +15,8 @@
             <option value="$PROJECT_DIR$/loglib" />
             <option value="$PROJECT_DIR$/logreleaselib" />
             <option value="$PROJECT_DIR$/skinlibs" />
+            <option value="$PROJECT_DIR$/uetool" />
+            <option value="$PROJECT_DIR$/uetool-base" />
             <option value="$PROJECT_DIR$/utilslib" />
           </set>
         </option>

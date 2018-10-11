@@ -2,7 +2,6 @@ package com.lz.framecase.logic;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
@@ -16,14 +15,13 @@ import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
-import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
-import com.tencent.wstt.gt.controller.GTRController;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
 import me.ele.uetool.UETool;
+
 
 /**
  * -----------作者----------日期----------变更内容-----
