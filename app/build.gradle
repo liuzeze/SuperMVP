@@ -37,7 +37,7 @@ android {
         debug {
             versionNameSuffix "-debug"
             debuggable true
-          //  minifyEnabled true
+//            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.production
             buildConfigField("String", "API_URL", rootProject.ext.apiUrl.debugUrl)

@@ -335,3 +335,14 @@ public static java.lang.String TABLENAME;
 #aidl相关类不混淆
 -keep class com.tencent.wstt.gt.* {*;}
 -keep class com.tencent.wstt.gtr.aidl.** {*;}
+
+#手动启用 保持 使用此注解的方法
+-dontskipnonpubliclibraryclassmembers
+-printconfiguration
+-keep,allowobfuscation @interface com.lz.fram.scope.CallBackAnnotion
+-keep @com.lz.fram.scope.CallBackAnnotion class *
+-keepclassmembers class * {
+        @com.lz.fram.scope.CallBackAnnotion *;
+ }
+
+

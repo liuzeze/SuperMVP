@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.os.Bundle
+import android.support.annotation.Keep
 import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.Gravity
@@ -12,15 +13,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
-import com.lz.fram.base.BasePresenter
-import com.lz.fram.inject.PresenterProviders
 import com.lz.fram.scope.AttachView
 import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.activity.VideoPlayerActivity
-import com.lz.framecase.anotation.ClassRuntime
-import com.lz.framecase.anotation.MethodDot
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
