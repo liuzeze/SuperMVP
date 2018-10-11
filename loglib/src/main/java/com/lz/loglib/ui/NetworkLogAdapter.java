@@ -17,10 +17,13 @@ import com.lz.loglib.data.NetworkFeedModel;
 
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by linkaipeng on 2018/5/20.
@@ -32,19 +35,8 @@ public class NetworkLogAdapter extends RecyclerView.Adapter {
     private final Activity mActivity;
     private List<NetworkFeedModel> mNetworkFeedList;
 
-    public NetworkLogAdapter(Activity activity) {
-        mNetworkFeedList = new ArrayList(DataPoolImpl.getInstance().getNetworkFeedMap().values());
-
-        try {
-            Collections.sort(mNetworkFeedList, new Comparator<NetworkFeedModel>() {
-                @Override
-                public int compare(NetworkFeedModel networkFeedModel1, NetworkFeedModel networkFeedModel2) {
-                    return (int) (networkFeedModel2.getCreateTime() - networkFeedModel1.getCreateTime());
-                }
-            });
-        } catch (Exception e) {
-            Log.e(TAG, TAG, e);
-        }
+    public NetworkLogAdapter(Activity activity, ArrayList arrayList) {
+        mNetworkFeedList = arrayList;
         mActivity = activity;
     }
 
@@ -83,14 +75,20 @@ public class NetworkLogAdapter extends RecyclerView.Adapter {
                 mActivity.startActivity(intent);
             }
         });
-
-        itemViewHolder.mMethodTextView.setText(networkFeedModel.getMethod());
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String date = formatDate.format(new Date(networkFeedModel.getCreateTime()));
+        itemViewHolder.mMethodTextView.setText(networkFeedModel.getMethod() +"   (" +date+")");
         itemViewHolder.mContentTypeTextView.setText("ContentType: " + networkFeedModel.getContentType());
     }
 
     @Override
     public int getItemCount() {
         return mNetworkFeedList.size();
+    }
+
+    public void setData(ArrayList arrayList) {
+        mNetworkFeedList = arrayList;
+        notifyDataSetChanged();
     }
 
     private static class ItemViewHolder extends RecyclerView.ViewHolder {

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.lz.framecase.R;
 import com.lz.loglib.ui.NetworkLogListActivity;
+import com.vondear.rxtool.RxTimeTool;
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -99,7 +100,6 @@ public class SuspensionView implements View.OnTouchListener {
                 view.getContext().startActivity(intent);*/
             }
         });
-
 
     }
 
