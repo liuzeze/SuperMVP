@@ -12,7 +12,6 @@ import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.anotation.ClassRuntime;
-import com.lz.framecase.env.SuspensionView;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
 import com.tencent.bugly.Bugly;
@@ -35,7 +34,6 @@ public class MyApplication extends FrameApplication {
         super.onCreate();
         RxTool.init(this);
         SkinManager.getInstance().init(this, new AttrChangeLisnter());
-        SuspensionView.getInstance().init(this);
         if (SettingUtils.Companion.getNightMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {

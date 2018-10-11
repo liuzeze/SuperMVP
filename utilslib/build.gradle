@@ -96,4 +96,5 @@ dependencies {
 
 //    api project(':uetool')
     api 'com.lz:uetools:1.0.0'
+    api 'com.lz:uetool_no_lib:1.0.0'
 }
