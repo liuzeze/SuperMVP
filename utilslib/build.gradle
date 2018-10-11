@@ -96,5 +96,6 @@ dependencies {
 
 //    api project(':uetool')
     debugApi 'com.lz:uetools:1.0.0'
-    releaseApi 'com.lz:uetool_no_lib:1.0.0'
+    releaseApi project(':UeToolnolib')
+//    releaseApi 'com.lz:uetool_no_lib:1.0.0'
 }
