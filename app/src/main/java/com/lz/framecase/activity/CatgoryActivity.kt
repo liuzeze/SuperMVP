@@ -51,7 +51,6 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
         }
         val gridLayoutManager = GridLayoutManager(mActivity, 4)
         recycler_view.layoutManager = gridLayoutManager
-
         getData()
         initAdapter()
         initListener()
@@ -73,7 +72,7 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                 mDragAdapter?.notifyDataSetChanged()
             }
         }
-        mDragAdapter?.setOnItemLongClickListener(BaseQuickAdapter.OnItemLongClickListener { adapter, view, position ->
+        mDragAdapter?.onItemLongClickListener = BaseQuickAdapter.OnItemLongClickListener { adapter, view, position ->
             if (titles.get(position).itemTypes == TitleBean.MYTITLESub) {
                 mDragAdapter?.enableDragItem(mItemTouchHelper!!)
                 for (title in titles) {
@@ -82,14 +81,14 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                 mDragAdapter?.notifyDataSetChanged()
             }
             false
-        })
+        }
         mDragAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             slidView(position, view)
         }
     }
 
     @Synchronized
-    fun slidView(position: Int, view: View)  {
+    fun slidView(position: Int, view: View) {
         try {
             if (titles.get(position).name.equals("推荐") ||
                     titles.get(position).name.equals("视频")) {

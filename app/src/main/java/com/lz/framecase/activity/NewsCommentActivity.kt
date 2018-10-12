@@ -69,7 +69,7 @@ class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract
         /* newsCommentAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
              // mPresenter.getNewCommentLists(groupId, itemId)
          }, comment_list)*/
-        newsCommentAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        newsCommentAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val text = commentList.get(position).comment?.text!!
             LpDialogUtils.alertDialog(mActivity, "提示", "复制", View.OnClickListener {
                 val copy = mActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -80,7 +80,7 @@ class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract
                 ShareAction.send(mActivity, text)
             }, true)
 
-        })
+        }
 
     }
 
