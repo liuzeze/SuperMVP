@@ -71,12 +71,12 @@ class NewsCommentActivity : BaseActivity<ViewDataBinding>(), NewsCommentContract
          }, comment_list)*/
         newsCommentAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val text = commentList.get(position).comment?.text!!
-            LpDialogUtils.alertDialog(mActivity, "内容分享", "复制内容", View.OnClickListener {
+            LpDialogUtils.alertDialog(mActivity, "提示", "复制", View.OnClickListener {
                 val copy = mActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clipData = ClipData.newPlainText("text", text)
                 copy.primaryClip = clipData
                 Snackbar.make(comment_list, "复制成功", Snackbar.LENGTH_SHORT).show()
-            }, "分享内容", View.OnClickListener {
+            }, "分享", View.OnClickListener {
                 ShareAction.send(mActivity, text)
             }, true)
 

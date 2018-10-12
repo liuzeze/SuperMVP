@@ -37,8 +37,8 @@ public class LpAlertDialog {
     private LinearLayout ll_btn_group;
     private TextView txt_title;
     private TextView txt_msg;
-    private Button btn_neg;
-    private Button btn_pos;
+    private TextView btn_neg;
+    private TextView btn_pos;
     private Display display;
     private boolean showTitle = false;
     private boolean showMsg = false;
@@ -87,9 +87,9 @@ public class LpAlertDialog {
         txt_title.setVisibility(View.GONE);
         txt_msg = (TextView) view.findViewById(R.id.txt_msg);
         txt_msg.setVisibility(View.GONE);
-        btn_neg = (Button) view.findViewById(R.id.btn_neg);
+        btn_neg = (TextView) view.findViewById(R.id.btn_neg);
         btn_neg.setVisibility(View.GONE);
-        btn_pos = (Button) view.findViewById(R.id.btn_pos);
+        btn_pos = (TextView) view.findViewById(R.id.btn_pos);
         btn_pos.setVisibility(View.GONE);
         mDialogRoot.setOnClickListener(new OnClickListener() {
             @Override

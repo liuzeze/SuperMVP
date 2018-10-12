@@ -8,11 +8,11 @@
     android:padding="50dp">
 
     <LinearLayout
-       android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/shape_diglog_bg"
+        android:clickable="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -25,7 +25,7 @@
             android:paddingLeft="40dp"
             android:paddingRight="@dimen/dp_40"
             android:textColor="#000000"
-            android:textSize="24dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             tools:text="标题" />
 
@@ -38,7 +38,7 @@
             android:paddingLeft="40dp"
             android:paddingRight="@dimen/dp_40"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             tools:text="内容" />
 
         <FrameLayout
@@ -58,22 +58,26 @@
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingBottom="30dp"
             android:paddingLeft="@dimen/dp_40"
-            android:paddingRight="@dimen/dp_40">
+            android:paddingRight="@dimen/dp_40"
+            android:paddingBottom="30dp">
 
-            <Button
+            <TextView
+                android:padding="10dp"
                 android:id="@+id/btn_neg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/shape_diglog_cancel"
+                android:button="@null"
                 android:gravity="center"
                 android:text="取消"
-                android:textColor="@android:color/white"
-                android:textSize="18dp" />
 
-            <Button
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:padding="10dp"
                 android:id="@+id/btn_pos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +85,7 @@
                 android:gravity="center"
                 android:text="确定"
                 android:textColor="@android:color/white"
-                android:textSize="18dp" />
+                android:textSize="12dp" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
