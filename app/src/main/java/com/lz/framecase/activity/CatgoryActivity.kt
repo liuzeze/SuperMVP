@@ -3,6 +3,7 @@ package com.lz.framecase.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.databinding.ViewDataBinding
+import android.databinding.adapters.ViewGroupBindingAdapter.setListener
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.support.v7.widget.DefaultItemAnimator
@@ -82,58 +83,86 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
             }
             false
         })
-        mDragAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        mDragAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            slidView(position, view)
+        }
+    }
+
+    @Synchronized
+    fun slidView(position: Int, view: View)  {
+        try {
             if (titles.get(position).name.equals("推荐") ||
                     titles.get(position).name.equals("视频")) {
                 SnackbarUtils.show(view, "不可取消")
-                return@OnItemClickListener
+                return
             }
+            val titleBean = titles.get(position)
+            titles.removeAt(position)
             var count2 = 0
-            for (title in titles) {
+            var otherPosition = 0
+            titles.forEachIndexed { index, titleBean ->
 
-                if (title.itemType === TitleBean.MYTITLESub) {
+                if (titleBean.itemType === TitleBean.MYTITLESub) {
                     count2++
+                }
+                if (titleBean.itemType === TitleBean.ORTHERTITLE) {
+                    otherPosition = index
                 }
             }
 
-            val titleBean = titles.get(position)
+
+            var outLocation = IntArray(2)
+            view.getLocationOnScreen(outLocation)
 
 
             var isRun = false
+            //上移
             if (titleBean?.itemTypes === TitleBean.ORTHERTITLESUB) {
                 val imageView = addMirrorView(recycler_view.getParent() as ViewGroup, recycler_view, view)
 
                 titleBean.itemTypes = TitleBean.MYTITLESub
-                titles.removeAt(position)
                 titles.add(count2 + 1, titleBean)
                 mDragAdapter?.notifyItemRangeChanged(count2, titles.size - 1)
 
-                imageView.setTranslationX(view.left.toFloat())
-                imageView.setTranslationY(view.top.toFloat())
-                imageView.animate().translationX((view.measuredWidth * (count2 % 4)).toFloat()).setDuration(500).start()
 
-                imageView.animate().translationY((view.measuredHeight * if (count2 / 4 == 0) count2+1 / 4 else count2 / 4 + 2).toFloat() + 50).setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        super.onAnimationEnd(animation)
-                        (recycler_view.getParent() as ViewGroup).removeView(imageView)
+                imageView.setTranslationX(outLocation[0].toFloat())
+                imageView.setTranslationY(outLocation[1].toFloat())
 
-                    }
-                }).setDuration(500).start()
+                var outLocation2 = IntArray(2)
+                val itemView = recycler_view.findViewHolderForAdapterPosition(otherPosition).itemView
+                itemView.getLocationOnScreen(outLocation2)
+
+                imageView.animate().translationX((view.measuredWidth * (count2 % 4)).toFloat())
+                        .setDuration(500)
+                        .start()
+
+                imageView.animate().translationY(outLocation2[1].toFloat() + if (count2 % 4 == 0) -100 else -200)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                super.onAnimationEnd(animation)
+                                (recycler_view.getParent() as ViewGroup).removeView(imageView)
+
+                            }
+                        }).setDuration(500).start()
                 isRun = true
 
             }
 
             if (mDragAdapter?.isItemDraggable!! && titleBean.itemType === TitleBean.MYTITLESub && !isRun) {
                 val imageView = addMirrorView(recycler_view.getParent() as ViewGroup, recycler_view, view)
+
                 titleBean?.itemTypes = TitleBean.ORTHERTITLESUB
-                titles.removeAt(position)
                 titles.add(count2 + 2, titleBean)
                 mDragAdapter?.notifyItemRangeChanged(position, titles.size - 1)
-                imageView.setTranslationX(view.left.toFloat())
-                imageView.setTranslationY(view.top.toFloat() + 50)
+                imageView.setTranslationX(outLocation[0].toFloat())
+                imageView.setTranslationY(outLocation[1].toFloat())
+
+                var outLocation2 = IntArray(2)
+                val itemView = recycler_view.findViewHolderForAdapterPosition(otherPosition).itemView
+                itemView.getLocationOnScreen(outLocation2)
                 imageView.animate().translationX(0f).setDuration(500).start()
                 val i = (count2 - 1) / 4
-                imageView.animate().translationY((view.measuredHeight * (if (i == 0) i + 2 else i + 3)).toFloat() + 50)
+                imageView.animate().translationY((outLocation2[1].toFloat() + if (count2 % 4 == 0) 0 else view.measuredHeight) + 50)
                         .setListener(object : AnimatorListenerAdapter() {
                             override fun onAnimationEnd(animation: Animator) {
                                 super.onAnimationEnd(animation)
@@ -155,8 +184,9 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                 }
             }
             RxSPTool.putString(mActivity, NEWSCATGORY, catgorys)
-
-        })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     /**

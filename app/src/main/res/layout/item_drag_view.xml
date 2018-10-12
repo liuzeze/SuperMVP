@@ -14,6 +14,7 @@
         android:background="@color/common_app_white_ffffff"
         android:gravity="center"
         android:padding="@dimen/dp_10"
+        android:lines="1"
         android:textColor="@color/common_app_gray_666666"
         tools:text="类型" />
 
