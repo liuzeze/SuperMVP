@@ -78,7 +78,9 @@ dependencies {
     api 'com.lz:inject_annotations:1.0.7'
     //    api project(':inject_annotation')
     //换肤框架
-    api project(':skinlibs')
+//    api project(':skinlibs')
+    api 'com.lz:skinlib:1.0.0'
+
     api 'com.lz:fram_lib:1.0.4'
     //    api project(':fram')
     //    api project(':uetool')
