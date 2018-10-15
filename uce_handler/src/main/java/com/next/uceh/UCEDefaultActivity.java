@@ -18,6 +18,8 @@
 package com.next.uceh;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -94,6 +96,19 @@ public final class UCEDefaultActivity extends AppCompatActivity {
                 });
             }
         }
+        Button reboot = findViewById(R.id.bt_reboot);
+        reboot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = UCEDefaultActivity.this.getPackageManager()
+                        .getLaunchIntentForPackage(UCEDefaultActivity.this.getApplication().getPackageName());
+                startActivity(intent);
+
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(10);
+            }
+        });
     }
 
     private void sendServiceLog(final String errorInfo, final String info) {

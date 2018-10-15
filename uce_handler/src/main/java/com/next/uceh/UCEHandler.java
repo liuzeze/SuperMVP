@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
@@ -43,21 +44,16 @@ public final class UCEHandler {
     private static final String SHARED_PREFERENCES_FILE = "uceh_preferences";
     private static final String SHARED_PREFERENCES_FIELD_TIMESTAMP = "last_crash_timestamp";
     private static final int MAX_ACTIVITIES_IN_LOG = 50;
-    private static final Deque<String> activityLog = new ArrayDeque<>(MAX_ACTIVITIES_IN_LOG);
     private Application application;
-    private boolean isInBackground = true;
     private boolean isBackgroundMode;
     private boolean isUCEHEnabled;
-    static boolean isTrackActivitiesEnabled;
     private UCECallback mUCECallback = null;
-    private static WeakReference<Activity> lastActivityCreated = new WeakReference<>(null);
 
     private UCEHandler(Builder builder) {
         mUCECallback = builder.mUCECallback;
         isUCEHEnabled = builder.isUCEHEnabled;
-        isTrackActivitiesEnabled = builder.isTrackActivitiesEnabled;
         isBackgroundMode = builder.isBackgroundModeEnabled;
-        UCEHandlerHelper.setServiceUrl(builder.url,builder.isAutoSend);
+        UCEHandlerHelper.setServiceUrl(builder.url, builder.isAutoSend);
         setUCEHandler(builder.context);
     }
 
@@ -74,7 +70,6 @@ public final class UCEHandler {
                     application = (Application) context.getApplicationContext();
                     //Setup UCE Handler.
                     setDefaultUncaughtExceptionHandler(oldHandler);
-                    registerLifecycleCallback();
                 }
                 Log.i(TAG, "UCEHandler has been installed.");
             } else {
@@ -99,8 +94,8 @@ public final class UCEHandler {
                         }
                     } else {
                         setLastCrashTimestamp(application, new Date().getTime());
-                        if (!isInBackground || isBackgroundMode) {
-                            ExceptionInfoBean exceptionInfoBean = UCEHandlerHelper.getExceptionInfoBean(throwable, activityLog);
+                        if (isBackgroundMode) {
+                            ExceptionInfoBean exceptionInfoBean = UCEHandlerHelper.getExceptionInfoBean(throwable);
                             if (mUCECallback != null) {
                                 mUCECallback.exceptionInfo(exceptionInfoBean);
                                 mUCECallback.throwable(throwable);
@@ -118,22 +113,7 @@ public final class UCEHandler {
                             //If it is null (should not be), we let it continue and kill the process or it will be stuck
                         }
                     }
-                    final Activity lastActivity = lastActivityCreated.get();
-                    if (lastActivity != null) {
-                        lastActivity.finish();
-                        lastActivityCreated.clear();
-                    }
 
-                    Intent intent = application.getPackageManager().getLaunchIntentForPackage(application.getPackageName());
-                    @SuppressLint("WrongConstant")
-                    PendingIntent restartIntent = PendingIntent.getActivity(application.getApplicationContext(), 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
-                    // 退出程序
-                    AlarmManager mgr = (AlarmManager) application.getSystemService(Context.ALARM_SERVICE);
-                    if (mgr != null) {
-                        // 1秒钟后重启应用
-                        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, restartIntent);
-                    }
-                    android.os.Process.killProcess(android.os.Process.myPid());
                     killCurrentProcess();
 
                 } else if (oldHandler != null) {
@@ -144,59 +124,6 @@ public final class UCEHandler {
         });
     }
 
-    private void registerLifecycleCallback() {
-        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-            final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            int currentlyStartedActivities = 0;
-
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                if (activity.getClass() != UCEDefaultActivity.class) {
-                    lastActivityCreated = new WeakReference<>(activity);
-                }
-                if (isTrackActivitiesEnabled) {
-                    activityLog.add(dateFormat.format(new Date()) + ": " + activity.getClass().getSimpleName() + " created\n");
-                }
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                currentlyStartedActivities++;
-                isInBackground = (currentlyStartedActivities == 0);
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                if (isTrackActivitiesEnabled) {
-                    activityLog.add(dateFormat.format(new Date()) + ": " + activity.getClass().getSimpleName() + " resumed\n");
-                }
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                if (isTrackActivitiesEnabled) {
-                    activityLog.add(dateFormat.format(new Date()) + ": " + activity.getClass().getSimpleName() + " paused\n");
-                }
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                currentlyStartedActivities--;
-                isInBackground = (currentlyStartedActivities == 0);
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                if (isTrackActivitiesEnabled) {
-                    activityLog.add(dateFormat.format(new Date()) + ": " + activity.getClass().getSimpleName() + " destroyed\n");
-                }
-            }
-        });
-    }
 
     /**
      * INTERNAL method that tells if the app has crashed in the last seconds.
@@ -232,7 +159,6 @@ public final class UCEHandler {
     public static class Builder {
         private Context context;
         private boolean isUCEHEnabled = true;
-        private boolean isTrackActivitiesEnabled = false;
         private boolean isBackgroundModeEnabled = true;
         private String url = "";
         private boolean isAutoSend = false;
@@ -249,11 +175,6 @@ public final class UCEHandler {
 
         public Builder setUCEHEnabled(boolean isUCEHEnabled) {
             this.isUCEHEnabled = isUCEHEnabled;
-            return this;
-        }
-
-        public Builder setTrackActivitiesEnabled(boolean isTrackActivitiesEnabled) {
-            this.isTrackActivitiesEnabled = isTrackActivitiesEnabled;
             return this;
         }
 

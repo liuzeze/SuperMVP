@@ -18,10 +18,6 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) : Coordina
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout?, child: View?, dependency: View?): Boolean {
-        return super.onDependentViewChanged(parent, child, dependency)
-    }
-
     override fun onNestedScroll(coordinatorLayout: CoordinatorLayout, child: View, target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int, type: Int) {
         println("dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed)
 

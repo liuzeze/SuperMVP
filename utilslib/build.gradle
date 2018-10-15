@@ -70,7 +70,11 @@ dependencies {
     releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
     //性能检测工具
     api 'com.tencent.wstt.gt:gt-sdk:3.1.0'
-    //自己定义的注解的java lib
+
+
+
+    /*=================================  自己定义类库引用  ==============================================*/
+
     api 'com.lz:inject_annotations:1.0.7'
     //    api project(':inject_annotation')
     //换肤框架
@@ -84,6 +88,6 @@ dependencies {
     // 异常捕获
 //    api project(':uce_handler')
 //    api project(':uce_handler_no_op')
-    debugApi 'com.lz:catch_handler:1.0.0'
+    debugApi 'com.lz:catch_handler:1.0.1'
     releaseApi 'com.lz:catch_handler_no_op:1.0.0'
 }

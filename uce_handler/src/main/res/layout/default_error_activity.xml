@@ -29,7 +29,17 @@
             android:orientation="vertical">
 
             <Button
-                android:visibility="gone"
+                android:id="@+id/bt_reboot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@color/leak_canary_leak"
+                android:text="重启"
+                android:textColor="@color/textColor_sub"
+                android:textSize="16sp"
+                android:typeface="serif" />
+
+            <Button
                 android:id="@+id/bt_sendservice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +48,9 @@
                 android:text="Send Service"
                 android:textColor="@color/textColor_sub"
                 android:textSize="16sp"
-                android:typeface="serif" />
+                android:typeface="serif"
+                android:visibility="gone" />
+
 
             <View
                 android:layout_width="match_parent"

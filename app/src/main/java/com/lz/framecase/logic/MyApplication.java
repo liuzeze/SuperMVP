@@ -1,12 +1,16 @@
 package com.lz.framecase.logic;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.View;
 
 import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
@@ -16,13 +20,19 @@ import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
+import com.lz.utilslib.interceptor.app.ScreenAdaptation;
+import com.lz.utilslib.interceptor.utils.LzAppUtils;
 import com.next.uceh.ExceptionInfoBean;
 import com.next.uceh.UCECallback;
+import com.next.uceh.UCEDefaultActivity;
 import com.next.uceh.UCEHandler;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;
+import com.vondear.rxtool.RxAppTool;
 import com.vondear.rxtool.RxTool;
+
+import java.util.List;
 
 import me.ele.uetool.UETool;
 
@@ -50,14 +60,13 @@ public class MyApplication extends FrameApplication {
         Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
 
         if (BuildConfig.DEBUG) {
-            UETool.showUETMenu();
             new UCEHandler.Builder(getApplicationContext())
-                    .setTrackActivitiesEnabled(true)
                     .setServiceUrl("https://oapi.dingtalk.com/robot/send?access_token=751492721368e26c2ffb52b6ce43481eca37b7a71eef2c3a09e47eda32000aae")
                     .build();
-
+            if (LzAppUtils.isCurrentProcess()) {
+                UETool.showUETMenu();
+            }
             // GTRController.init(this);
-
             BlockCanary.install(this, new BlockCanaryContext()).start();
         }
     }
@@ -71,6 +80,7 @@ public class MyApplication extends FrameApplication {
         Beta.installTinker();
     }
 
+
     /**
      * activity周期管理
      */
@@ -80,6 +90,7 @@ public class MyApplication extends FrameApplication {
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 //栈管理
                 RxActivityTool.addActivity(activity);
+                //  new ScreenAdaptation(activity,720).register();
             }
 
             @Override

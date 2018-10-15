@@ -30,10 +30,6 @@ public class UCEHandlerHelper {
     private static boolean sIsAutoSend;
 
     public static ExceptionInfoBean getExceptionInfoBean(Throwable throwable) {
-        return getExceptionInfoBean(throwable, null);
-    }
-
-    public static ExceptionInfoBean getExceptionInfoBean(Throwable throwable, Deque<String> activityLog) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         throwable.printStackTrace(pw);
@@ -73,11 +69,6 @@ public class UCEHandlerHelper {
         }
 
         StringBuilder activityLogStringBuilder = new StringBuilder();
-        if (UCEHandler.isTrackActivitiesEnabled) {
-            while (!activityLog.isEmpty()) {
-                activityLogStringBuilder.append(activityLog.poll());
-            }
-        }
 
         return ExceptionInfoBean.newInstance()
                 .setUrl(sUrl)
@@ -113,8 +104,6 @@ public class UCEHandlerHelper {
         }
         errorReport.append(LINE_SEPARATOR);
         if (exceptionInfoBean != null) {
-            errorReport.append("\n------------ USER ACTIVITIES ------------\n");
-            errorReport.append(LINE_SEPARATOR);
             errorReport.append(exceptionInfoBean.getActivityLogString());
             errorReport.append(LINE_SEPARATOR);
         }

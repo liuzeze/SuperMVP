@@ -54,6 +54,7 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
         getData()
         initAdapter()
         initListener()
+        throw NullPointerException()
     }
 
     private fun CatgoryActivity.initListener() {

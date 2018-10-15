@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.jakewharton.hugo'
 // 依赖插件脚本
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -25,12 +24,15 @@ android {
         enabled = true
     }
     signingConfigs {
+
         //开发者签名
         production {
             storeFile file("./jks/newskey.jks")
             storePassword "123456"
             keyAlias "news"
             keyPassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
     buildTypes {
