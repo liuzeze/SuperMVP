@@ -8,18 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/UeToolnolib" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/fram" />
-            <option value="$PROJECT_DIR$/inject_annotation" />
-            <option value="$PROJECT_DIR$/inject_compile" />
-            <option value="$PROJECT_DIR$/loglib" />
-            <option value="$PROJECT_DIR$/logreleaselib" />
-            <option value="$PROJECT_DIR$/skinlibs" />
-            <option value="$PROJECT_DIR$/uce_handler" />
-            <option value="$PROJECT_DIR$/uce_handler_no_op" />
-            <option value="$PROJECT_DIR$/uetool" />
-            <option value="$PROJECT_DIR$/uetool-base" />
             <option value="$PROJECT_DIR$/utilslib" />
           </set>
         </option>

@@ -31,8 +31,6 @@ android {
             storePassword "123456"
             keyAlias "news"
             keyPassword "123456"
-            v1SigningEnabled true
-            v2SigningEnabled true
         }
     }
     buildTypes {
@@ -96,7 +94,7 @@ dependencies {
     implementation project(':utilslib')
 
     //AOP面向切面编程，加入这行就不用在libs下引入jar包了，不然要写成compile file(libs/aspectjrt.jar)
-    compile 'org.aspectj:aspectjrt:1.8.13'
+    api 'org.aspectj:aspectjrt:1.8.13'
 
 }
 
