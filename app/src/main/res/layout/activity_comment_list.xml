@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -9,10 +10,10 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/comment_toobar"
         android:layout_width="match_parent"
-        android:transitionName="SearchView"
         android:layout_height="50dp"
         android:background="@color/app_them_blue"
-        android:tag="skin:app_them:background"></android.support.v7.widget.Toolbar>
+        android:tag="skin:app_them:background"
+        android:transitionName="SearchView"></android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"
@@ -22,9 +23,11 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/comment_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_comment">
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>

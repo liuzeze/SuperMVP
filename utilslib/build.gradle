@@ -79,7 +79,7 @@ dependencies {
     api 'com.lz:fram_lib:1.0.4'
     //    api project(':fram')
     //    api project(':uetool')
-    debugApi 'com.lz:uetools:1.0.0'
+    debugApi 'com.lz:uetools:1.0.1'
     //    releaseApi project(':UeToolnolib')
     releaseApi 'com.lz:uetools_release:1.0.0'
     // 异常捕获

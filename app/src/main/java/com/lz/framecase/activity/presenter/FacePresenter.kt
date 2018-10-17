@@ -1,6 +1,7 @@
 package com.lz.framecase.activity.presenter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -19,13 +20,20 @@ import com.lz.framecase.logic.Constans
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxSPTool
 import com.vondear.rxtool.RxTool
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.io
 import java.io.ByteArrayOutputStream
+import java.io.ObjectInput
 import javax.inject.Inject
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
+@SuppressLint("CheckResult")
 class FacePresenter @Inject
 constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.View>(), FaceContract.Presenter {
     override fun auth(context: Context) {
@@ -50,6 +58,32 @@ constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.Vie
         val bytes = baos.toByteArray()
         val s = Base64.encodeToString(bytes, Base64.DEFAULT)
         val string = RxSPTool.getString(RxTool.getContext(), Constans.FACETOKEN)
+
+
+      /*  mRequestApi.token()
+                ?.observeOn(Schedulers.io())
+                ?.flatMap {
+                    mRequestApi.getNewPicture(s,
+                            it.access_token, "age,beauty,expression,faceshape,gender,glasses,landmark,race,qualities")
+                }
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.`as`(bindLifecycle<FaceResponse>())
+                ?.subscribeWith(object : CommonSubscriber<FaceResponse>(mBaseView){
+                    override fun onError(e: Throwable?) {
+                        super.onError(e)
+                    }
+
+                    override fun onNext(s: FaceResponse) {
+                        if (s.error_msg.equals("SUCCESS")) {
+                            detectResult(bitmap, s.result)
+                        } else {
+                            ToastUtils.error(s.error_msg)
+                        }
+                    }
+
+                })
+*/
+
         val newPicture = mRequestApi.getNewPicture(s,
                 string, "age,beauty,expression,faceshape,gender,glasses,landmark,race,qualities")
 

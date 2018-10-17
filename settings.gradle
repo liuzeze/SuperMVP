@@ -1,12 +1,11 @@
-include ':app', ':utilslib'
-
+include ':app', ':utilslib' ,':uetool'
 //, ':fram'
 // ,':loglib'
 // , ':UeToolnolib'
 // , ':inject_compile'
 // , ':inject_annotation'
 // , ':skinlibs'
-// , ':uetool'
+
 // , ':uetool-base'
 // , ':logreleaselib'
 // , ':uce_handler'
