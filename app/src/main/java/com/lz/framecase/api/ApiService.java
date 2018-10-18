@@ -69,7 +69,7 @@ public interface ApiService {
      * @return
      */
 //    @Headers("Content-Type : application/json")
-    @POST("https://aip.baidubce.com/rest/2.0/face/v3/detect?access_token=24.92daa52691d8390d47f94ced2251b527.2592000.1540451248.282335-14279355")
+    @POST("https://aip.baidubce.com/rest/2.0/face/v3/detect")
     @FormUrlEncoded
     Flowable<FaceResponse> getFaceInfo(
             @Field("image") String imageBase64,

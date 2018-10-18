@@ -3,9 +3,11 @@ package com.lz.framecase.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.media.FaceDetector
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,29 +18,41 @@ import android.support.v4.content.FileProvider
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.lz.fram.base.LpLoadDialog
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
+import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.adapter.FaceAdapter
 import com.lz.framecase.activity.presenter.FaceContract
 import com.lz.framecase.activity.presenter.FacePresenter
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.FaceListEntity
+import com.lz.framecase.bean.FaceResponse
 import com.lz.inject_annotation.InjectActivity
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tencent.bugly.proguard.s
+import com.tencent.bugly.proguard.t
 import com.vondear.rxtool.RxImageTool
+import com.vondear.rxtool.RxTool
+import com.vondear.rxtool.view.RxToast
 import io.reactivex.Flowable
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subscribers.ResourceSubscriber
 import kotlinx.android.synthetic.main.activity_face.*
+import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 /**
@@ -114,8 +128,8 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
             val rxPermissions = RxPermissions(this)
             rxPermissions.request(Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(Consumer {
-                if (it) {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(fun(it: Boolean?) {
+                if (it!!) {
                     if (Build.VERSION.SDK_INT >= 24) {
 
 

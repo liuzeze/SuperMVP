@@ -29,8 +29,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <!--适配全面屏手机-->
-        <meta-data android:name="android.max_aspect"
-            android:value="2.1"/>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
         <!-- 网络框架配置 -->
         <meta-data
@@ -58,7 +59,9 @@
         <activity android:name=".activity.VideoPlayerActivity" />
         <activity android:name=".activity.CatgoryActivity" />
         <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.FaceActivity" />
+        <activity
+            android:name=".activity.FaceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".activity.FaceDetailActivity" />
     </application>
 
