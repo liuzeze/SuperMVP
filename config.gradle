@@ -16,7 +16,7 @@ ext {
     android = [
             applicationId    : "com.lz.framecase",
             compileSdkVersion: 28,
-            minSdkVersion    : 15,
+            minSdkVersion    : 16,
             targetSdkVersion : 22,
 
 
