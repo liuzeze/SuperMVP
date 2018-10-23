@@ -74,8 +74,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
     override fun initLisenter() {
         super.initLisenter()
         SwipeRefreshLayout.setOnRefreshListener {
-            mNewsBean.clear()
-            mPresenter?.dataList?.clear()
+
             mPresenter?.getNewLists(category)
         }
 
@@ -98,11 +97,11 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
                 }
             }
         }
-        newsListAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
+        newsListAdapter?.setOnLoadMoreListener({
             mPresenter?.getNewLists(category)
         }, recyclerView)
 
-        newsListAdapter?.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+        newsListAdapter?.setOnItemClickListener { adapter, view, position ->
 
             val item = mNewsBean.get(position)
             // view.transitionName = "SearchView"
@@ -130,7 +129,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
             }
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, "SearchView").toBundle())
 
-        })
+        }
     }
 
     @CallBackAnnotion("getNewsListSuccess")

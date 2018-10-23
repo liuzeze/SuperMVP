@@ -29,7 +29,7 @@ public class FixLinearLayoutManager extends LinearLayoutManager {
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         try {
             super.onLayoutChildren(recycler, state);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

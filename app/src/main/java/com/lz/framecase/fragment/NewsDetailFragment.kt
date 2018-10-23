@@ -6,6 +6,7 @@ import android.content.Intent
 import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
@@ -23,9 +24,11 @@ import com.lz.framecase.fragment.presenter.NewsDetailContract
 import com.lz.framecase.fragment.presenter.NewsDetailPresenter
 import kotlinx.android.synthetic.main.fragment_news_detail.*
 import android.provider.Telephony.MmsSms.PendingMessages.ERROR_TYPE
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.webkit.ValueCallback
 import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.widget.RxToolbar
 import com.lz.framecase.R.id.*
@@ -40,6 +43,7 @@ import java.util.ArrayList
 import com.lz.inject_annotation.InjectFragment
 import javax.inject.Inject
 import com.lz.fram.scope.AttachView
+import com.lz.utilslib.interceptor.utils.ToastUtils
 
 
 /**
@@ -133,7 +137,7 @@ class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.V
     @SuppressLint("JavascriptInterface")
     private fun initLIstener() {
         // 不调用第三方浏览器即可进行页面反应
-        webview.setWebViewClient(object : WebViewClient() {
+        webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 if (!TextUtils.isEmpty(url)) {
                     view.loadUrl(url)
@@ -141,31 +145,32 @@ class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.V
                 return true
             }
 
+            @RequiresApi(Build.VERSION_CODES.KITKAT)
             override fun onPageFinished(view: WebView, url: String) {
                 refresh_layout?.setRefreshing(false)
 
-                // 注入 js 函数监听
-                view.loadUrl(JS_INJECT_IMG)
-                view.loadUrl("javascript:next()");
+//                view.loadUrl("javascript:next()");
                 super.onPageFinished(view, url)
             }
-        })
+        }
 
-        webview.setOnKeyListener({ view, i, keyEvent ->
+        webview.setOnKeyListener { view, i, keyEvent ->
             if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK && webview.canGoBack()) {
                 webview.goBack()
                 true
             }
             false
-        })
+        }
 
-        webview.setWebChromeClient(object : WebChromeClient() {
+        webview.webChromeClient = object : WebChromeClient() {
+            @RequiresApi(Build.VERSION_CODES.KITKAT)
             override fun onProgressChanged(view: WebView, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
                 try {
                     if (newProgress >= 90) {
                         refresh_layout.setRefreshing(false)
-
+                        // 注入 js 函数监听
+                        view.evaluateJavascript(JS_INJECT_IMG, null)
                     } else {
                         refresh_layout.setRefreshing(true)
 
@@ -173,7 +178,7 @@ class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.V
                 } catch (e: Exception) {
                 }
             }
-        })
+        }
         webview.addJavascriptInterface(mPresenter, "imageListener")
         refresh_layout.setOnRefreshListener {
             mPresenter.loadUrl(newsDataBean!!)
