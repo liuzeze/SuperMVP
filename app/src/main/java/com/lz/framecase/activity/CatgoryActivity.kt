@@ -97,6 +97,10 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                 return
             }
             val titleBean = titles.get(position)
+            if (titleBean?.itemTypes == TitleBean.ORTHERTITLE ||
+                    titleBean?.itemTypes == TitleBean.MYTITLE) {
+                return
+            }
             titles.removeAt(position)
             var count2 = 0
             var otherPosition = 0
