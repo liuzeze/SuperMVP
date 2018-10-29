@@ -101,6 +101,10 @@ class CatgoryActivity : BaseActivity<ViewDataBinding>() {
                     titleBean?.itemTypes == TitleBean.MYTITLE) {
                 return
             }
+            if (!titles.get(position).isEditer
+                    && titleBean?.itemTypes == TitleBean.MYTITLESub) {
+                return
+            }
             titles.removeAt(position)
             var count2 = 0
             var otherPosition = 0
