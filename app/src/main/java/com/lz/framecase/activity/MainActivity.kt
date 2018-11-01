@@ -24,6 +24,7 @@ import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
+import com.lz.utilslib.interceptor.utils.ToastUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -43,6 +44,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
     override fun initViewData() {
         initFragment()
         initlIstener()
+        ToastUtils.info("测试")
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

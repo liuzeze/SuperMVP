@@ -66,6 +66,7 @@
             android:name=".activity.FaceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".activity.FaceDetailActivity" />
+        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>

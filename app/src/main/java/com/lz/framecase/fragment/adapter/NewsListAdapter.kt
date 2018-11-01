@@ -1,23 +1,14 @@
 package com.lz.framecase.fragment.adapter
 
-import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.lz.framecase.R
-import com.lz.framecase.R.id.glide_custom_view_target_tag
-import com.lz.framecase.R.id.iv_media
-import com.lz.framecase.bean.DataEntity
-import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.utilslib.interceptor.utils.TimeUtil
-import com.vondear.rxtool.RxTimeTool
-import java.util.concurrent.TimeUnit
 
 /**
  *-----------作者----------日期----------变更内容-----

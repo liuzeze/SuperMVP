@@ -30,13 +30,13 @@ import retrofit2.Retrofit;
  * 网络请求
  */
 public class RequestApi {
+    @Inject
     Retrofit mRetrofit;
     @Inject
     LpLoadDialog mLpLoadDialog;
 
     @Inject
-    public RequestApi(Retrofit retrofit) {
-        mRetrofit = retrofit;
+    public RequestApi() {
     }
 
 

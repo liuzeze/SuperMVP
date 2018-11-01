@@ -31,6 +31,7 @@ constructor(var mRequestApi: RequestApi)
                 .subscribeWith(object : CommonSubscriber<MultNewsBean>(mBaseView) {
                     override fun onNext(bean: MultNewsBean) {
                         val list = ArrayList<NewsDataBean>()
+                        com.orhanobut.logger.Logger.e("呵呵大小"+list.size)
 
                         val data = bean.data!!
                         for (datum in data) {

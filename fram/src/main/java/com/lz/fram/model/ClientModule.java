@@ -4,6 +4,7 @@ package com.lz.fram.model;
 
 
 import com.lz.fram.convert.FastJsonConverterFactory;
+import com.lz.fram.gson.GsonAdapter;
 import com.lz.fram.scope.InterceptorsScope;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public abstract class ClientModule {
 
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                    .addConverterFactory(ScalarsConverterFactory.create())
-                 .addConverterFactory(GsonConverterFactory.create())
+                 .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()))
                 .baseUrl(url)
                 .client(client);
         if (configuration != null) {
