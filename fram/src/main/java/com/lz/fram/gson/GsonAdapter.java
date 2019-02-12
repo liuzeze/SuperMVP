@@ -20,6 +20,7 @@ public class GsonAdapter {
                 .registerTypeAdapter(double.class, new DoubleDefault0Adapter())
                 .registerTypeAdapter(Long.class, new LongDefault0Adapter())
                 .registerTypeAdapter(long.class, new LongDefault0Adapter())
+                .registerTypeAdapter(String.class, new StringDefault0Adapter())
                 .create();
 
         return gson;

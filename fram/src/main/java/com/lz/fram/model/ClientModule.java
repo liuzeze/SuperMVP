@@ -2,7 +2,6 @@
 package com.lz.fram.model;
 
 
-
 import com.lz.fram.convert.FastJsonConverterFactory;
 import com.lz.fram.gson.GsonAdapter;
 import com.lz.fram.scope.InterceptorsScope;
@@ -26,7 +25,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  * 2017/12/26	9:24	     刘泽			   网络相关对象获取  提供okhttp  和 retrofit相关实例
- *
  */
 @Module
 public abstract class ClientModule {
@@ -49,8 +47,8 @@ public abstract class ClientModule {
     static Retrofit provideRetrofit(Retrofit.Builder builder, @Nullable RetrofitConfiguration configuration, OkHttpClient client, HttpUrl url) {
 
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                   .addConverterFactory(ScalarsConverterFactory.create())
-                 .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()))
                 .baseUrl(url)
                 .client(client);
         if (configuration != null) {

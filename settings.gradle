@@ -1,4 +1,4 @@
-include ':app', ':utilslib' //,':uetool'
+include ':app', ':utilslib'//, ':fram' //,':uetool'
 //, ':fram'
 // ,':loglib'
 // , ':UeToolnolib'
