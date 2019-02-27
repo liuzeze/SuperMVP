@@ -1,3 +1,5 @@
+#   掘金专栏  https://juejin.im/post/5bab32c35188255c8d0fd0a8
+
 # 项目使用kotlin 和java 混合开发,业务部分是kotlin开发,框架基类部分是java开发
 
 # 技术热点
