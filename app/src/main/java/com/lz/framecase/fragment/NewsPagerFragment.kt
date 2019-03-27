@@ -3,11 +3,13 @@ package com.lz.framecase.fragment
 import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.Fragment
+import android.text.TextUtils
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
 import com.lz.framecase.activity.CatgoryActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.fragment.adapter.NewsPagerAdapter
+import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_news_pager.*
@@ -63,21 +65,32 @@ class NewsPagerFragment : BaseFragment() {
         arrayList.clear()
 
 
+        val category = RxSPTool.getContent(mContext, CatgoryActivity.NEWSCATGORY)
+
+        if (!TextUtils.isEmpty(category)) {
+
+            val nameId = category.split("&")
+            for (s in nameId) {
+                val split = s.split("|")
+                val s1 = split[0]
+                val s2 = split[1]
+                string.add(s1)
+                stringId.add(s2)
+            }
+        } else {
             for (s in resources.getStringArray(R.array.mobile_news_name)) {
                 string.add(s)
                 if (string.size == 6) {
                     break
                 }
-
             }
             for (s in resources.getStringArray(R.array.mobile_news_id)) {
                 stringId.add(s)
                 if (stringId.size == 6) {
                     break
                 }
-
             }
-
+        }
 
         for (s in stringId.indices) {
 

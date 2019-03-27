@@ -17,6 +17,7 @@ import com.lz.utilslib.interceptor.utils.LzAppUtils;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
+import lz.com.acatch.CatchHandler;
 import me.ele.uetool.UETool;
 
 
@@ -40,6 +41,9 @@ public class MyApplication extends FrameApplication {
         registerActivityCycle();
 
         if (BuildConfig.DEBUG) {
+            new CatchHandler.Builder(getApplicationContext())
+                    .setUrl("钉钉机器人网址")
+                    .build();
             if (LzAppUtils.isCurrentProcess()) {
                 UETool.showUETMenu();
             }
