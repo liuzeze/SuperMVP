@@ -1,4 +1,4 @@
-package com.lz.fram.download;
+package com.lz.fram.net.http;
 
 
 /**

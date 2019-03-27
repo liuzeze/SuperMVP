@@ -9,7 +9,6 @@ import com.lz.fram.scope.CallBackAnnotion;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 

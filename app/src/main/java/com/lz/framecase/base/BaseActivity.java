@@ -2,14 +2,11 @@ package com.lz.framecase.base;
 
 
 import android.app.Activity;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.lz.MyInjectUtils;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
@@ -22,9 +19,6 @@ import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 import com.uber.autodispose.AutoDisposeConverter;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
@@ -33,16 +27,15 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseActivity<T extends ViewDataBinding> extends SwipeBackActivity implements BaseView {
+public abstract class BaseActivity extends SwipeBackActivity implements BaseView {
 
     protected Activity mActivity;
     private ImmersionBar mImmersionBar;
-    protected T mBind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBind = DataBindingUtil.setContentView(this, getLayout());
+        setContentView( getLayout());
         initConfig();
         onViewCreated();
         initViewData();

@@ -31,12 +31,24 @@ public class PresenterProviders {
             for (Annotation ann : anns) {
 
                 if (ann instanceof AttachView) {
-                    String canonicalName = field.getType().getName();
+                    Class<?> type = field.getType();
+                    Object o = null;
                     try {
+                        o = field.get(obj);
+                        if (o == null) {
+                            field.set(obj, type.newInstance());
+                        }
+                        String canonicalName = type.getName();
+
                         mPresenterStore.put(canonicalName, (BasePresenter) field.get(obj));
+
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
                     }
+
+
                     break;
                 }
             }

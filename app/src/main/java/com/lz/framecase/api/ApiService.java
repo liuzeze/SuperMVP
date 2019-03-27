@@ -23,11 +23,13 @@ import retrofit2.http.Url;
 public interface ApiService {
 
     //    @Headers({DOMAIN_NAME_HEADER + DOUBAN_DOMAIN_NAME})
-    @GET("news/latest")
-    Flowable<String> getNewLists();
 
     @GET("http://is.snssdk.com/api/news/feed/v62/?iid=5034850950&device_id=6096495334&refer=1&count=20&aid=13")
     Flowable<MultNewsBean> getNewsArticle(
+            @Query("category") String category,
+            @Query("max_behot_time") String maxBehotTime);
+   @GET("http://is.snssdk.com/api/news/feed/v62/?iid=5034850950&device_id=6096495334&refer=1&count=20&aid=13")
+    Flowable<String> getNewsArticle3(
             @Query("category") String category,
             @Query("max_behot_time") String maxBehotTime);
 

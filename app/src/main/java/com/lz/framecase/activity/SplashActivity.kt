@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator.REVERSE
 import android.content.Intent
-import android.databinding.ViewDataBinding
 import android.widget.ImageView
 import cn.bingoogolapple.bgabanner.BGALocalImageSize
 import com.lz.framecase.R
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 
 
-class SplashActivity : BaseActivity<ViewDataBinding>() {
+class SplashActivity : BaseActivity() {
 
 
     var subscribe: Disposable? = null

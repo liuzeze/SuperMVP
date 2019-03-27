@@ -23,9 +23,6 @@ android {
 
 dependencies {
 
-    annotationProcessor "com.google.dagger:dagger-compiler:2.16"
-    //dagger库以及编译库
-    api 'com.google.dagger:dagger:2.16'
     //异步处
     api 'com.squareup.retrofit2:retrofit:2.4.0'
     api 'io.reactivex.rxjava2:rxjava:2.2.0'
@@ -36,6 +33,15 @@ dependencies {
     api 'com.squareup.retrofit2:converter-scalars:2.3.0'
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     api 'com.alibaba:fastjson:1.2.48'
+
+    api('com.squareup.retrofit2:converter-simplexml:2.0.1') {
+
+        exclude group: 'xpp3', module: 'xpp3'
+
+        exclude group: 'stax', module: 'stax-api'
+
+        exclude group: 'stax', module: 'stax'
+    }
 
     api 'com.uber.autodispose:autodispose:0.7.0'
     api 'com.uber.autodispose:autodispose-android-archcomponents:0.7.0'

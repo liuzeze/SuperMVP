@@ -5,33 +5,38 @@ import android.text.TextUtils
 import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
-import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.NewsDataBean
 import com.vondear.rxtool.RxTimeTool
-import java.util.ArrayList
-import javax.inject.Inject
+import java.util.*
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class NewsListPresenter @Inject
-constructor(var mRequestApi: RequestApi)
+class NewsListPresenter
     : RxPresenter<NewsListContract.View>(), NewsListContract.Presenter {
     val dataList = ArrayList<NewsDataBean>()
+    var mRequestApi: RequestApi
+
+    init {
+        mRequestApi = RequestApi();
+    }
+
     /**
      * 登录
      */
     override fun getNewLists(category: String?) {
 
         val gson = Gson()
-        val subscribeWith = mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
+        mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
                 .`as`(bindLifecycle())
-                .subscribeWith(object : CommonSubscriber<MultNewsBean>(mBaseView) {
-                    override fun onNext(bean: MultNewsBean) {
+                .subscribeWith(object : CommonSubscriber<String>(mBaseView) {
+                    override fun onNext(beanstr: String) {
+
+                        var bean=Gson().fromJson(beanstr,MultNewsBean::class.java)
                         val list = ArrayList<NewsDataBean>()
-                        com.orhanobut.logger.Logger.e("呵呵大小"+list.size)
+                        com.orhanobut.logger.Logger.e("呵呵大小" + list.size)
 
                         val data = bean.data!!
                         for (datum in data) {

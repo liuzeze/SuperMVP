@@ -2,8 +2,6 @@ package com.lz.framecase.base;
 
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -18,12 +16,11 @@ import butterknife.Unbinder;
  * Created by 刘泽 on 2017/7/10 18:50.
  */
 
-public abstract class BaseUiPresenter<T extends ViewDataBinding> extends RxPresenter {
+public abstract class BaseUiPresenter extends RxPresenter {
 
 
     private View convertView;
     private Unbinder mUnbinder;
-    private T mBind;
 
 
     public void creatLayout() {
@@ -32,17 +29,9 @@ public abstract class BaseUiPresenter<T extends ViewDataBinding> extends RxPrese
         try {
             if (getLayout() != -1) {
                 LayoutInflater inflater = LayoutInflater.from(context == null ? MyApplication.mApplication : context);
-                try {
-                    mBind = DataBindingUtil.inflate(inflater,
-                            getLayout(), null, false);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (mBind == null) {
-                    convertView = inflater.inflate(getLayout(), null, false);
-                } else {
-                    convertView = mBind.getRoot();
-                }
+
+                convertView = inflater.inflate(getLayout(), null, false);
+
                 mUnbinder = ButterKnife.bind(this, convertView);
             }
 

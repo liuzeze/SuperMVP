@@ -1,4 +1,4 @@
-package com.lz.fram.gson;
+package com.lz.fram.net.gson;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -12,29 +12,28 @@ import com.google.gson.JsonSyntaxException;
 import java.lang.reflect.Type;
 
 /**
- * Created by Allen on 2017/11/20.
- * <p>
- * 定义为double类型,如果后台返回""或者null,则返回0.00
+ * -----------作者----------日期----------变更内容-----
+ * -          刘泽      2018-11-01       创建class
  */
-
-public class DoubleDefault0Adapter implements JsonSerializer<Double>, JsonDeserializer<Double> {
+public class ListDefaultAdapter implements JsonSerializer<Long>, JsonDeserializer<Long> {
     @Override
-    public Double deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public Long deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
         try {
             if (json.getAsString().equals("") || json.getAsString().equals("null")) {
-                return 0.00;
+                return 0l;
             }
         } catch (Exception ignore) {
         }
         try {
-            return json.getAsDouble();
+            return json.getAsLong();
         } catch (NumberFormatException e) {
             throw new JsonSyntaxException(e);
         }
     }
 
     @Override
-    public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(Long src, Type typeOfSrc, JsonSerializationContext context) {
         return new JsonPrimitive(src);
     }
 }

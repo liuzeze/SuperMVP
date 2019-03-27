@@ -1,46 +1,31 @@
 
-package com.lz.fram.model;
+package com.lz.fram.net.http;
 
 import android.text.TextUtils;
-
-
-import com.lz.fram.scope.InterceptorsScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-import io.reactivex.annotations.Nullable;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  * 2017/12/26	9:24	     刘泽			  请求框架参数初始化
- *
  */
-@Module
 public class GlobalConfigBuild {
     private HttpUrl mApiUrl;
     private List<Interceptor> mInterceptors;
-    private AppModule.GsonConfiguration mGsonConfiguration;
-    private ClientModule.RetrofitConfiguration mRetrofitConfiguration;
-    private ClientModule.OkhttpConfiguration mOkhttpConfiguration;
     private List<Interceptor> netInterceptors;
-
+    private RetrofitFactory.RetrofitConfiguration mRetrofitConfiguration;
+    private OkhttpFactory.OkhttpConfiguration mOkhttpConfiguration;
 
     private GlobalConfigBuild(Builder builder) {
         this.mApiUrl = builder.apiUrl;
         this.mInterceptors = builder.interceptors;
         this.netInterceptors = builder.netInterceptors;
-        this.mGsonConfiguration = builder.gsonConfiguration;
         this.mRetrofitConfiguration = builder.retrofitConfiguration;
         this.mOkhttpConfiguration = builder.okhttpConfiguration;
-
-
     }
 
     public static Builder builder() {
@@ -48,20 +33,21 @@ public class GlobalConfigBuild {
     }
 
 
-    @Singleton
-    @Provides
-    @Nullable
-    @InterceptorsScope("Interceptors")
-    List<Interceptor> provideInterceptors() {
+    List<Interceptor> getInterceptors() {
         return mInterceptors;
     }
 
-    @Singleton
-    @Provides
-    @Nullable
-    @InterceptorsScope("netInterceptors")
-    List<Interceptor> provideNetInterceptors() {
+    List<Interceptor> getNetInterceptors() {
         return netInterceptors;
+    }
+
+    RetrofitFactory.RetrofitConfiguration getRetrofitConfiguration() {
+        return mRetrofitConfiguration;
+    }
+
+
+    OkhttpFactory.OkhttpConfiguration getOkhttpConfiguration() {
+        return mOkhttpConfiguration;
     }
 
 
@@ -70,46 +56,22 @@ public class GlobalConfigBuild {
      *
      * @return
      */
-    @Singleton
-    @Provides
-    HttpUrl provideBaseUrl() {
+    HttpUrl getBaseUrl() {
         return mApiUrl;
     }
-
-    @Singleton
-    @Provides
-    @Nullable
-    AppModule.GsonConfiguration provideGsonConfiguration() {
-        return mGsonConfiguration;
-    }
-
-    @Singleton
-    @Provides
-    @Nullable
-    ClientModule.RetrofitConfiguration provideRetrofitConfiguration() {
-        return mRetrofitConfiguration;
-    }
-
-    @Singleton
-    @Provides
-    @Nullable
-    ClientModule.OkhttpConfiguration provideOkhttpConfiguration() {
-        return mOkhttpConfiguration;
-    }
-
 
     public static final class Builder {
         private HttpUrl apiUrl;
         private List<Interceptor> interceptors;
         private List<Interceptor> netInterceptors;
-        private AppModule.GsonConfiguration gsonConfiguration;
-        private ClientModule.RetrofitConfiguration retrofitConfiguration;
-        private ClientModule.OkhttpConfiguration okhttpConfiguration;
+        private RetrofitFactory.RetrofitConfiguration retrofitConfiguration;
+        private OkhttpFactory.OkhttpConfiguration okhttpConfiguration;
 
         private Builder() {
         }
 
-        public Builder baseurl(String baseUrl) {//基础url
+        public Builder baseurl(String baseUrl) {
+            //基础url
             if (TextUtils.isEmpty(baseUrl)) {
                 throw new NullPointerException("BaseUrl can not be empty");
             }
@@ -118,7 +80,8 @@ public class GlobalConfigBuild {
         }
 
 
-        public Builder addInterceptor(Interceptor interceptor) {//动态添加任意个interceptor
+        public Builder addInterceptor(Interceptor interceptor) {
+            //动态添加任意个interceptor
             if (interceptors == null) {
                 interceptors = new ArrayList<>();
             }
@@ -134,17 +97,13 @@ public class GlobalConfigBuild {
             return this;
         }
 
-        public Builder gsonConfiguration(AppModule.GsonConfiguration gsonConfiguration) {
-            this.gsonConfiguration = gsonConfiguration;
-            return this;
-        }
 
-        public Builder retrofitConfiguration(ClientModule.RetrofitConfiguration retrofitConfiguration) {
+        public Builder retrofitConfiguration(RetrofitFactory.RetrofitConfiguration retrofitConfiguration) {
             this.retrofitConfiguration = retrofitConfiguration;
             return this;
         }
 
-        public Builder okhttpConfiguration(ClientModule.OkhttpConfiguration okhttpConfiguration) {
+        public Builder okhttpConfiguration(OkhttpFactory.OkhttpConfiguration okhttpConfiguration) {
             this.okhttpConfiguration = okhttpConfiguration;
             return this;
         }

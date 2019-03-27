@@ -3,25 +3,30 @@ package com.lz.framecase.fragment.presenter
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import com.lz.fram.base.RxPresenter
+import com.lz.fram.net.RxRequestUtils
 import com.lz.fram.observer.CommonSubscriber
+import com.lz.fram.observer.Transformer
 import com.lz.framecase.api.RequestApi
-import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.WendaArticleBean
 import com.lz.framecase.bean.WendaArticleDataBean
 import com.vondear.rxtool.RxTimeTool
-import com.vondear.rxtool.view.RxToast
-import java.util.ArrayList
-import javax.inject.Inject
+import java.util.*
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class WenDaListPresenter @Inject
-constructor(var mRequestApi: RequestApi)
+class WenDaListPresenter
     : RxPresenter<WenDaListContract.View>(), WenDaListContract.Presenter {
     var time: String = (RxTimeTool.getCurTimeMills() / 1000).toString()
     val dataList = ArrayList<WendaArticleDataBean>()
+    var mRequestApi: RequestApi
+
+    init {
+        mRequestApi = RequestApi();
+    }
 
     /**
      * 登录

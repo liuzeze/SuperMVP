@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lz.fram.app;
+package com.lz.fram.net.http;
 
 
+public interface ConfigModule {
+    /**
+     * 使用{@link GlobalConfigBuild.Builder}给框架配置一些配置参数
+     *
+     * @param builder
+     */
+    void applyOptions(GlobalConfigBuild.Builder builder);
 
-import com.lz.fram.component.AppComponent;
-
-import io.reactivex.annotations.NonNull;
-
-/**
- * -----------作者----------日期----------变更内容-----
- * -          刘泽      2018-06-28       application 的接口
- */
-public interface App {
-    @NonNull
-    AppComponent getAppComponent();
 }

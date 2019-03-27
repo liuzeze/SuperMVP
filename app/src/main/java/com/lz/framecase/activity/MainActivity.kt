@@ -1,7 +1,6 @@
 package com.lz.framecase.activity
 
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -15,11 +14,7 @@ import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseActivity
-import com.lz.framecase.databinding.ActivityMain2Binding
-import com.lz.framecase.fragment.ImagePagerFragment
 import com.lz.framecase.fragment.NewsPagerFragment
-import com.lz.framecase.fragment.NewsTitlePagerFragment
-import com.lz.framecase.fragment.VideoPagerFragment
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
@@ -33,7 +28,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class MainActivity : BaseActivity<ActivityMain2Binding>() {
+class MainActivity : BaseActivity() {
 
     override fun getLayout(): Int {
         return R.layout.activity_main2
@@ -49,20 +44,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initlIstener() {
-        RxView.clicks(mBind.ivSearch)
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer {
-                    val intent = Intent(mActivity, FaceActivity::class.java)
-                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, mBind.ivSearch, "SearchView").toBundle())
-                })
-        RxView.clicks(mBind.ivTitle)
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer {
-                    drawerlayout.openDrawer(Gravity.LEFT)
 
-                })
 
         RxNavigationView.itemSelections(nav_view).debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -137,12 +119,7 @@ class MainActivity : BaseActivity<ActivityMain2Binding>() {
 
     private fun initFragment() {
         val newsPagerFragment = NewsPagerFragment.getInstance()
-        val imagePagerFragment = ImagePagerFragment.getInstance()
-        val videoPagerFragment = VideoPagerFragment.getInstance()
-        val newsTitlePagerFragment = NewsTitlePagerFragment.getInstance()
-        loadMultipleRootFragment(R.id.container, 0, newsPagerFragment,
-                imagePagerFragment, videoPagerFragment, newsTitlePagerFragment
-        )
+        loadMultipleRootFragment(R.id.container, 0, newsPagerFragment)
     }
 
 

@@ -2,13 +2,13 @@ package com.lz.framecase.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.Keep
 import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
+import android.widget.TextView
+import butterknife.BindView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
@@ -16,30 +16,25 @@ import com.google.gson.Gson
 import com.lz.fram.scope.AttachView
 import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.R
-import com.lz.framecase.activity.NewDetailActivity
-import com.lz.framecase.activity.VideoPlayerActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
-import com.lz.framecase.logic.MyApplication
-import com.lz.inject_annotation.InjectFragment
 import com.lz.utilslib.interceptor.utils.ShareAction
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.HashSet
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-@InjectFragment
-class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View {
+class NewsListFragment : BaseFragment(), NewsListContract.View {
     @AttachView
-    @Inject
-    lateinit var mPresenter: NewsListPresenter
+    @JvmField
+    internal var mPresenter: NewsListPresenter? = null
+
 
     private var gson: Gson? = null
     private var category: String = ""
@@ -107,8 +102,7 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
             // view.transitionName = "SearchView"
             var intent: Intent? = null
             if (item.itemType === NewsDataBean.NEWSTEXT) {
-                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
-                intent?.putExtra(NewDetailActivity.TAG, item)
+
             }
             if (item.itemType === NewsDataBean.NEWSIMG) {
                 var imgUrl = "http://p3.pstatp.com/"
@@ -118,13 +112,10 @@ class NewsListFragment : BaseFragment<ViewDataBinding>(), NewsListContract.View 
                         imgUrl += image_list!!.get(0).uri?.replace("list", "large")
                     }
                 }
-                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
-                intent?.putExtra(NewDetailActivity.TAG, item)
-                intent?.putExtra(NewDetailActivity.IMG, imgUrl)
+
             }
             if (item.itemType === NewsDataBean.NEWSVIDEO) {
-                intent = Intent(MyApplication.mApplication, VideoPlayerActivity::class.java)
-                intent?.putExtra(NewDetailActivity.TAG, item)
+
 
             }
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, "SearchView").toBundle())

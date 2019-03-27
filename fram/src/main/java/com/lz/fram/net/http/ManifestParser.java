@@ -1,12 +1,9 @@
 
-package com.lz.fram.app;
+package com.lz.fram.net.http;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-
-
-import com.lz.fram.model.ConfigModule;
 
 import java.util.ArrayList;
 import java.util.List;

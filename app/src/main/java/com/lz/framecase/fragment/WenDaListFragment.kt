@@ -1,45 +1,29 @@
 package com.lz.framecase.fragment
 
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v7.widget.PopupMenu
-import android.view.Gravity
-import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.Gson
+import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseFragment
-import com.lz.framecase.bean.DataEntity
-import com.lz.framecase.bean.MultNewsBean
-import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.bean.WendaArticleDataBean
-import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.adapter.WenDaListAdapter
-import com.lz.framecase.fragment.presenter.NewsListContract
-import com.lz.framecase.fragment.presenter.NewsListPresenter
 import com.lz.framecase.fragment.presenter.WenDaListContract
 import com.lz.framecase.fragment.presenter.WenDaListPresenter
-import com.lz.framecase.presenter.NewsCommentPresenter
-import com.lz.utilslib.interceptor.utils.ShareAction
-import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.vondear.rxtool.RxTimeTool
-import kotlinx.android.synthetic.main.fragment_news_list.*
 import com.lz.inject_annotation.InjectFragment
-import javax.inject.Inject
-import com.lz.fram.scope.AttachView
+import com.lz.utilslib.interceptor.utils.SnackbarUtils
+import kotlinx.android.synthetic.main.fragment_news_list.*
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-@InjectFragment
-class WenDaListFragment : BaseFragment<ViewDataBinding>(), WenDaListContract.View {
+class WenDaListFragment : BaseFragment(), WenDaListContract.View {
 
 
     @AttachView
-    @Inject
-    lateinit var mPresenter: WenDaListPresenter
+    @JvmField
+    internal var mPresenter: WenDaListPresenter? = null
 
     private var gson: Gson? = null
     private var category: String = ""
@@ -65,17 +49,17 @@ class WenDaListFragment : BaseFragment<ViewDataBinding>(), WenDaListContract.Vie
         initListener()
         SwipeRefreshLayout.setRefreshing(true)
 
-        mPresenter.getWenDaList()
+        mPresenter!!.getWenDaList()
     }
 
     private fun initListener() {
         SwipeRefreshLayout.setOnRefreshListener {
             mNewsBean.clear()
-            mPresenter.dataList.clear()
-            mPresenter.getWenDaList()
+            mPresenter!!.dataList.clear()
+            mPresenter!!.getWenDaList()
         }
         newsListAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
-            mPresenter.getWenDaList()
+            mPresenter!!.getWenDaList()
         })
         newsListAdapter?.setOnItemClickListener { adapter, view, position ->
             SnackbarUtils.show(view, "未开发")

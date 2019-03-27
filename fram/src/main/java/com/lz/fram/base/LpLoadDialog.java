@@ -19,7 +19,7 @@ import com.lz.fram.R;
 
 /**
  * -----------作者----------日期----------变更内容-----
- * -          刘泽      2018-06-28       加载框 不完善
+ * -          刘泽      2018-06-28       加载框
  */
 public class LpLoadDialog extends Dialog {
 

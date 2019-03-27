@@ -1,4 +1,4 @@
-package com.lz.fram.gson;
+package com.lz.fram.net.gson;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -14,28 +14,28 @@ import java.lang.reflect.Type;
 /**
  * Created by Allen on 2017/11/20.
  * <p>
- * 定义为long类型,如果后台返回""或者null,则返回0
+ * 定义为int类型,如果后台返回""或者null,则返回0
  */
 
-public class LongDefault0Adapter implements JsonSerializer<Long>, JsonDeserializer<Long> {
+public class IntegerDefault0Adapter implements JsonSerializer<Integer>, JsonDeserializer<Integer> {
     @Override
-    public Long deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+    public Integer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         try {
             if (json.getAsString().equals("") || json.getAsString().equals("null")) {
-                return 0l;
+                return 0;
             }
         } catch (Exception ignore) {
         }
         try {
-            return json.getAsLong();
+            return json.getAsInt();
         } catch (NumberFormatException e) {
             throw new JsonSyntaxException(e);
         }
     }
 
     @Override
-    public JsonElement serialize(Long src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(Integer src, Type typeOfSrc, JsonSerializationContext context) {
         return new JsonPrimitive(src);
     }
 }
