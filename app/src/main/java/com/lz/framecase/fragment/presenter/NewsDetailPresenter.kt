@@ -5,25 +5,29 @@ import android.text.TextUtils
 import android.webkit.JavascriptInterface
 import com.lz.fram.base.RxPresenter
 import com.lz.framecase.api.RequestApi
-import com.lz.framecase.bean.*
+import com.lz.framecase.bean.NewsContentBean
+import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.utils.SettingUtils
-import com.lz.utilslib.interceptor.utils.ToastUtils
-import io.reactivex.*
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.FlowableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import java.util.ArrayList
+import java.util.*
 import java.util.regex.Pattern
-import javax.inject.Inject
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class NewsDetailPresenter @Inject
-constructor(var mRequestApi: RequestApi)
+class NewsDetailPresenter
     : RxPresenter<NewsDetailContract.View>(), NewsDetailContract.Presenter {
 
+    var mRequestApi: RequestApi
 
+    init {
+        mRequestApi = RequestApi();
+    }
     override fun loadUrl(dataBean: NewsDataBean) {
         val url = dataBean.display_url
 

@@ -10,7 +10,6 @@ import android.graphics.Paint
 import android.util.Base64
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
-import com.lz.framecase.BuildConfig
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.FaceListEntity
 import com.lz.framecase.bean.FaceResponse
@@ -20,22 +19,20 @@ import com.lz.framecase.logic.Constans
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxSPTool
 import com.vondear.rxtool.RxTool
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.schedulers.Schedulers.io
 import java.io.ByteArrayOutputStream
-import java.io.ObjectInput
-import javax.inject.Inject
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
 @SuppressLint("CheckResult")
-class FacePresenter @Inject
-constructor(internal var mRequestApi: RequestApi) : RxPresenter<FaceContract.View>(), FaceContract.Presenter {
+class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
+    var mRequestApi: RequestApi
+
+    init {
+        mRequestApi = RequestApi();
+    }
+
     override fun auth(context: Context) {
         mRequestApi.token()
                 ?.`as`(bindLifecycle<TokenBean>())

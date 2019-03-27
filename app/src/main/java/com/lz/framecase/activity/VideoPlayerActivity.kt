@@ -1,6 +1,5 @@
 package com.lz.framecase.activity
 
-import android.databinding.ViewDataBinding
 import android.text.TextUtils
 import cn.jzvd.JZVideoPlayer
 import cn.jzvd.JZVideoPlayerStandard
@@ -18,23 +17,21 @@ import com.lz.framecase.presenter.VideoPlayerContract
 import com.lz.framecase.presenter.VideoPlayerPresenter
 import com.lz.inject_annotation.InjectActivity
 import kotlinx.android.synthetic.main.activity_video_player.*
-import javax.inject.Inject
 
 
-@InjectActivity
-class VideoPlayerActivity : BaseActivity<ViewDataBinding>(), VideoPlayerContract.View, NewsCommentContract.View {
+class VideoPlayerActivity : BaseActivity(), VideoPlayerContract.View, NewsCommentContract.View {
 
     @AttachView
-    @Inject
-    lateinit var mPresenter2: NewsCommentPresenter
+    @JvmField
+    internal var mPresenter2: NewsCommentPresenter? = null
 
     @AttachView
-    @Inject
-    lateinit var mPresenter: VideoPlayerPresenter
+    @JvmField
+    internal var mPresenter: VideoPlayerPresenter? = null
 
-    @Inject
     @AttachView
-    lateinit var mUiPresenter: VideoPlayerHead
+    @JvmField
+    internal var mUiPresenter: VideoPlayerHead? = null
 
     var newsDataBean: NewsDataBean? = null
     var commentList = ArrayList<NewsCommentBean.DataBean>()
@@ -71,16 +68,16 @@ class VideoPlayerActivity : BaseActivity<ViewDataBinding>(), VideoPlayerContract
 
 
         mPresenter2?.getNewCommentLists(newsDataBean?.group_id.toString(), 0)
-        mPresenter.getVideoUrl(newsDataBean?.video_id!!)
+        mPresenter!!.getVideoUrl(newsDataBean?.video_id!!)
         initHeadView()
 
     }
 
     private fun initHeadView() {
-        mUiPresenter.creatLayout()
+        mUiPresenter!!.creatLayout()
 
-        mUiPresenter.setData(newsDataBean)
-        newsCommentAdapter?.addHeaderView(mUiPresenter.holderView)
+        mUiPresenter!!.setData(newsDataBean)
+        newsCommentAdapter?.addHeaderView(mUiPresenter!!.holderView)
     }
 
     override fun getNewsCommentSuccess(data: ArrayList<NewsCommentBean.DataBean>) {

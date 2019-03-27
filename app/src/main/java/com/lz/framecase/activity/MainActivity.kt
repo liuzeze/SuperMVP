@@ -1,6 +1,7 @@
 package com.lz.framecase.activity
 
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -44,7 +45,18 @@ class MainActivity : BaseActivity() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initlIstener() {
-
+        RxView.clicks(iv_search)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    val intent = Intent(mActivity, FaceActivity::class.java)
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity, iv_search, "SearchView").toBundle())
+                })
+        RxView.clicks(iv_title)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    drawerlayout.openDrawer(Gravity.LEFT) })
 
         RxNavigationView.itemSelections(nav_view).debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

@@ -10,7 +10,7 @@ import com.lz.framecase.fragment.presenter.NewsListContract
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class VideoPagerFragment : BaseFragment<ViewDataBinding>() {
+class VideoPagerFragment : BaseFragment() {
 
     companion object {
         fun getInstance(): VideoPagerFragment {

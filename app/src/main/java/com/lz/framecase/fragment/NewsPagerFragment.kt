@@ -1,9 +1,11 @@
 package com.lz.framecase.fragment
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.Fragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
+import com.lz.framecase.activity.CatgoryActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.fragment.adapter.NewsPagerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,6 +46,9 @@ class NewsPagerFragment : BaseFragment() {
         RxView.clicks(iv_catgory).debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
+                    val intent = Intent(mContext, CatgoryActivity::class.java)
+                    this@NewsPagerFragment.startActivityForResult(intent, 1000)
+
 
                 })
     }
@@ -60,10 +65,16 @@ class NewsPagerFragment : BaseFragment() {
 
             for (s in resources.getStringArray(R.array.mobile_news_name)) {
                 string.add(s)
+                if (string.size == 6) {
+                    break
+                }
 
             }
             for (s in resources.getStringArray(R.array.mobile_news_id)) {
                 stringId.add(s)
+                if (stringId.size == 6) {
+                    break
+                }
 
             }
 

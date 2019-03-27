@@ -2,7 +2,6 @@ package com.lz.framecase.holder
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.databinding.ViewDataBinding
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -17,13 +16,12 @@ import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.widget.CircleImageView
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import javax.inject.Inject
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-class VideoPlayerHead @Inject constructor() : BaseUiPresenter<ViewDataBinding>() {
+class VideoPlayerHead  : BaseUiPresenter() {
 
 
     @BindView(R.id.tv_title)

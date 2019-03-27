@@ -34,7 +34,7 @@ public interface ApiService {
             @Query("max_behot_time") String maxBehotTime);
 
     @GET("http://lf.snssdk.com/api/news/feed/v62/?iid=12507202490&device_id=37487219424&refer=1&count=20&aid=13")
-    Flowable<MultNewsBean> getNewsArticle2(
+    Flowable<String> getNewsArticle2(
             @Query("category") String category,
             @Query("max_behot_time") String maxBehotTime);
 

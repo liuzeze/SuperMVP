@@ -28,7 +28,7 @@ import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
 
-class CatgoryActivity : BaseActivity<ViewDataBinding>() {
+class CatgoryActivity : BaseActivity() {
 
     private val titles = ArrayList<TitleBean>()
     private var mDragAdapter: DragAdapter? = null

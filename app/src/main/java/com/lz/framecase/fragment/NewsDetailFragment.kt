@@ -3,59 +3,45 @@ package com.lz.framecase.fragment
 import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Intent
-import android.databinding.ViewDataBinding
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.text.TextUtils
 import android.view.KeyEvent
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.bumptech.glide.Glide
+import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
+import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.activity.NewDetailActivity.Companion.IMG
 import com.lz.framecase.activity.NewDetailActivity.Companion.TAG
+import com.lz.framecase.activity.NewsCommentActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.presenter.NewsDetailContract
 import com.lz.framecase.fragment.presenter.NewsDetailPresenter
-import kotlinx.android.synthetic.main.fragment_news_detail.*
-import android.provider.Telephony.MmsSms.PendingMessages.ERROR_TYPE
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.Toolbar
-import android.view.MenuItem
-import android.view.View
-import android.webkit.ValueCallback
-import com.gyf.barlibrary.ImmersionBar
-import com.jakewharton.rxbinding2.widget.RxToolbar
-import com.lz.framecase.R.id.*
-import com.lz.framecase.activity.ImagePreviewActivity
-import com.lz.framecase.activity.NewsCommentActivity
-import com.lz.framecase.presenter.NewsCommentPresenter
+import com.lz.inject_annotation.InjectFragment
 import com.lz.skinlibs.SkinManager
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.vondear.rxtool.RxWebViewTool
-import java.util.ArrayList
-import com.lz.inject_annotation.InjectFragment
-import javax.inject.Inject
-import com.lz.fram.scope.AttachView
-import com.lz.utilslib.interceptor.utils.ToastUtils
+import kotlinx.android.synthetic.main.fragment_news_detail.*
+import java.util.*
 
 
 /**
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-30       创建class
  */
-@InjectFragment
-class NewsDetailFragment : BaseFragment<ViewDataBinding>(), NewsDetailContract.View {
+class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
 
 
     @AttachView
-    @Inject
     lateinit var mPresenter: NewsDetailPresenter
 
     var newsDataBean: NewsDataBean? = null

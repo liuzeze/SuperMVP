@@ -16,7 +16,6 @@ public class FrameApplication extends Application  {
      */
     public static FrameApplication mApplication;
 
-    private boolean isHostError;
 
 
 

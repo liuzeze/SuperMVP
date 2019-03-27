@@ -5,14 +5,17 @@ import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.NewsCommentBean
-import javax.inject.Inject
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class NewsCommentPresenter @Inject
-constructor(internal var mRequestApi: RequestApi) : RxPresenter<NewsCommentContract.View>(), NewsCommentContract.Presenter {
+class NewsCommentPresenter  : RxPresenter<NewsCommentContract.View>(), NewsCommentContract.Presenter {
+    var mRequestApi: RequestApi
+
+    init {
+        mRequestApi = RequestApi();
+    }
 
     /**
      * 登录

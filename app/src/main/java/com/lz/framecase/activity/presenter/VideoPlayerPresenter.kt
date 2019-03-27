@@ -6,14 +6,17 @@ import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
 import java.util.*
 import java.util.zip.CRC32
-import javax.inject.Inject
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class VideoPlayerPresenter @Inject
-constructor(internal var mRequestApi: RequestApi) : RxPresenter<VideoPlayerContract.View>(), VideoPlayerContract.Presenter {
+class VideoPlayerPresenter : RxPresenter<VideoPlayerContract.View>(), VideoPlayerContract.Presenter {
+    var mRequestApi: RequestApi
+
+    init {
+        mRequestApi = RequestApi();
+    }
 
     /**
      * 登录

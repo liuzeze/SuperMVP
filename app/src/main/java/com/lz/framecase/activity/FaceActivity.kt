@@ -3,11 +3,8 @@ package com.lz.framecase.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.media.FaceDetector
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,48 +15,34 @@ import android.support.v4.content.FileProvider
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.lz.fram.base.LpLoadDialog
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
-import com.lz.framecase.R.id.*
 import com.lz.framecase.activity.adapter.FaceAdapter
 import com.lz.framecase.activity.presenter.FaceContract
 import com.lz.framecase.activity.presenter.FacePresenter
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.FaceListEntity
-import com.lz.framecase.bean.FaceResponse
+import com.lz.framecase.logic.MyApplication
 import com.lz.inject_annotation.InjectActivity
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.tencent.bugly.proguard.s
-import com.tencent.bugly.proguard.t
 import com.vondear.rxtool.RxImageTool
-import com.vondear.rxtool.RxTool
-import com.vondear.rxtool.view.RxToast
 import io.reactivex.Flowable
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subscribers.ResourceSubscriber
 import kotlinx.android.synthetic.main.activity_face.*
-import okhttp3.ResponseBody
 import java.io.File
 import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-@InjectActivity
-class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
+class FaceActivity : BaseActivity(), FaceContract.View {
 
 
     val CODE_SELECT_IMAGE: Int = 2;//相册RequestCode
@@ -72,19 +55,18 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
     var bitmap: Bitmap? = null
     var mFaces: ArrayList<FaceListEntity> = ArrayList()
     var faceAdapter: FaceAdapter? = null
-    @Inject
     @AttachView
     @JvmField
     var mPresenter: FacePresenter? = null
 
-    @Inject
-    lateinit var dialog: LpLoadDialog
+    var dialog: LpLoadDialog ?=null
 
     override fun getLayout(): Int {
         return R.layout.activity_face
     }
 
     override fun initViewData() {
+        dialog = LpLoadDialog(this)
         face_toolbar.setTitle("人脸检测")
         face_toolbar.setTitleTextColor(Color.WHITE)
         faceAdapter = FaceAdapter(mFaces)
@@ -107,15 +89,15 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
                 startActivity(intent, optionsCompat.toBundle())
             }
         }
-        bt_album.setOnClickListener(View.OnClickListener {
+        bt_album.setOnClickListener({
             var albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(albumIntent, CODE_SELECT_IMAGE);
         })
-        bt_change.setOnClickListener(View.OnClickListener {
+        bt_change.setOnClickListener( {
             it.isSelected = !it.isSelected
         })
         bt_open_photo.setOnClickListener({
-            dialog.show()
+            dialog!!.show()
             mPresenter?.auth(mActivity)
         })
         bt_take_photo.setOnClickListener(View.OnClickListener {
@@ -266,12 +248,12 @@ class FaceActivity : BaseActivity<ViewDataBinding>(), FaceContract.View {
     override fun authFailed() {
         bt_open_photo.visibility = View.VISIBLE
         bt_open_photo.text = "授权失败"
-        dialog.dismiss()
+        dialog!!.dismiss()
     }
 
     override fun authSuccess() {
         bt_open_photo.visibility = View.GONE
         bt_take_photo.visibility = View.VISIBLE
-        dialog.dismiss()
+        dialog!!.dismiss()
     }
 }

@@ -16,11 +16,14 @@ import com.google.gson.Gson
 import com.lz.fram.scope.AttachView
 import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.R
+import com.lz.framecase.activity.NewDetailActivity
+import com.lz.framecase.activity.VideoPlayerActivity
 import com.lz.framecase.base.BaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.presenter.NewsListContract
 import com.lz.framecase.fragment.presenter.NewsListPresenter
+import com.lz.framecase.logic.MyApplication
 import com.lz.utilslib.interceptor.utils.ShareAction
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import java.util.*
@@ -102,7 +105,8 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
             // view.transitionName = "SearchView"
             var intent: Intent? = null
             if (item.itemType === NewsDataBean.NEWSTEXT) {
-
+                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
             }
             if (item.itemType === NewsDataBean.NEWSIMG) {
                 var imgUrl = "http://p3.pstatp.com/"
@@ -112,11 +116,14 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
                         imgUrl += image_list!!.get(0).uri?.replace("list", "large")
                     }
                 }
-
+                intent = Intent(MyApplication.mApplication, NewDetailActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
+                intent?.putExtra(NewDetailActivity.IMG, imgUrl)
             }
             if (item.itemType === NewsDataBean.NEWSVIDEO) {
 
-
+                intent = Intent(MyApplication.mApplication, VideoPlayerActivity::class.java)
+                intent?.putExtra(NewDetailActivity.TAG, item)
             }
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity, view, "SearchView").toBundle())
 

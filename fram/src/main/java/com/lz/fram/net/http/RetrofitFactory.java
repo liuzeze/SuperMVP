@@ -40,7 +40,6 @@ public class RetrofitFactory {
         mClient = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()))
                 .baseUrl(configBuild.getBaseUrl())
                 .client(build);

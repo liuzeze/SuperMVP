@@ -1,25 +1,17 @@
 package com.lz.framecase.activity
 
-import android.databinding.ViewDataBinding
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.FaceListEntity
-import com.lz.framecase.bean.FaceppBean
 import kotlinx.android.synthetic.main.activity_face_detail.*
 
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class FaceDetailActivity : BaseActivity<ViewDataBinding>() {
+class FaceDetailActivity : BaseActivity() {
 
 
     override fun getLayout(): Int {

@@ -1,16 +1,13 @@
 package com.lz.framecase.fragment
 
-import android.databinding.ViewDataBinding
-import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
 import com.lz.framecase.base.BaseFragment
-import com.lz.framecase.fragment.presenter.NewsListContract
 
 
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsTitlePagerFragment : BaseFragment<ViewDataBinding>() {
+class NewsTitlePagerFragment : BaseFragment() {
 
     companion object {
         fun getInstance(): NewsTitlePagerFragment {

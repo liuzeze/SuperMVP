@@ -63,6 +63,9 @@ public class LpLoadDialog extends Dialog {
         rootView.setLayoutParams(rootLp);
         rootView.addView(mIvProgress);
         setContentView(rootView);
+
+        getWindow().setType(LayoutParams.TYPE_SYSTEM_ALERT);
+
     }
 
     /**
