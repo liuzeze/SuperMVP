@@ -10,10 +10,13 @@ import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.lz.fram.app.FrameApplication;
 import com.lz.framecase.BuildConfig;
+import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
 import com.lz.utilslib.interceptor.utils.LzAppUtils;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.vondear.rxtool.RxActivityTool;
 import com.vondear.rxtool.RxTool;
 
@@ -39,7 +42,9 @@ public class MyApplication extends FrameApplication {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         registerActivityCycle();
-
+        Beta.initDelay = 3 * 1000;
+        Beta.canShowUpgradeActs.add(MainActivity.class);
+        Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
         if (BuildConfig.DEBUG) {
             new CatchHandler.Builder(getApplicationContext())
                     .setUrl("钉钉机器人网址")
@@ -57,6 +62,7 @@ public class MyApplication extends FrameApplication {
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
         super.attachBaseContext(base);
+        Beta.installTinker();
 
     }
 

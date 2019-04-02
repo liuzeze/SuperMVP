@@ -43,8 +43,8 @@ public class GlobalConfiguration implements ConfigModule {
     public void applyOptions(GlobalConfigBuild.Builder builder) {
         if (BuildConfig.DEBUG) {
             //Release 时,让框架不再打印 Http 请求和响应的信息
-            //  builder.addInterceptor(new LoggerInterceptor());
-            // builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
+              builder.addInterceptor(new LoggerInterceptor());
+             builder.addNetworkInterceptor(new OkNetworkMonitorInterceptor());
         }
 
         builder
