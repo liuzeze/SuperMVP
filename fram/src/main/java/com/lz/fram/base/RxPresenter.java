@@ -2,6 +2,7 @@ package com.lz.fram.base;
 
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.lz.fram.app.FrameApplication;
@@ -22,6 +23,7 @@ import io.reactivex.disposables.Disposable;
 
 public class RxPresenter<T extends BaseView> implements BasePresenter {
     protected T mBaseView;
+    protected Context mContext;
     private LifecycleOwner mLifecycleOwner;
 
     private HashMap<Object, Disposable> mapDisposable;
@@ -76,6 +78,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
         mLifecycleOwner = lifecycleOwner;
         this.mBaseView = (T) lifecycleOwner;
+        mContext = mBaseView.getContext();
     }
 
     @Override
@@ -88,6 +91,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     public void onDestroy(LifecycleOwner owner) {
         detachView();
     }
+
 
     protected void callBack(String tag, Object... obj) {
         Method[] declaredMethods = mBaseView.getClass().getDeclaredMethods();
@@ -111,5 +115,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
             }
 
         }
+
     }
 }

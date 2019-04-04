@@ -87,6 +87,7 @@ class VideoPlayerActivity : BaseActivity(), VideoPlayerContract.View, NewsCommen
             newsCommentAdapter?.loadMoreEnd()
             return
         }
+        commentList.clear()
         commentList.addAll(data)
         newsCommentAdapter?.setNewData(commentList)
         newsCommentAdapter?.loadMoreComplete()

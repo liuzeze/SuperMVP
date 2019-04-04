@@ -40,7 +40,6 @@ class MainActivity : BaseActivity() {
     override fun initViewData() {
         initFragment()
         initlIstener()
-        ToastUtils.info("测试")
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

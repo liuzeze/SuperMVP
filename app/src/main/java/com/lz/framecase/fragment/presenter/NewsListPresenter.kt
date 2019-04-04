@@ -85,9 +85,11 @@ class NewsListPresenter
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
-
-                            callBack("getNewsListSuccess", list, bean.isHas_more_to_refresh)
-                            //  mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
+                            val l = System.currentTimeMillis()
+//                            callBack("getNewsListSuccess", list, bean.isHas_more_to_refresh)
+                              mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
+                            val l1 = System.currentTimeMillis()
+                            println("刘泽====" + (l1 - l))
                         }
                     }
                 })

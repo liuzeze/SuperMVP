@@ -2,6 +2,7 @@ package com.lz.framecase.base;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( getLayout());
+        setContentView(getLayout());
         initConfig();
         onViewCreated();
         initViewData();
@@ -102,6 +103,11 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     @Override
     public void showErrorMsg(String msg) {
         ToastUtils.error(msg);
+    }
+
+    @Override
+    public Context getContext() {
+        return mActivity;
     }
 
     /**

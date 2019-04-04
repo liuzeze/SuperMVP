@@ -1,6 +1,7 @@
 package com.lz.fram.base;
 
 
+import android.content.Context;
 
 /**
  * -----------作者----------日期----------变更内容-----
@@ -9,5 +10,7 @@ package com.lz.fram.base;
 public interface BaseView {
 
     void showErrorMsg(String msg);
+
+    Context getContext();
 
 }

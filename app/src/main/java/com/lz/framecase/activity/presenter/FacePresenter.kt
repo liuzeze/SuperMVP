@@ -8,6 +8,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.Base64
+import android.widget.Toast
 import com.lz.fram.base.RxPresenter
 import com.lz.fram.observer.CommonSubscriber
 import com.lz.framecase.api.RequestApi
@@ -34,6 +35,7 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
     }
 
     override fun auth(context: Context) {
+        Toast.makeText(mContext,"dsjkhasjdghasjkg",Toast.LENGTH_SHORT).show()
         mRequestApi.token()
                 ?.`as`(bindLifecycle<TokenBean>())
                 ?.subscribeWith(object : CommonSubscriber<TokenBean>(mBaseView) {

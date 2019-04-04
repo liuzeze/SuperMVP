@@ -59,7 +59,7 @@ class FaceActivity : BaseActivity(), FaceContract.View {
     @JvmField
     var mPresenter: FacePresenter? = null
 
-    var dialog: LpLoadDialog ?=null
+    var dialog: LpLoadDialog? = null
 
     override fun getLayout(): Int {
         return R.layout.activity_face
@@ -93,7 +93,7 @@ class FaceActivity : BaseActivity(), FaceContract.View {
             var albumIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(albumIntent, CODE_SELECT_IMAGE);
         })
-        bt_change.setOnClickListener( {
+        bt_change.setOnClickListener({
             it.isSelected = !it.isSelected
         })
         bt_open_photo.setOnClickListener({
@@ -121,8 +121,11 @@ class FaceActivity : BaseActivity(), FaceContract.View {
                             takeIntent.putExtra("android.intent.extras.CAMERA_FACING", 1)
                         }
 
+                        takeIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                         startActivityForResult(takeIntent, CODE_TAKE_PHOTO)
+
+
                     } else {
                         val takeIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                         photoUri = getMediaFileUri(TYPE_TAKE_PHOTO)

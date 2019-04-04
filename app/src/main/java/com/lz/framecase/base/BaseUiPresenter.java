@@ -51,7 +51,6 @@ public abstract class BaseUiPresenter extends RxPresenter {
         return convertView;
     }
 
-
     protected abstract int getLayout();
 
     @Override

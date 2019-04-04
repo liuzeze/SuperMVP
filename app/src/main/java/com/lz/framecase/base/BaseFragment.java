@@ -47,7 +47,8 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
 
         mUnbinder = ButterKnife.bind(this, rootView);
         if (!SettingUtils.Companion.getSlideBackMode()) {
-            setSwipeBackEnable(false); // 是否允许滑动
+            // 是否允许滑动
+            setSwipeBackEnable(false);
         }
         InjectFragment annotation = this.getClass().getAnnotation(InjectFragment.class);
         if (annotation != null) {
@@ -84,6 +85,12 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
             mUnbinder.unbind();
         }
 
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        return mContext;
     }
 
     @Override
