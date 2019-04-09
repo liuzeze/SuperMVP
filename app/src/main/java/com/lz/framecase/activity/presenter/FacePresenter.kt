@@ -35,7 +35,6 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
     }
 
     override fun auth(context: Context) {
-        Toast.makeText(mContext,"dsjkhasjdghasjkg",Toast.LENGTH_SHORT).show()
         mRequestApi.token()
                 ?.`as`(bindLifecycle<TokenBean>())
                 ?.subscribeWith(object : CommonSubscriber<TokenBean>(mBaseView) {
