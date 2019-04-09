@@ -12,7 +12,9 @@ import com.uber.autodispose.AutoDisposeConverter;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -39,6 +41,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
         if (mapDisposable == null) {
             mapDisposable = new HashMap<>();
         }
+
         //添加前先移除
         removeSubscribe(tag);
         //加入到管理
@@ -65,7 +68,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
         }
     }
 
-
     protected <T> AutoDisposeConverter<T> bindLifecycle() {
         if (null == mLifecycleOwner) {
             throw new NullPointerException("lifecycleOwner == null");
@@ -81,15 +83,14 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
         mContext = mBaseView.getContext();
     }
 
-    @Override
-    public void detachView() {
-        this.mBaseView = null;
-    }
-
 
     @Override
     public void onDestroy(LifecycleOwner owner) {
-        detachView();
+        this.mBaseView = null;
+        mContext = null;
+        if (mapDisposable != null) {
+            mapDisposable.clear();
+        }
     }
 
 

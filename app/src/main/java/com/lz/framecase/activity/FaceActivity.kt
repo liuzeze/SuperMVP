@@ -66,7 +66,7 @@ class FaceActivity : BaseActivity(), FaceContract.View {
     }
 
     override fun initViewData() {
-        dialog = LpLoadDialog(this)
+        dialog = LpLoadDialog(MyApplication.mApplication)
         face_toolbar.setTitle("人脸检测")
         face_toolbar.setTitleTextColor(Color.WHITE)
         faceAdapter = FaceAdapter(mFaces)

@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.lz.fram.R;
 
@@ -26,8 +27,6 @@ public class LpLoadDialog extends Dialog {
     protected Context mContext;
 
     protected LayoutParams mLayoutParams;
-    private Animation mLoadAnimation;
-    private ImageView mIvProgress;
 
     public LayoutParams getLayoutParams() {
         return mLayoutParams;
@@ -50,18 +49,12 @@ public class LpLoadDialog extends Dialog {
             mLayoutParams.gravity = Gravity.CENTER;
         }
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mIvProgress = new ImageView(context);
-        mIvProgress.setBackgroundResource(R.mipmap.lp_loading);
-        ViewGroup.LayoutParams lp = new LayoutParams();
-        lp.width = 60;
-        lp.height = 60;
-        mIvProgress.setLayoutParams(lp);
-        mLoadAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate_loading);
+        ProgressBar progressBar = new ProgressBar(context);
         LinearLayout rootView = new LinearLayout(context);
         LinearLayout.LayoutParams rootLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         rootLp.gravity = Gravity.CENTER;
         rootView.setLayoutParams(rootLp);
-        rootView.addView(mIvProgress);
+        rootView.addView(progressBar);
         setContentView(rootView);
 
         getWindow().setType(LayoutParams.TYPE_SYSTEM_ALERT);
@@ -126,9 +119,6 @@ public class LpLoadDialog extends Dialog {
     public synchronized void show() {
         if (!isShowing()) {
             super.show();
-            if (mIvProgress != null) {
-                mIvProgress.startAnimation(mLoadAnimation);
-            }
         }
         showCount = showCount + 1;
     }
@@ -139,9 +129,7 @@ public class LpLoadDialog extends Dialog {
         if (showCount <= 0) {
             showCount = 0;
             super.dismiss();
-            if (mIvProgress != null) {
-                mIvProgress.clearAnimation();
-            }
+
         }
     }
 }

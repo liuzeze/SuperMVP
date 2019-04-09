@@ -81,8 +81,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
         if (annotation != null) {
             InjectTools.inject(this);
         }
-        PresenterDispatch mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
-        mPresenterDispatch.attachView(this, getLifecycle());
+        PresenterDispatch presenterDispatch = PresenterProviders.inject(this).presenterCreate();
+        presenterDispatch.attachView(this, getLifecycle());
     }
 
     /**

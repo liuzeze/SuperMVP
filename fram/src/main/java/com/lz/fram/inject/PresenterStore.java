@@ -18,7 +18,8 @@ public class PresenterStore<P extends BasePresenter> {
     public final void put(String key, P presenter) {
         P oldPresenter = mMap.put(DEFAULT_KEY + ":" + key, presenter);
         if (oldPresenter != null) {
-            oldPresenter.detachView();
+            oldPresenter.onDestroy(null);
+            oldPresenter=null;
         }
     }
 
@@ -28,7 +29,7 @@ public class PresenterStore<P extends BasePresenter> {
 
     public final void clear() {
         for (P presenter : mMap.values()) {
-            presenter.detachView();
+            presenter.onDestroy(null);
         }
         mMap.clear();
     }

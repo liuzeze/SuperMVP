@@ -1,6 +1,7 @@
 package com.lz.framecase.base;
 
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,10 +55,11 @@ public abstract class BaseUiPresenter extends RxPresenter {
     protected abstract int getLayout();
 
     @Override
-    public void detachView() {
-        super.detachView();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+        convertView = null;
     }
 }

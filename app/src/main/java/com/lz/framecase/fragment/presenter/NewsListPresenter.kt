@@ -10,6 +10,7 @@ import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.NewsDataBean
 import com.vondear.rxtool.RxTimeTool
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
@@ -85,11 +86,9 @@ class NewsListPresenter
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
-                            val l = System.currentTimeMillis()
+
 //                            callBack("getNewsListSuccess", list, bean.isHas_more_to_refresh)
                               mBaseView.getNewsListSuccess(list, bean.isHas_more_to_refresh)
-                            val l1 = System.currentTimeMillis()
-                            println("刘泽====" + (l1 - l))
                         }
                     }
                 })

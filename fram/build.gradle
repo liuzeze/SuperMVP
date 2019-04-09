@@ -24,13 +24,13 @@ android {
 dependencies {
 
     //异步处
-    api 'com.squareup.retrofit2:retrofit:2.4.0'
-    api 'io.reactivex.rxjava2:rxjava:2.2.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.4'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
     // 网络库
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 //    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.5.0'
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     api 'com.alibaba:fastjson:1.2.48'
 

@@ -74,8 +74,8 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
     }
 
     protected void onViewCreated() {
-        PresenterDispatch mPresenterDispatch = PresenterProviders.inject(this).presenterCreate();
-        mPresenterDispatch.attachView(this, getLifecycle());
+        PresenterDispatch presenterDispatch = PresenterProviders.inject(this).presenterCreate();
+        presenterDispatch.attachView(this, getLifecycle());
     }
 
     @Override

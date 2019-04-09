@@ -13,9 +13,7 @@ import android.arch.lifecycle.OnLifecycleEvent;
 public interface BasePresenter extends LifecycleObserver {
 
     void setLifecycleOwner(LifecycleOwner lifecycleOwner);
-
-    void detachView();
-
+    
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy(LifecycleOwner owner);
 
