@@ -65,7 +65,7 @@ class NewsCommentActivity : BaseActivity(), NewsCommentContract.View {
          }, comment_list)*/
         newsCommentAdapter?.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val text = commentList.get(position).comment?.text!!
-            LpDialogUtils.alertDialog(mActivity, "提示", "复制", View.OnClickListener {
+            LpDialogUtils.alertDialog(mActivity, "提示", text,"复制", View.OnClickListener {
                 val copy = mActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clipData = ClipData.newPlainText("text", text)
                 copy.primaryClip = clipData

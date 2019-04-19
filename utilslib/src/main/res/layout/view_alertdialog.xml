@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="true"
-    android:padding="50dp">
+    android:padding="50dp"
+    tools:background="@color/common_app_red_ff0000">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/shape_diglog_bg"
@@ -20,10 +21,12 @@
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
+            android:lines="1"
             android:paddingLeft="40dp"
-            android:paddingRight="@dimen/dp_40"
+            android:paddingRight="40dp"
             android:textColor="#000000"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -33,10 +36,9 @@
             android:id="@+id/txt_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:paddingLeft="40dp"
-            android:paddingRight="@dimen/dp_40"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:textColor="#000000"
             android:textSize="14sp"
             tools:text="内容" />
@@ -46,46 +48,47 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="visible">
+            android:visibility="visible" />
 
-        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
 
+            android:layout_height="1px"
+            android:layout_marginTop="20dp"
+            android:background="@color/common_app_gray_cccccc" />
 
         <LinearLayout
             android:id="@+id/ll_btn_group"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:divider="@drawable/shape_divide_line"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_40"
-            android:paddingRight="@dimen/dp_40"
-            android:paddingBottom="30dp">
+            android:showDividers="middle">
 
             <TextView
                 android:id="@+id/btn_neg"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/shape_diglog_cancel"
+                android:layout_weight="1"
                 android:button="@null"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="13dp"
                 android:text="取消"
 
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
+                android:textColor="@color/common_app_blue_0008ff"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/btn_pos"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_diglog_confirm"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="13dp"
                 android:text="确定"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
+                android:textColor="@color/common_app_red_ff0000"
+                android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
