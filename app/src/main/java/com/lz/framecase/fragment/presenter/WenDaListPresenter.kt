@@ -3,12 +3,8 @@ package com.lz.framecase.fragment.presenter
 
 import android.text.TextUtils
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonParser
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.net.RxRequestUtils
-import com.lz.fram.observer.CommonSubscriber
-import com.lz.fram.observer.Transformer
+import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.WendaArticleBean
 import com.lz.framecase.bean.WendaArticleDataBean
@@ -33,7 +29,7 @@ class WenDaListPresenter
      */
     override fun getWenDaList() {
         val gson = Gson()
-        val subscriber = object : CommonSubscriber<WendaArticleBean>(mBaseView) {
+        val subscriber = object : CommonObserver<WendaArticleBean>(mBaseView) {
             override fun onNext(bean: WendaArticleBean) {
                 val list = ArrayList<WendaArticleDataBean>()
                 for (i in bean.data!!.indices) {

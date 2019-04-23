@@ -1,18 +1,14 @@
 package com.lz.framecase.api;
 
 
+import android.os.SystemClock;
 import android.util.Base64;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.lz.fram.base.LpLoadDialog;
 import com.lz.fram.net.RxRequestUtils;
 import com.lz.fram.observer.Transformer;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.bean.FaceResponse;
-import com.lz.framecase.bean.MultNewsBean;
 import com.lz.framecase.bean.NewsCommentBean;
 import com.lz.framecase.bean.NewsContentBean;
 import com.lz.framecase.bean.TokenBean;
@@ -26,6 +22,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -40,7 +38,7 @@ public class RequestApi {
         mLpLoadDialog = new LpLoadDialog(MyApplication.mApplication);
     }
 
-    public Flowable<String> getNewLists(String category, String time) {
+    public Observable<String> getNewLists(String category, String time) {
 
         int i = new Random().nextInt(10);
         if (i % 2 == 0) {
@@ -48,25 +46,24 @@ public class RequestApi {
                     RxRequestUtils
                             .create(ApiService.class)
                             .getNewsArticle2(category, time)
-                            .compose(Transformer.switchSchedulers());
+                            .compose(Transformer.switchSchedulersObser("getNewLists"));
         } else {
             return
                     RxRequestUtils
                             .create(ApiService.class)
                             .getNewsArticle3(category, time)
-                            .compose(Transformer.switchSchedulers());
+                            .compose(Transformer.switchSchedulersObser("getNewLists"));
         }
 
 
     }
-    public Flowable<WendaArticleBean> getWenDaLists(String time) {
 
-        Flowable<WendaArticleBean> compose = RxRequestUtils
+    public Observable<WendaArticleBean> getWenDaLists(String time) {
+
+        Observable<WendaArticleBean> compose = RxRequestUtils
                 .create(ApiService.class)
                 .getWendaArticle(time)
-                .compose(Transformer.<WendaArticleBean>switchSchedulers());
-
-
+                .compose(Transformer.<WendaArticleBean>switchSchedulersObser("getWenDaLists"));
         return compose;
     }
 
@@ -81,18 +78,18 @@ public class RequestApi {
 
 
     @Nullable
-    public Flowable<NewsCommentBean> getNewsComment(@NotNull String groupId, long itemId) {
+    public Observable<NewsCommentBean> getNewsComment(@NotNull String groupId, long itemId) {
         return
                 RxRequestUtils
                         .create(ApiService.class)
                         .getNewsComment(groupId, itemId)
-                        .compose(Transformer.switchSchedulers(mLpLoadDialog));
+                        .compose(Transformer.switchSchedulersObser(mLpLoadDialog));
 
 
     }
 
     @Nullable
-    public Flowable<String> getVideoUrl(@NotNull String url) {
+    public Observable<String> getVideoUrl(@NotNull String url) {
         return
                 RxRequestUtils
                         .create(ApiService.class)
@@ -123,24 +120,36 @@ public class RequestApi {
                                 return null;
                             }
                         })
-                        .compose(Transformer.<String>switchSchedulers(mLpLoadDialog));
+                        .compose(Transformer.<String>switchSchedulersObser(mLpLoadDialog));
 
 
     }
 
-    public Flowable<FaceResponse> getNewPicture(String img, String token, String des) {
+    public Observable<FaceResponse> getNewPicture(String img, String token, String des) {
         return RxRequestUtils
                 .create(ApiService.class)
                 .getFaceInfo(img, "BASE64", des, 10, "LIVE", token)
-                .compose(Transformer.<FaceResponse>switchSchedulers(mLpLoadDialog));
+                .compose(Transformer.<FaceResponse>switchSchedulersObser(mLpLoadDialog,"121441"))
+                .observeOn(Schedulers.io())
+                .map(new Function<FaceResponse, FaceResponse>() {
+                    @Override
+                    public FaceResponse apply(FaceResponse faceResponse) throws Exception {
+
+                        SystemClock.sleep(3000);
+                        return faceResponse;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                ;
+
     }
 
 
-    public Flowable<TokenBean> token() {
+    public Observable<TokenBean> token() {
         return RxRequestUtils
                 .create(ApiService.class)
                 .token("client_credentials", BuildConfig.FACE_API_KEY, BuildConfig.FACE_API_SECRET)
-                .compose(Transformer.<TokenBean>switchSchedulers(mLpLoadDialog));
+                .compose(Transformer.<TokenBean>switchSchedulersObser(mLpLoadDialog));
 
     }
 }

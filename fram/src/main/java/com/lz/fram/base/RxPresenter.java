@@ -6,6 +6,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.lz.fram.app.FrameApplication;
+import com.lz.fram.net.RxRequestUtils;
 import com.lz.fram.scope.CallBackAnnotion;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -88,13 +89,25 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     public void onDestroy(LifecycleOwner owner) {
         this.mBaseView = null;
         mContext = null;
-        if (mapDisposable != null) {
-            mapDisposable.clear();
-        }
+//        RxRequestUtils.cancelAll();
+//        if (mapDisposable != null) {
+//            mapDisposable.clear();
+//        }
     }
 
 
+    /**
+     * 注解回调方式
+     *
+     * @param tag
+     * @param obj
+     */
+    @Deprecated
     protected void callBack(String tag, Object... obj) {
+        if (mBaseView == null) {
+            Toast.makeText(FrameApplication.mApplication, "mBaseView is null", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Method[] declaredMethods = mBaseView.getClass().getDeclaredMethods();
         for (Method declaredMethod : declaredMethods) {
             declaredMethod.setAccessible(true);
@@ -105,11 +118,8 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
                         declaredMethod.invoke(mBaseView, obj);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        if (mBaseView != null) {
-                            mBaseView.showErrorMsg(e.getMessage());
-                        } else {
-                            Toast.makeText(FrameApplication.mApplication, "mBaseView is null", Toast.LENGTH_SHORT).show();
-                        }
+                        mBaseView.showErrorMsg(e.getMessage());
+
                     }
                     break;
                 }

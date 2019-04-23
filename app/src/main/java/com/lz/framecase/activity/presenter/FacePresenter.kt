@@ -8,9 +8,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.Base64
-import android.widget.Toast
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.observer.CommonSubscriber
+import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.FaceListEntity
 import com.lz.framecase.bean.FaceResponse
@@ -20,6 +19,7 @@ import com.lz.framecase.logic.Constans
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxSPTool
 import com.vondear.rxtool.RxTool
+import io.reactivex.disposables.Disposable
 import java.io.ByteArrayOutputStream
 
 
@@ -37,7 +37,7 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
     override fun auth(context: Context) {
         mRequestApi.token()
                 ?.`as`(bindLifecycle<TokenBean>())
-                ?.subscribeWith(object : CommonSubscriber<TokenBean>(mBaseView) {
+                ?.subscribeWith(object : CommonObserver<TokenBean>(mBaseView) {
                     override fun onError(mes: String?) {
                         super.onError(mes)
                         mBaseView.authFailed()
@@ -66,7 +66,7 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
                 }
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.`as`(bindLifecycle<FaceResponse>())
-                ?.subscribeWith(object : CommonSubscriber<FaceResponse>(mBaseView){
+                ?.subscribeWith(object : CommonObserver<FaceResponse>(mBaseView){
                     override fun onError(e: Throwable?) {
                         super.onError(e)
                     }
@@ -87,9 +87,15 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
 
         newPicture
                 ?.`as`(bindLifecycle<FaceResponse>())
-                ?.subscribeWith(object : CommonSubscriber<FaceResponse>(mBaseView) {
-                    override fun onError(e: Throwable?) {
+                ?.subscribeWith(object : CommonObserver<FaceResponse>(mBaseView) {
+
+                    override fun onSubscribe(d: Disposable) {
+                        super.onSubscribe(d)
+
+                    }
+                    override fun onError(e: Throwable) {
                         super.onError(e)
+                        ToastUtils.error(e.message)
                     }
 
                     override fun onNext(s: FaceResponse) {

@@ -226,6 +226,7 @@ class FaceActivity : BaseActivity(), FaceContract.View {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe {
                                 mPresenter?.getNewPicture(bitmap)
+                                mPresenter?.getNewPicture(bitmap)
                                 Glide.with(this).load(bitmap).into(iv_photo)
                             }
 

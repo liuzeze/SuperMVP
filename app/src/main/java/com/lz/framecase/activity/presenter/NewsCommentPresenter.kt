@@ -1,20 +1,10 @@
 package com.lz.framecase.presenter
 
 
-import android.util.Log
-import android.widget.Toast
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.observer.CommonSubscriber
-import com.lz.framecase.anotation.ObjectUtil
+import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.NewsCommentBean
-import com.lz.utilslib.interceptor.utils.ToastUtils
-import com.tencent.bugly.proguard.s
-import io.reactivex.*
-import io.reactivex.functions.Consumer
-import io.reactivex.internal.operators.flowable.FlowableBlockingSubscribe.subscribe
-import io.reactivex.internal.subscriptions.SubscriptionHelper.cancel
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -35,7 +25,7 @@ class NewsCommentPresenter : RxPresenter<NewsCommentContract.View>(), NewsCommen
         newsComment
 
                 ?.`as`(bindLifecycle<NewsCommentBean>())
-                ?.subscribeWith(object : CommonSubscriber<NewsCommentBean>(mBaseView) {
+                ?.subscribeWith(object : CommonObserver<NewsCommentBean>(mBaseView) {
                     override fun onNext(s: NewsCommentBean) {
 
 

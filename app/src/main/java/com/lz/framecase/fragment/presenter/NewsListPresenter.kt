@@ -4,13 +4,12 @@ package com.lz.framecase.fragment.presenter
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.observer.CommonSubscriber
+import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.api.RequestApi
 import com.lz.framecase.bean.MultNewsBean
 import com.lz.framecase.bean.NewsDataBean
 import com.vondear.rxtool.RxTimeTool
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
@@ -21,7 +20,7 @@ class NewsListPresenter
     var mRequestApi: RequestApi
 
     init {
-        mRequestApi = RequestApi();
+        mRequestApi = RequestApi()
     }
 
     /**
@@ -32,7 +31,7 @@ class NewsListPresenter
         val gson = Gson()
         mRequestApi.getNewLists(category, (RxTimeTool.getCurTimeMills() / 1000).toString())
                 .`as`(bindLifecycle())
-                .subscribeWith(object : CommonSubscriber<String>(mBaseView) {
+                .subscribeWith(object : CommonObserver<String>(mBaseView) {
                     override fun onNext(beanstr: String) {
 
                         var bean=Gson().fromJson(beanstr,MultNewsBean::class.java)

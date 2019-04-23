@@ -1,5 +1,30 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    repoName = 'maven'
+//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'liuzejcenter'
+// bintray.com用户名
+    groupId = 'com.lz'
+// jcenter上的路径,bintray上创建Package时填写的Version control项
+    artifactId = 'fram'  //(与jcenter上新建的package name  一致)
+// 项目名称，bintray上创建Package时填写的Name项
+    publishVersion = '1.0.1'
+    desc = '封装的mvp 框架'
+// 描述，不重要
+    website = 'https://github.com/liuzeze'
+// 网站，最好有，不重要
+}
+//gradlew clean build bintrayUpload -PbintrayUser=liuzejcenter -PbintrayKey=941f3e08b74415a9c75ad2dd219d151b9a464b79 -PdryRun=false
+tasks.withType(Javadoc) {
+    options { encoding "UTF-8" charSet 'UTF-8' links "http://docs.oracle.com/javase/7/docs/api" }
+}
+
+
+
+
+
 android {
     compileSdkVersion 27
     defaultConfig {

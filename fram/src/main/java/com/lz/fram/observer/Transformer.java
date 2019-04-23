@@ -113,5 +113,35 @@ public class Transformer {
             }
         };
     }
+    public static <T> ObservableTransformer<T, T> switchSchedulersObser(final Dialog dialog) {
+
+        return new ObservableTransformer<T, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .doOnSubscribe(new Consumer<Disposable>() {
+                            @Override
+                            public void accept(Disposable disposable) throws Exception {
+                                if (dialog != null) {
+                                    dialog.show();
+                                }
+
+                            }
+                        })
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally(new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                if (dialog != null) {
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+            }
+        };
+    }
 
 }

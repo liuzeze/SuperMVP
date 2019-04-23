@@ -28,6 +28,7 @@ class NewsDetailPresenter
     init {
         mRequestApi = RequestApi();
     }
+
     override fun loadUrl(dataBean: NewsDataBean) {
         val url = dataBean.display_url
 
@@ -45,9 +46,10 @@ class NewsDetailPresenter
                 .map { o -> getHTML(o) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .`as`(bindLifecycle())
-                .subscribe(Consumer<String?> { r -> mBaseView?.onSetWebView(r, true) }, Consumer<Throwable> { throwable ->
-                    mBaseView?.onSetWebView(null, false)
-                })
+                .subscribe(Consumer<String?> { r -> mBaseView?.onSetWebView(r, true) },
+                        Consumer<Throwable> { throwable ->
+                            mBaseView?.onSetWebView(null, false)
+                        })
     }
 
     /**

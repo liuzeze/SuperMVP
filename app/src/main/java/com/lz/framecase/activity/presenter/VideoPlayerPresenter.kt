@@ -2,7 +2,7 @@ package com.lz.framecase.presenter
 
 
 import com.lz.fram.base.RxPresenter
-import com.lz.fram.observer.CommonSubscriber
+import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.api.RequestApi
 import java.util.*
 import java.util.zip.CRC32
@@ -22,7 +22,7 @@ class VideoPlayerPresenter : RxPresenter<VideoPlayerContract.View>(), VideoPlaye
      * 登录
      */
     override fun getVideoUrl(groupId: String) {
-        val subscriber = object : CommonSubscriber<String>(mBaseView) {
+        val subscriber = object : CommonObserver<String>(mBaseView) {
             override fun onNext(s: String) {
                 mBaseView.getVideoUrlSuccess(s)
             }

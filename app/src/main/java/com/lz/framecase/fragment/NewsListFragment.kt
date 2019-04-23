@@ -72,7 +72,7 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
     override fun initLisenter() {
         super.initLisenter()
         SwipeRefreshLayout.setOnRefreshListener {
-
+            mNewsBean.clear()
             mPresenter?.getNewLists(category)
         }
 

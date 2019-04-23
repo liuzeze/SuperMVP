@@ -8,6 +8,7 @@ import com.lz.fram.net.download.DownParamBean;
 import com.lz.fram.net.http.HttpConfigFactory;
 import com.lz.fram.net.http.RetrofitFactory;
 import com.lz.fram.net.upload.UploadRetrofit;
+import com.lz.fram.observer.ObserverManager;
 
 import java.io.File;
 
@@ -73,4 +74,11 @@ public class RxRequestUtils {
 
     }
 
+    public static void cancelAll() {
+        ObserverManager.get().cancelAll();
+    }
+
+    public static void cancel(Object... tag) {
+        ObserverManager.get().cancel(tag);
+    }
 }

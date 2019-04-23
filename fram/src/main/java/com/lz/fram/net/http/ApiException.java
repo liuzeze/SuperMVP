@@ -90,7 +90,7 @@ public class ApiException extends Exception {
             return ex;
         } else {
             ex = new ApiException(e, ERROR.UNKNOWN);
-            ex.message = "未知错误";
+            ex.message = "未知错误" + e.getMessage();
             return ex;
         }
     }
