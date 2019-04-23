@@ -103,7 +103,7 @@ dependencies {
 }
 
 
-
+/*================================aspactj  aop  配置==================*/
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -117,7 +117,7 @@ variants.all { variant ->
         return
     }
 
-    JavaCompile javaCompile = variant.javaCompile
+    JavaCompile javaCompile = variant.getJavaCompileProvider().get()
     javaCompile.doLast {
         String[] args = ["-showWeaveInfo",
                          "-1.5",
