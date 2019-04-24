@@ -78,8 +78,8 @@ dependencies {
 //    api project(':skinlibs')
     api 'com.lz:skinlib:1.0.0'
 
-//    api 'com.lz:fram:1.0.1'
-    api project(':fram')
+    api 'com.lz:fram:1.0.2'
+//    api project(':fram')
     //    api project(':uetool')
     debugApi 'com.lz:uetools:1.0.1'
     //    releaseApi project(':UeToolnolib')

@@ -72,6 +72,7 @@ dependencies {
     api 'com.uber.autodispose:autodispose-android-archcomponents:0.7.0'
 }
 
+/*
 
 //////// 打包发布配置开始 ////////
 //////// 打包发布配置开始 ////////
@@ -104,4 +105,4 @@ task androidSourcesJar(type: Jar) {
 }
 artifacts {
     archives androidSourcesJar
-}
+}*/
