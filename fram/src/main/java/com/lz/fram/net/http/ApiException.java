@@ -1,6 +1,8 @@
 package com.lz.fram.net.http;
 
 
+import android.text.TextUtils;
+
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 
@@ -44,7 +46,11 @@ public class ApiException extends Exception {
             HttpException httpException = (HttpException) e;
             ex = new ApiException(httpException, httpException.code());
             try {
-                ex.message = httpException.response().errorBody().string();
+                if (TextUtils.isEmpty(httpException.message())) {
+                    ex.message = httpException.response().errorBody().string();
+                } else {
+                    ex.message = httpException.message();
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
                 ex.message = e1.getMessage();

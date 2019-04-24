@@ -46,13 +46,13 @@ public class RequestApi {
                     RxRequestUtils
                             .create(ApiService.class)
                             .getNewsArticle2(category, time)
-                            .compose(Transformer.switchSchedulersObser("getNewLists"));
+                            .compose(Transformer.switchSchedulersObser());
         } else {
             return
                     RxRequestUtils
                             .create(ApiService.class)
                             .getNewsArticle3(category, time)
-                            .compose(Transformer.switchSchedulersObser("getNewLists"));
+                            .compose(Transformer.switchSchedulersObser());
         }
 
 
@@ -63,7 +63,7 @@ public class RequestApi {
         Observable<WendaArticleBean> compose = RxRequestUtils
                 .create(ApiService.class)
                 .getWendaArticle(time)
-                .compose(Transformer.<WendaArticleBean>switchSchedulersObser("getWenDaLists"));
+                .compose(Transformer.<WendaArticleBean>switchSchedulersObser());
         return compose;
     }
 
@@ -129,7 +129,7 @@ public class RequestApi {
         return RxRequestUtils
                 .create(ApiService.class)
                 .getFaceInfo(img, "BASE64", des, 10, "LIVE", token)
-                .compose(Transformer.<FaceResponse>switchSchedulersObser(mLpLoadDialog,"121441"))
+                .compose(Transformer.<FaceResponse>switchSchedulersObser(mLpLoadDialog))
                 .observeOn(Schedulers.io())
                 .map(new Function<FaceResponse, FaceResponse>() {
                     @Override

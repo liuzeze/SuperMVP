@@ -20,6 +20,7 @@ import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxSPTool
 import com.vondear.rxtool.RxTool
 import io.reactivex.disposables.Disposable
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
 
@@ -27,7 +28,7 @@ import java.io.ByteArrayOutputStream
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
 @SuppressLint("CheckResult")
-class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
+class FacePresenter : RxPresenter<FaceContract.View>(), FaceContract.Presenter {
     var mRequestApi: RequestApi
 
     init {
@@ -58,29 +59,29 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
         val string = RxSPTool.getString(RxTool.getContext(), Constans.FACETOKEN)
 
 
-      /*  mRequestApi.token()
-                ?.observeOn(Schedulers.io())
-                ?.flatMap {
-                    mRequestApi.getNewPicture(s,
-                            it.access_token, "age,beauty,expression,faceshape,gender,glasses,landmark,race,qualities")
-                }
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.`as`(bindLifecycle<FaceResponse>())
-                ?.subscribeWith(object : CommonObserver<FaceResponse>(mBaseView){
-                    override fun onError(e: Throwable?) {
-                        super.onError(e)
-                    }
+        /*  mRequestApi.token()
+                  ?.observeOn(Schedulers.io())
+                  ?.flatMap {
+                      mRequestApi.getNewPicture(s,
+                              it.access_token, "age,beauty,expression,faceshape,gender,glasses,landmark,race,qualities")
+                  }
+                  ?.observeOn(AndroidSchedulers.mainThread())
+                  ?.`as`(bindLifecycle<FaceResponse>())
+                  ?.subscribeWith(object : CommonObserver<FaceResponse>(mBaseView){
+                      override fun onError(e: Throwable?) {
+                          super.onError(e)
+                      }
 
-                    override fun onNext(s: FaceResponse) {
-                        if (s.error_msg.equals("SUCCESS")) {
-                            detectResult(bitmap, s.result)
-                        } else {
-                            ToastUtils.error(s.error_msg)
-                        }
-                    }
+                      override fun onNext(s: FaceResponse) {
+                          if (s.error_msg.equals("SUCCESS")) {
+                              detectResult(bitmap, s.result)
+                          } else {
+                              ToastUtils.error(s.error_msg)
+                          }
+                      }
 
-                })
-*/
+                  })
+  */
 
         val newPicture = mRequestApi.getNewPicture(s,
                 string, "age,beauty,expression,faceshape,gender,glasses,landmark,race,qualities")
@@ -91,8 +92,14 @@ class FacePresenter: RxPresenter<FaceContract.View>(), FaceContract.Presenter {
 
                     override fun onSubscribe(d: Disposable) {
                         super.onSubscribe(d)
-
+                        addSubscribe("newPicture", d)
                     }
+
+                    override fun onComplete() {
+                        super.onComplete()
+                        removeSubscribe("newPicture")
+                    }
+
                     override fun onError(e: Throwable) {
                         super.onError(e)
                         ToastUtils.error(e.message)

@@ -9,22 +9,12 @@ import io.reactivex.disposables.Disposable;
 
 public class ObserverManager {
 
-    private static ObserverManager mInstance = null;
 
     public static HashMap<Object, CompositeDisposable> mMaps;
 
-    public static ObserverManager get() {
-        if (mInstance == null) {
-            synchronized (ObserverManager.class) {
-                if (mInstance == null) {
-                    mInstance = new ObserverManager();
-                }
-            }
-        }
-        return mInstance;
-    }
 
-    private ObserverManager() {
+
+    public ObserverManager() {
         mMaps = new HashMap<>();
     }
 

@@ -74,11 +74,5 @@ public class RxRequestUtils {
 
     }
 
-    public static void cancelAll() {
-        ObserverManager.get().cancelAll();
-    }
 
-    public static void cancel(Object... tag) {
-        ObserverManager.get().cancel(tag);
-    }
 }

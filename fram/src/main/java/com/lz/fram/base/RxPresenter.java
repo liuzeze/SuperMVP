@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.lz.fram.app.FrameApplication;
 import com.lz.fram.net.RxRequestUtils;
+import com.lz.fram.observer.ObserverManager;
 import com.lz.fram.scope.CallBackAnnotion;
 import com.lz.fram.utils.RxLifecycleUtils;
 import com.uber.autodispose.AutoDisposeConverter;
@@ -29,24 +30,21 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     protected Context mContext;
     private LifecycleOwner mLifecycleOwner;
 
-    private HashMap<Object, Disposable> mapDisposable;
 
+    protected ObserverManager mObserverManager;
 
     /**
      * 添加带有标记的订阅，方便手动注销，以免重复的订阅响应
      *
-     * @param tag          订阅标记
-     * @param subscription 订阅者
+     * @param tag        订阅标记
+     * @param disposable 订阅者
      */
-    protected void addSubscribe(String tag, Disposable subscription) {
-        if (mapDisposable == null) {
-            mapDisposable = new HashMap<>();
-        }
+    public void addSubscribe(String tag, Disposable disposable) {
 
-        //添加前先移除
-        removeSubscribe(tag);
-        //加入到管理
-        mapDisposable.put(tag, subscription);
+        if (mObserverManager == null) {
+            mObserverManager = new ObserverManager();
+        }
+        mObserverManager.add(tag, disposable);
     }
 
 
@@ -55,17 +53,9 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
      *
      * @param tag 订阅者标记
      */
-    private void removeSubscribe(String tag) {
-        if (mapDisposable != null) {
-            //取出队列中订阅者进行主动消费掉
-            Disposable disposable = mapDisposable.get(tag);
-
-            if (disposable != null) {
-                //主动的进行消费
-                disposable.dispose();
-                //从管理集合中移除
-                mapDisposable.remove(tag);
-            }
+    public void removeSubscribe(String tag) {
+        if (mObserverManager != null) {
+            mObserverManager.cancel(tag);
         }
     }
 
@@ -89,10 +79,9 @@ public class RxPresenter<T extends BaseView> implements BasePresenter {
     public void onDestroy(LifecycleOwner owner) {
         this.mBaseView = null;
         mContext = null;
-//        RxRequestUtils.cancelAll();
-//        if (mapDisposable != null) {
-//            mapDisposable.clear();
-//        }
+        if (mObserverManager != null) {
+            mObserverManager.cancelAll();
+        }
     }
 
 
