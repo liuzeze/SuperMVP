@@ -1,13 +1,12 @@
 package com.lz.framecase.fragment
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
 import com.lz.framecase.activity.CatgoryActivity
-import com.lz.framecase.base.BaseFragment
+import com.lz.framecase.base.NewsBaseFragment
 import com.lz.framecase.fragment.adapter.NewsPagerAdapter
 import com.vondear.rxtool.RxSPTool
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +18,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsPagerFragment : BaseFragment() {
+class NewsPagerFragment : NewsBaseFragment() {
     var newsPagerAdapter: NewsPagerAdapter? = null
 
     companion object {

@@ -4,12 +4,12 @@ import android.view.View
 import com.lz.fram.observer.CommonObserver
 import com.lz.framecase.R
 import com.lz.framecase.api.RequestApi
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.vondear.rxtool.RxTimeTool
 import kotlinx.android.synthetic.main.activity_search.*
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : NewsBaseActivity() {
     @JvmField
     internal var mApi: RequestApi? = null
 

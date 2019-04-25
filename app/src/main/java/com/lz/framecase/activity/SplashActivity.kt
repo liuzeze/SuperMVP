@@ -8,7 +8,7 @@ import android.content.Intent
 import android.widget.ImageView
 import cn.bingoogolapple.bgabanner.BGALocalImageSize
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.utilslib.interceptor.utils.LzStatueBarUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : NewsBaseActivity() {
 
 
     var subscribe: Disposable? = null

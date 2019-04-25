@@ -22,11 +22,10 @@ import com.lz.framecase.activity.ImagePreviewActivity
 import com.lz.framecase.activity.NewDetailActivity.Companion.IMG
 import com.lz.framecase.activity.NewDetailActivity.Companion.TAG
 import com.lz.framecase.activity.NewsCommentActivity
-import com.lz.framecase.base.BaseFragment
+import com.lz.framecase.base.NewsBaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.presenter.NewsDetailContract
 import com.lz.framecase.fragment.presenter.NewsDetailPresenter
-import com.lz.inject_annotation.InjectFragment
 import com.lz.skinlibs.SkinManager
 import com.lz.utilslib.interceptor.utils.ShareAction
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
@@ -38,7 +37,7 @@ import java.util.*
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-30       创建class
  */
-class NewsDetailFragment : BaseFragment(), NewsDetailContract.View {
+class NewsDetailFragment : NewsBaseFragment(), NewsDetailContract.View {
 
 
     @AttachView

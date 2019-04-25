@@ -14,13 +14,12 @@ import com.gyf.barlibrary.ImmersionBar
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.jakewharton.rxbinding2.view.RxView
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.fragment.NewsPagerFragment
 import com.lz.framecase.utils.SettingUtils
 import com.lz.skinlibs.SkinManager
 import com.lz.skinlibs.utils.PrefUtils
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
-import com.lz.utilslib.interceptor.utils.ToastUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -29,7 +28,7 @@ import java.util.concurrent.TimeUnit
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class MainActivity : BaseActivity() {
+class MainActivity : NewsBaseActivity() {
 
     override fun getLayout(): Int {
         return R.layout.activity_main2

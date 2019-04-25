@@ -1,13 +1,12 @@
 package com.lz.framecase.activity;
 
 import android.graphics.Bitmap;
-import android.widget.Toast;
 
 import com.lz.fram.scope.AttachView;
 import com.lz.framecase.R;
 import com.lz.framecase.activity.presenter.FaceContract;
 import com.lz.framecase.activity.presenter.FacePresenter;
-import com.lz.framecase.base.BaseActivity;
+import com.lz.framecase.base.NewsBaseActivity;
 import com.lz.framecase.bean.FaceListEntity;
 import com.lz.utilslib.interceptor.utils.ToastUtils;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-09-11       创建class
  */
-public class ExampleActivity extends BaseActivity implements FaceContract.View {
+public class ExampleActivity extends NewsBaseActivity implements FaceContract.View {
     @AttachView
     FacePresenter mFacePresenter;
 

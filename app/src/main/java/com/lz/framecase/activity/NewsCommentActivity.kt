@@ -13,11 +13,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.activity.adapter.NewsCommentAdapter
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.NewsCommentBean
 import com.lz.framecase.presenter.NewsCommentContract
 import com.lz.framecase.presenter.NewsCommentPresenter
-import com.lz.inject_annotation.InjectActivity
 import com.lz.utilslib.interceptor.utils.LpDialogUtils
 import com.lz.utilslib.interceptor.utils.ShareAction
 import kotlinx.android.synthetic.main.activity_comment_list.*
@@ -26,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_comment_list.*
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-31       创建class
  */
-class NewsCommentActivity : BaseActivity(), NewsCommentContract.View {
+class NewsCommentActivity : NewsBaseActivity(), NewsCommentContract.View {
 
     @AttachView
     @JvmField

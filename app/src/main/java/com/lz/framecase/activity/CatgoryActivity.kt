@@ -2,8 +2,6 @@ package com.lz.framecase.activity
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.databinding.ViewDataBinding
-import android.databinding.adapters.ViewGroupBindingAdapter.setListener
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.support.v7.widget.DefaultItemAnimator
@@ -11,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.TextUtils
-import android.transition.Explode
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -22,13 +19,13 @@ import com.lz.framecase.R
 import com.lz.framecase.activity.adapter.drag.DragAdapter
 import com.lz.framecase.activity.adapter.drag.ItemTouchListCallBack
 import com.lz.framecase.activity.adapter.drag.MyItemAnimator
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.TitleBean
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import com.vondear.rxtool.RxSPTool
 import kotlinx.android.synthetic.main.activity_catgory.*
 
-class CatgoryActivity : BaseActivity() {
+class CatgoryActivity : NewsBaseActivity() {
 
     private val titles = ArrayList<TitleBean>()
     private var mDragAdapter: DragAdapter? = null

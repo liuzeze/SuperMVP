@@ -16,6 +16,7 @@ import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.anotation.ClassRuntime;
 import com.lz.framecase.utils.SettingUtils;
 import com.lz.skinlibs.SkinManager;
+import com.lz.utilslib.interceptor.app.ScreenAdaptation;
 import com.lz.utilslib.interceptor.utils.LzAppUtils;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -81,7 +82,7 @@ public class MyApplication extends FrameApplication {
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 //栈管理
                 RxActivityTool.addActivity(activity);
-                //  new ScreenAdaptation(activity,720).register();
+                new ScreenAdaptation(activity, 720).register();
             }
 
             @Override

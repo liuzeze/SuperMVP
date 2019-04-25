@@ -7,8 +7,6 @@ import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
-import android.widget.TextView
-import butterknife.BindView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.SLIDEIN_BOTTOM
 import com.chad.library.adapter.base.BaseViewHolder
@@ -18,7 +16,7 @@ import com.lz.fram.scope.CallBackAnnotion
 import com.lz.framecase.R
 import com.lz.framecase.activity.NewDetailActivity
 import com.lz.framecase.activity.VideoPlayerActivity
-import com.lz.framecase.base.BaseFragment
+import com.lz.framecase.base.NewsBaseFragment
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.adapter.NewsListAdapter
 import com.lz.framecase.fragment.presenter.NewsListContract
@@ -33,7 +31,7 @@ import kotlin.collections.HashSet
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-class NewsListFragment : BaseFragment(), NewsListContract.View {
+class NewsListFragment : NewsBaseFragment(), NewsListContract.View {
     @AttachView
     @JvmField
     internal var mPresenter: NewsListPresenter? = null

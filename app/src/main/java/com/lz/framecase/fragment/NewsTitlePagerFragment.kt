@@ -1,13 +1,13 @@
 package com.lz.framecase.fragment
 
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseFragment
+import com.lz.framecase.base.NewsBaseFragment
 
 
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class NewsTitlePagerFragment : BaseFragment() {
+class NewsTitlePagerFragment : NewsBaseFragment() {
 
     companion object {
         fun getInstance(): NewsTitlePagerFragment {

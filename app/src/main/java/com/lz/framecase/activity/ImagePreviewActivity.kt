@@ -12,7 +12,7 @@ import android.view.View
 import cn.bingoogolapple.bgabanner.transformer.TransitionEffect
 import com.bumptech.glide.Glide
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.widget.imagebrowser.DismissFrameLayout
 import com.lz.utilslib.interceptor.utils.LpDialogUtils
 import com.lz.utilslib.interceptor.utils.ShareAction
@@ -31,7 +31,7 @@ import uk.co.senab.photoview.PhotoViewAttacher
 import java.io.File
 import java.util.*
 
-class ImagePreviewActivity : BaseActivity() {
+class ImagePreviewActivity : NewsBaseActivity() {
 
     var mColorDrawable: ColorDrawable? = null
     override fun getLayout(): Int {

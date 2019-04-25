@@ -1,11 +1,11 @@
 package com.lz.framecase.activity
 
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.fragment.NewsDetailFragment
 
-class NewDetailActivity : BaseActivity() {
+class NewDetailActivity : NewsBaseActivity() {
 
 
     companion object {

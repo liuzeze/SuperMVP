@@ -1,14 +1,9 @@
 package com.lz.framecase.activity.adapter
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.support.design.widget.Snackbar
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
 import com.lz.framecase.bean.NewsCommentBean
 
 /**

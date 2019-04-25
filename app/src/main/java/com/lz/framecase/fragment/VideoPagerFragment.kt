@@ -1,16 +1,13 @@
 package com.lz.framecase.fragment
 
-import android.databinding.ViewDataBinding
-import com.lz.fram.base.BasePresenter
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseFragment
-import com.lz.framecase.fragment.presenter.NewsListContract
+import com.lz.framecase.base.NewsBaseFragment
 
 
 /**
  * -------- ���� ---------- ά���� ------------ ������� --------
  */
-class VideoPagerFragment : BaseFragment() {
+class VideoPagerFragment : NewsBaseFragment() {
 
     companion object {
         fun getInstance(): VideoPagerFragment {

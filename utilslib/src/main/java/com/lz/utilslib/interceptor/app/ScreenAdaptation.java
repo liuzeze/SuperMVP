@@ -14,7 +14,7 @@ public class ScreenAdaptation {
 
 
     private Context mContext;
-    private float mWidth = 1366;
+    private float mWidth = 720;
 
     public ScreenAdaptation(Context context, float width) {
         mContext = context;

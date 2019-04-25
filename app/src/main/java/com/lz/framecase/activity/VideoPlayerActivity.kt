@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
 import com.lz.framecase.activity.adapter.NewsCommentAdapter
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.NewsCommentBean
 import com.lz.framecase.bean.NewsDataBean
 import com.lz.framecase.holder.VideoPlayerHead
@@ -15,11 +15,10 @@ import com.lz.framecase.presenter.NewsCommentContract
 import com.lz.framecase.presenter.NewsCommentPresenter
 import com.lz.framecase.presenter.VideoPlayerContract
 import com.lz.framecase.presenter.VideoPlayerPresenter
-import com.lz.inject_annotation.InjectActivity
 import kotlinx.android.synthetic.main.activity_video_player.*
 
 
-class VideoPlayerActivity : BaseActivity(), VideoPlayerContract.View, NewsCommentContract.View {
+class VideoPlayerActivity : NewsBaseActivity(), VideoPlayerContract.View, NewsCommentContract.View {
 
     @AttachView
     @JvmField

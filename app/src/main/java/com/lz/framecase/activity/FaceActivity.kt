@@ -21,10 +21,9 @@ import com.lz.framecase.R
 import com.lz.framecase.activity.adapter.FaceAdapter
 import com.lz.framecase.activity.presenter.FaceContract
 import com.lz.framecase.activity.presenter.FacePresenter
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.FaceListEntity
 import com.lz.framecase.logic.MyApplication
-import com.lz.inject_annotation.InjectActivity
 import com.lz.utilslib.interceptor.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.vondear.rxtool.RxImageTool
@@ -42,7 +41,7 @@ import kotlin.collections.ArrayList
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class FaceActivity : BaseActivity(), FaceContract.View {
+class FaceActivity : NewsBaseActivity(), FaceContract.View {
 
 
     val CODE_SELECT_IMAGE: Int = 2;//相册RequestCode

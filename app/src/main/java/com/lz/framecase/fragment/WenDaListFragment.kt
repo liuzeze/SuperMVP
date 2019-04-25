@@ -5,12 +5,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.google.gson.Gson
 import com.lz.fram.scope.AttachView
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseFragment
+import com.lz.framecase.base.NewsBaseFragment
 import com.lz.framecase.bean.WendaArticleDataBean
 import com.lz.framecase.fragment.adapter.WenDaListAdapter
 import com.lz.framecase.fragment.presenter.WenDaListContract
 import com.lz.framecase.fragment.presenter.WenDaListPresenter
-import com.lz.inject_annotation.InjectFragment
 import com.lz.utilslib.interceptor.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.fragment_news_list.*
 
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_news_list.*
  * -----------作者----------日期----------变更内容-----
  * -          刘泽      2018-08-29       创建class
  */
-class WenDaListFragment : BaseFragment(), WenDaListContract.View {
+class WenDaListFragment : NewsBaseFragment(), WenDaListContract.View {
 
 
     @AttachView

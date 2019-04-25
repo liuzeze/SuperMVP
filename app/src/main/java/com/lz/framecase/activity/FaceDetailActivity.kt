@@ -3,7 +3,7 @@ package com.lz.framecase.activity
 import android.graphics.Bitmap
 import android.view.MotionEvent
 import com.lz.framecase.R
-import com.lz.framecase.base.BaseActivity
+import com.lz.framecase.base.NewsBaseActivity
 import com.lz.framecase.bean.FaceListEntity
 import kotlinx.android.synthetic.main.activity_face_detail.*
 
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_face_detail.*
 /**
  * -------- 日期 ---------- 维护人 ------------ 变更内容 --------
  */
-class FaceDetailActivity : BaseActivity() {
+class FaceDetailActivity : NewsBaseActivity() {
 
 
     override fun getLayout(): Int {
