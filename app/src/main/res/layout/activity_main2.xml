@@ -78,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
-                android:background="@color/common_app_white_ffffff"
                 app:elevation="16dp"
+                android:background="@color/common_app_white_ffffff"
                 app:itemIconTint="@drawable/nav_item_color_state"
                 app:itemTextColor="@drawable/nav_item_color_state"
                 app:layout_behavior="com.lz.framecase.widget.BottomNavigationBehavior"
@@ -94,6 +94,7 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             android:tag="LEFT"
+            android:background="@color/common_app_white_ffffff"
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/nav_menu" />
     </android.support.v4.widget.DrawerLayout>

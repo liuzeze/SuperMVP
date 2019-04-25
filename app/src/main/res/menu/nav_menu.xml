@@ -10,7 +10,8 @@
     <!--android:title="@string/nav_account"/>-->
     <!--</group>-->
 
-    <group android:id="@+id/other">
+    <group
+        android:id="@+id/other">
         <item
             android:id="@+id/nav_switch_night_mode"
             android:icon="@drawable/ic_nav_setting"

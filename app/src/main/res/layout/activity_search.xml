@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@color/common_app_white_ffffff"
     tools:context=".activity.SearchActivity">
 
     <android.support.v7.widget.Toolbar

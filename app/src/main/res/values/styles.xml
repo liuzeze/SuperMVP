@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="whiteText">
@@ -22,6 +22,11 @@
     <style name="imagethem" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="splashthem" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@mipmap/main_bg</item>
     </style>
 
     <!--http://www.jianshu.com/p/7b2d842267ab--> <!--BottomNavigationView 的选中没有选中的字体大小-->

@@ -12,7 +12,6 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_app_transparency_b100"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -34,7 +33,6 @@
                 android:id="@+id/iv_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/common_app_gray_cccccc"
                 android:fitsSystemWindows="true"
                 android:minHeight="192dp"
                 android:scaleType="centerCrop"
@@ -75,11 +73,10 @@
                     android:id="@+id/webview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/common_app_white_ffffff" />
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="16dp" />
 
             </android.support.v4.widget.NestedScrollView>
 

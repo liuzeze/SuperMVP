@@ -48,7 +48,9 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
-        <activity android:name=".activity.SplashActivity">
+        <activity
+            android:theme="@style/splashthem"
+            android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

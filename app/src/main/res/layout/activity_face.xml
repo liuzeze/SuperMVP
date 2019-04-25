@@ -8,6 +8,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/common_app_white_ffffff"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -23,7 +24,6 @@
             android:id="@+id/iv_photo"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:background="@color/common_app_gray_cccccc"
             android:src="@drawable/ic_img_default"
             android:transitionName="SearchView"
             app:layout_constraintTop_toBottomOf="@+id/face_toolbar" />

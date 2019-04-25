@@ -3,6 +3,8 @@ package com.lz.framecase.logic;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Debug;
+import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
@@ -34,6 +36,8 @@ public class MyApplication extends FrameApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+//        Debug.startMethodTracing(Environment.getExternalStorageState() + "tracing");
         RxTool.init(this);
         SkinManager.getInstance().init(this, new AttrChangeLisnter());
         if (SettingUtils.Companion.getNightMode()) {
@@ -55,6 +59,7 @@ public class MyApplication extends FrameApplication {
             // GTRController.init(this);
             BlockCanary.install(this, new BlockCanaryContext()).start();
         }
+//        Debug.stopMethodTracing();
     }
 
     @Override
