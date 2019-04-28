@@ -12,7 +12,7 @@ public class HttpConfigFactory {
 
     private static HttpConfigFactory instance;
     private GlobalConfigBuild mConfigBuild;
-    private Context mContext;
+    private ConfigModule[] mOptions;
 
     public static HttpConfigFactory getInstance() {
         if (instance == null) {
@@ -27,7 +27,6 @@ public class HttpConfigFactory {
 
 
     public GlobalConfigBuild initConfig(Context context) {
-        mContext = context;
         List<ConfigModule> parse = new ManifestParser(context).parse();
         GlobalConfigBuild.Builder builder = GlobalConfigBuild
                 .builder();
@@ -38,9 +37,22 @@ public class HttpConfigFactory {
         return mConfigBuild;
     }
 
+    public GlobalConfigBuild initConfig(ConfigModule... options) {
+        mOptions = options;
+        GlobalConfigBuild.Builder builder = GlobalConfigBuild
+                .builder();
+        if (options != null) {
+            for (ConfigModule option : options) {
+                option.applyOptions(builder);
+            }
+        }
+        mConfigBuild = builder.build();
+        return mConfigBuild;
+    }
+
     public GlobalConfigBuild getConfigBuild() {
         if (mConfigBuild == null) {
-            initConfig(mContext);
+            initConfig();
         }
         return mConfigBuild;
     }

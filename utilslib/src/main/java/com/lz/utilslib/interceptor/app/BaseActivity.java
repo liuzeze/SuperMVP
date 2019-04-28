@@ -10,8 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.inject_annotation.InjectActivity;
-import com.lz.inject_annotation.InjectTools;
 
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
@@ -45,10 +43,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
      * 为presenter 注册毁掉
      */
     private void initInject() {
-        InjectActivity annotation = this.getClass().getAnnotation(InjectActivity.class);
-        if (annotation != null) {
-            InjectTools.inject(this);
-        }
         PresenterDispatch presenterDispatch = PresenterProviders.inject(this).presenterCreate();
         presenterDispatch.attachView(this, getLifecycle());
     }

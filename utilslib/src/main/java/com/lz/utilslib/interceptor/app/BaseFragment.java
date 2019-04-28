@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
-import com.lz.inject_annotation.InjectFragment;
-import com.lz.inject_annotation.InjectTools;
 
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
@@ -50,10 +48,6 @@ public abstract class BaseFragment extends SwipeBackFragment implements BaseView
 
 
     private void initInject() {
-        InjectFragment annotation = this.getClass().getAnnotation(InjectFragment.class);
-        if (annotation != null) {
-            InjectTools.inject(this);
-        }
         PresenterDispatch presenterDispatch = PresenterProviders.inject(this).presenterCreate();
         presenterDispatch.attachView(this, getLifecycle());
     }

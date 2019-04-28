@@ -72,13 +72,13 @@ dependencies {
 
     /*=================================  自己定义类库引用  ==============================================*/
 
-    api 'com.lz:inject_annotations:1.0.7'
+//    api 'com.lz:inject_annotations:1.0.7'
     //    api project(':inject_annotation')
     //换肤框架
 //    api project(':skinlibs')
     api 'com.lz:skinlib:1.0.0'
 
-    api 'com.lz:fram:1.0.2'
+    api 'com.lz:fram:1.0.3'
 //    api project(':fram')
     //    api project(':uetool')
     debugApi 'com.lz:uetools:1.0.1'

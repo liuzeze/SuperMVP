@@ -68,7 +68,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
      * @param filePath  图片路径
      * @return Observable
      */
-    public static Observable<ResponseBody> uploadImage(String uploadUrl, String filePath) {
+    public  Observable<ResponseBody> uploadImage(String uploadUrl, String filePath) {
         List<String> filePaths = new ArrayList<>();
         filePaths.add(filePath);
         return uploadFilesWithParams(uploadUrl, "uploaded_file", null, filePaths);
@@ -81,7 +81,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
      * @param filePaths 图片路径
      * @return Observable
      */
-    public static Observable<ResponseBody> uploadImages(String uploadUrl, List<String> filePaths) {
+    public  Observable<ResponseBody> uploadImages(String uploadUrl, List<String> filePaths) {
         return uploadFilesWithParams(uploadUrl, "uploaded_file", null, filePaths);
     }
 
@@ -94,7 +94,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
      * @param filePaths 图片路径
      * @return Observable
      */
-    public static Observable<ResponseBody> uploadFilesWithParams(String uploadUrl, String fileName, Map<String, Object> paramsMap, List<String> filePaths) {
+    public  Observable<ResponseBody> uploadFilesWithParams(String uploadUrl, String fileName, Map<String, Object> paramsMap, List<String> filePaths) {
 
         MultipartBody.Builder builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM);

@@ -39,9 +39,9 @@
             android:value="2.1" />
 
         <!-- 网络框架配置 -->
-        <meta-data
+    <!--    <meta-data
             android:name="com.lz.framecase.logic.GlobalConfiguration"
-            android:value="ConfigModule" />
+            android:value="ConfigModule" />-->
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"

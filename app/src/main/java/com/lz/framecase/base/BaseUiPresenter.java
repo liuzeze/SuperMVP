@@ -39,6 +39,7 @@ public abstract class BaseUiPresenter extends RxPresenter {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new NullPointerException("LzInitUtils initConfig");
         }
 
 

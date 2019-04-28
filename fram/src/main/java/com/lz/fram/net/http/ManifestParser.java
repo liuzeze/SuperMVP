@@ -36,6 +36,8 @@ public final class ManifestParser {
             }
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Unable to find metadata to parse ConfigModule", e);
+        } catch (NullPointerException e) {
+           // throw new RuntimeException("Context is null;", e);
         }
 
         return modules;

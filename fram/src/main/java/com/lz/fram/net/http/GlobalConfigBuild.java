@@ -14,7 +14,7 @@ import okhttp3.Interceptor;
  * 2017/12/26	9:24	     刘泽			  请求框架参数初始化
  */
 public class GlobalConfigBuild {
-    private HttpUrl mApiUrl;
+    private HttpUrl mApiUrl ;
     private List<Interceptor> mInterceptors;
     private List<Interceptor> netInterceptors;
     private RetrofitFactory.RetrofitConfiguration mRetrofitConfiguration;
@@ -61,7 +61,7 @@ public class GlobalConfigBuild {
     }
 
     public static final class Builder {
-        private HttpUrl apiUrl;
+        private HttpUrl apiUrl= HttpUrl.parse("https://api.github.com/");
         private List<Interceptor> interceptors;
         private List<Interceptor> netInterceptors;
         private RetrofitFactory.RetrofitConfiguration retrofitConfiguration;

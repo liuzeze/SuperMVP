@@ -1,11 +1,8 @@
 package com.lz.utilslib.interceptor.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 import android.view.View;
-
-import com.lz.fram.app.FrameApplication;
 
 /**
  * -----------作者----------日期----------变更内容-----

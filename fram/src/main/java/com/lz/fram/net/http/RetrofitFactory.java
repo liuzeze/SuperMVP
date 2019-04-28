@@ -3,6 +3,9 @@ package com.lz.fram.net.http;
 
 import com.lz.fram.net.gson.GsonAdapter;
 
+import java.util.logging.Logger;
+
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -32,11 +35,10 @@ public class RetrofitFactory {
     public RetrofitFactory() {
 
         GlobalConfigBuild configBuild = HttpConfigFactory.getInstance().getConfigBuild();
-        if (configBuild == null) {
-            throw new NullPointerException("请先配置参数！");
+        if (configBuild.getBaseUrl() == null) {
+            throw new NullPointerException("请先配置地址参数！");
         }
         OkHttpClient build = OkhttpFactory.getInstance().getOkhttpBuilder().build();
-
         mClient = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
@@ -44,9 +46,10 @@ public class RetrofitFactory {
                 .baseUrl(configBuild.getBaseUrl())
                 .client(build);
 
-
-        if (configBuild.getRetrofitConfiguration() != null) {
-            configBuild.getRetrofitConfiguration().configRetrofit(mClient);
+        if (configBuild != null) {
+            if (configBuild.getRetrofitConfiguration() != null) {
+                configBuild.getRetrofitConfiguration().configRetrofit(mClient);
+            }
         }
 
 

@@ -1,16 +1,15 @@
 package com.lz.framecase.logic;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
-import com.lz.fram.app.FrameApplication;
+import com.lz.fram.net.RxRequestUtils;
 import com.lz.framecase.BuildConfig;
 import com.lz.framecase.activity.MainActivity;
 import com.lz.framecase.anotation.ClassRuntime;
@@ -32,14 +31,19 @@ import me.ele.uetool.UETool;
  * -          刘泽      2018-08-03       创建class
  */
 @ClassRuntime()
-public class MyApplication extends FrameApplication {
+public class MyApplication extends Application {
+
+    public static Application mApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        mApplication = this;
 //        Debug.startMethodTracing(Environment.getExternalStorageState() + "tracing");
         RxTool.init(this);
+        //配置网络请求参数
+        RxRequestUtils.initConfig(new GlobalConfiguration());
+
         SkinManager.getInstance().init(this, new AttrChangeLisnter());
         if (SettingUtils.Companion.getNightMode()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -57,7 +61,7 @@ public class MyApplication extends FrameApplication {
             if (LzAppUtils.isCurrentProcess()) {
                 UETool.showUETMenu();
             }
-            // GTRController.init(this);
+            // GTRController.initConfig(this);
             BlockCanary.install(this, new BlockCanaryContext()).start();
         }
 //        Debug.stopMethodTracing();

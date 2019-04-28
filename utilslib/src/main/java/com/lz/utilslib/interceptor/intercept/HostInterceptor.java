@@ -1,7 +1,5 @@
 package com.lz.utilslib.interceptor.intercept;
 
-import com.lz.fram.app.FrameApplication;
-
 import java.io.IOException;
 
 import okhttp3.Interceptor;

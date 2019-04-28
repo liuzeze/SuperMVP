@@ -16,9 +16,6 @@
 package com.lz.framecase.logic;
 
 
-import android.content.Context;
-
-import com.google.gson.GsonBuilder;
 import com.lz.fram.net.http.ConfigModule;
 import com.lz.fram.net.http.GlobalConfigBuild;
 import com.lz.fram.net.http.OkhttpFactory;
