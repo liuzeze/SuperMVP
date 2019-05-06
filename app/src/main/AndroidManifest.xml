@@ -39,9 +39,9 @@
             android:value="2.1" />
 
         <!-- 网络框架配置 -->
-    <!--    <meta-data
-            android:name="com.lz.framecase.logic.GlobalConfiguration"
-            android:value="ConfigModule" />-->
+        <!--    <meta-data
+                android:name="com.lz.framecase.logic.GlobalConfiguration"
+                android:value="ConfigModule" />-->
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -49,8 +49,8 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <activity
-            android:theme="@style/splashthem"
-            android:name=".activity.SplashActivity">
+            android:name=".activity.SplashActivity"
+            android:theme="@style/splashthem">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,9 @@
         <activity
             android:name=".activity.ImagePreviewActivity"
             android:theme="@style/imagethem" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="uiMode" />
         <activity android:name=".activity.NewDetailActivity" />
         <activity android:name=".activity.NewsCommentActivity" />
         <activity android:name=".activity.VideoPlayerActivity" />
@@ -70,7 +72,6 @@
             android:name=".activity.FaceActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".activity.FaceDetailActivity" />
-        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>

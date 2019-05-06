@@ -39,40 +39,16 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-//        Debug.startMethodTracing(Environment.getExternalStorageState() + "tracing");
-        RxTool.init(this);
-        //配置网络请求参数
-        RxRequestUtils.initConfig(new GlobalConfiguration());
-
-        SkinManager.getInstance().init(this, new AttrChangeLisnter());
-        if (SettingUtils.Companion.getNightMode()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
         registerActivityCycle();
-        Beta.initDelay = 3 * 1000;
-        Beta.canShowUpgradeActs.add(MainActivity.class);
-        Bugly.init(this, BuildConfig.BUGGLY_APPID, true);
-        if (BuildConfig.DEBUG) {
-            new CatchHandler.Builder(getApplicationContext())
-                    .setUrl("钉钉机器人网址")
-                    .build();
-            if (LzAppUtils.isCurrentProcess()) {
-                UETool.showUETMenu();
-            }
-            // GTRController.initConfig(this);
-            BlockCanary.install(this, new BlockCanaryContext()).start();
-        }
-//        Debug.stopMethodTracing();
     }
+
 
     @Override
     protected void attachBaseContext(Context base) {
         // you must install multiDex whatever tinker is installed!
         MultiDex.install(base);
         super.attachBaseContext(base);
-        Beta.installTinker();
+
 
     }
 

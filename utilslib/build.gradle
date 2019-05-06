@@ -89,4 +89,7 @@ dependencies {
 //    api project(':uce_handler_no_op')
     debugApi 'com.lz:catch_handler:1.0.1'
     releaseApi 'com.lz:catch_handler_no_op:1.0.0'
+
+    api 'com.noober.background:core:1.4.4'
+
 }

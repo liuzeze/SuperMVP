@@ -6,7 +6,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
-        android:background="@color/common_app_transparency_w100"
         android:layout_height="match_parent"
         tools:context=".activity.SplashActivity">
 
@@ -32,9 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginTop="110dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_fileName="AndroidWave.json"
             app:lottie_loop="true" />
@@ -42,29 +41,35 @@
 
         <TextView
             android:id="@+id/tv_skip"
-            shape_radius="@{90}"
-            shape_solid_color="@{@color/common_app_white_ffffff}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="跳过"
+            android:textColor="@color/black"
+            app:bl_corners_radius="90dp"
+            app:bl_solid_color="@color/ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
             android:id="@+id/tv_enter"
-            select_def_color="@{@color/common_app_purple_fb01ff}"
-            select_radius="@{20}"
-            select_sel_color="@{@color/common_app_red_f01717}"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="点击进入"
-            android:textColor="@color/common_app_white_ffffff"
+            android:textColor="@color/common_app_black_000000"
             android:textSize="13dp"
+            app:bl_corners_radius="20dp"
+            app:bl_pressed_solid_color="@color/common_app_white_ffffff"
+            app:bl_pressed_stroke_color="@color/common_app_purple_fb01ff"
+            app:bl_pressed_textColor="@color/common_app_black_000000"
+            app:bl_stroke_width="2dp"
+            app:bl_unPressed_solid_color="@color/common_app_yellow_ce8d37"
+            app:bl_unPressed_stroke_color="@color/common_app_red_f01717"
+            app:bl_unPressed_textColor="@color/common_app_red_ef4a15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

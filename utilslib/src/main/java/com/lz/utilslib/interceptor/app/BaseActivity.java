@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import com.lz.fram.base.BaseView;
 import com.lz.fram.inject.PresenterDispatch;
 import com.lz.fram.inject.PresenterProviders;
+import com.noober.background.BackgroundLibrary;
 
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
@@ -25,6 +26,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BackgroundLibrary.inject2(this);
         setContentView(getLayout());
         mActivity = this;
         initConfig();
