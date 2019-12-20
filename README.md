@@ -105,55 +105,5 @@
    }
    ```
    
-   
-1. 基于databinding 实现 选择器以及圆角背景在xml中的动态设置 ,省去了自己创建select  和 shape的xml文件
-
-   ```
-              <layout>
-     <!--shape使用方式-->
-                        <TextView
-                              //边框宽度
-                              shape_strokr_width="@{1}"
-                              //圆角大小
-                              shape_radius="@{90}"
-                              //边框颜色
-                              shape_strokr_color="@{@color/common_app_white_ffffff}"
-                              //填充颜色
-                              shape_solid_color="@{@color/common_app_white_ffffff}"
-                              //是否需要圆形
-                              shape_is_circle="true"
-                              android:layout_width="40dp"
-                              android:layout_height="40dp"
-                              android:layout_margin="30dp"
-                              android:gravity="center"
-                              android:text="跳过"
-                              app:layout_constraintEnd_toEndOf="parent"
-                              app:layout_constraintTop_toTopOf="parent" />
-    <!--选择器-->
-                         <TextView
-                              //默认填充颜色
-                              select_def_color="@{@color/common_app_purple_fb01ff}"
-                              //默认边框颜色
-                              select_def_stroke_color="@{@color/common_app_red_f01717}"
-                              //圆角大小
-                              select_radius="@{90}"
-                              //选中填充颜色
-                              select_sel_color="@{@color/common_app_red_f01717}"
-                              //选中边框颜色
-                              select_sel_stroke_color="@{@color/common_app_purple_fb01ff}"
-                              //边框宽度大小 默认1
-                              select_strokr_width="@{1}"
-                              //是否需要圆形
-                              select_is_circle="true"
-                              android:layout_width="200dp"
-                              android:layout_height="50dp"
-                              android:layout_marginBottom="50dp"
-                              android:gravity="center"
-                              android:text="点击进入"
-                              android:textColor="@color/common_app_white_ffffff"
-                              android:textSize="30dp"
-                              app:layout_constraintBottom_toBottomOf="parent" />
-                </layout>
-   ```
 
 
